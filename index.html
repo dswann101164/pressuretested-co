@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -170,17 +171,17 @@ body{background:var(--navy-800);color:var(--text);font-family:var(--sans);font-s
 .vt-header{padding:.9rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;background:var(--navy-900);}
 .vt-title{font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);}
 .table-scroll{overflow-x:auto;}
-table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:1060px;}
 th{text-align:left;padding:.65rem 1.25rem;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);border-bottom:1px solid var(--border);white-space:nowrap;background:var(--navy-800);}
 td{padding:.75rem 1.25rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(255,255,255,0.03);}
 td.mono{font-family:var(--mono);font-size:12px;}
-td.title-cell{color:var(--text);min-width:240px;max-width:320px;font-size:13px;}
+td.title-cell{color:var(--text);min-width:300px;max-width:420px;font-size:13px;}
 .status-pill{display:inline-block;font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:4px;font-weight:500;letter-spacing:0.04em;white-space:nowrap;}
 .pill-clickable{cursor:pointer;transition:opacity 0.15s;}
 .pill-clickable:hover{opacity:0.75;}
-.repair-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;}
+.repair-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;}
 .repair-modal-overlay.active{display:flex;}
 .repair-modal{background:var(--navy-700);border:1px solid var(--amber-border);border-radius:8px;max-width:520px;width:90%;padding:2rem;position:relative;max-height:85vh;overflow-y:auto;}
 .repair-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;line-height:1;}
@@ -613,7 +614,7 @@ function renderResults(data) {
       ${watchCell}
       ${subsCell}
       ${momCell}
-      <td><span class="status-pill ${v.statusClass} pill-clickable" onclick="showRepairModal('${v.status}','${v.title||v['Video title']||''}')"> ${v.status}</span></td>
+      <td><span class="status-pill ${v.statusClass} pill-clickable" data-status="${v.status}" data-title="${(v['Video title']||'').replace(/"/g,'&quot;')}">${v.status}</span></td>
     </tr>`;
   }).join('');
 
@@ -929,9 +930,9 @@ fileInput.addEventListener('change',()=>handleFile(fileInput.files[0]));
 </script>
 
 
-<div class="repair-modal-overlay" id="repairModalOverlay" onclick="if(event.target===this)closeRepairModal()">
+<div class="repair-modal-overlay" id="repairModalOverlay">
   <div class="repair-modal">
-    <button class="repair-modal-close" onclick="closeRepairModal()">✕</button>
+    <button class="repair-modal-close" id="repairModalClose">✕</button>
     <div class="repair-modal-tag" id="repairModalTag"></div>
     <div class="repair-modal-title" id="repairModalTitle"></div>
     <div class="repair-modal-video" id="repairModalVideo"></div>
@@ -947,79 +948,44 @@ fileInput.addEventListener('change',()=>handleFile(fileInput.files[0]));
 </div>
 
 <script>
-const REPAIR_INSTRUCTIONS = {
+(function(){
+var REPAIR = {
   'Repackage': {
-    tag: '🔴 Priority 1 — Repackage',
-    tagColor: 'var(--red)',
+    tag: '🔴 Priority 1 — Repackage', tagColor: 'var(--red)',
     what: 'This video has enough impressions to generate data but CTR is below 2.5%. The algorithm is serving it but viewers are not clicking. The title and thumbnail are not converting.',
-    steps: [
-      'Open this video in YouTube Studio → Analytics → Reach tab',
-      'Check CTR over time — is it flat or declining?',
-      'Write 3 new title variations using a stronger hook or specific number',
-      'Create a new thumbnail — swap face expression, change text, increase contrast',
-      'A/B test the new thumbnail using YouTube built-in A/B Testing',
-      'Do not touch the video content — this is a packaging problem'
-    ]
+    steps: ['Open this video in YouTube Studio → Analytics → Reach tab','Check CTR over time — is it flat or declining?','Write 3 new title variations using a stronger hook or specific number','Create a new thumbnail — swap face expression, change text, increase contrast','A/B test the new thumbnail using YouTube built-in A/B Testing','Do not touch the video content — this is a packaging problem']
   },
   'Improve CTR': {
-    tag: '🟡 Priority 2 — Improve CTR',
-    tagColor: 'var(--yellow)',
+    tag: '🟡 Priority 2 — Improve CTR', tagColor: 'var(--yellow)',
     what: 'CTR is between 2.5% and 4% with solid impressions. The video is being served but underperforming on click-through. Small improvements to title or thumbnail can push this into the performing range.',
-    steps: [
-      'Review the thumbnail — does it communicate a clear benefit or outcome?',
-      'Check the title — is the hook in the first 40 characters?',
-      'Compare this thumbnail to your highest CTR video on the channel shelf',
-      'Test one variable at a time: either title or thumbnail, not both',
-      'Target: get CTR above 4% to exit this status'
-    ]
+    steps: ['Review the thumbnail — does it communicate a clear benefit or outcome?','Check the title — is the hook in the first 40 characters?','Compare this thumbnail to your highest CTR video on the channel shelf','Test one variable at a time: either title or thumbnail, not both','Target: get CTR above 4% to exit this status']
   },
   'Boost': {
-    tag: '🟠 Priority 3 — Boost',
-    tagColor: 'var(--amber)',
+    tag: '🟠 Priority 3 — Boost', tagColor: 'var(--amber)',
     what: 'CTR is strong but impressions are too low for the algorithm to learn. The content is working but not being served enough.',
-    steps: [
-      'Add this video link to end screens on 2–3 other videos',
-      'Pin a comment on your other videos mentioning this topic',
-      'Include this video URL in your next video description as a related resource',
-      'Check that the title uses keywords your audience searches for',
-      'Do not change the thumbnail — CTR is already working'
-    ]
+    steps: ['Add this video link to end screens on 2-3 other videos','Pin a comment on your other videos mentioning this topic','Include this video URL in your next video description as a related resource','Check that the title uses keywords your audience searches for','Do not change the thumbnail — CTR is already working']
   },
   'Stable': {
-    tag: '🟠 Priority 3 — Stable',
-    tagColor: 'var(--amber)',
+    tag: '🟠 Priority 3 — Stable', tagColor: 'var(--amber)',
     what: 'This video is neither strongly performing nor clearly broken. It may be too new for a verdict, or sitting in a low-impression plateau. Monitor before making changes.',
-    steps: [
-      'Check days since publish — if under 14 days, wait for more data',
-      'Look at impressions — if under 100, the video has not been distributed yet',
-      'Verify the title contains a clear searchable topic',
-      'Check end screens — is this video linked from other videos?',
-      'Revisit in 30 days before deciding to repackage'
-    ]
+    steps: ['Check days since publish — if under 14 days, wait for more data','Look at impressions — if under 100, the video has not been distributed yet','Verify the title contains a clear searchable topic','Check end screens — is this video linked from other videos?','Revisit in 30 days before deciding to repackage']
   },
   'Performing': {
-    tag: '🟢 Performing',
-    tagColor: 'var(--green)',
+    tag: '🟢 Performing', tagColor: 'var(--green)',
     what: 'This video is generating strong signal. VPI is above threshold and the algorithm is distributing it. Use this as a benchmark for future thumbnail and title decisions.',
-    steps: [
-      'Screenshot the thumbnail — use as visual reference for future videos',
-      'Copy the title structure — identify what made it work',
-      'Add end screen links from this video to lower-performing videos',
-      'Check Audience Retention — find where viewers drop off to improve future intros',
-      'Do not change anything on this video'
-    ]
+    steps: ['Screenshot the thumbnail — use as visual reference for future videos','Copy the title structure — identify what made it work','Add end screen links from this video to lower-performing videos','Check Audience Retention — find where viewers drop off to improve future intros','Do not change anything on this video']
   }
 };
 
 function showRepairModal(status, videoTitle) {
-  const data = REPAIR_INSTRUCTIONS[status] || REPAIR_INSTRUCTIONS['Stable'];
+  var data = REPAIR[status] || REPAIR['Stable'];
   document.getElementById('repairModalTag').textContent = data.tag;
   document.getElementById('repairModalTag').style.color = data.tagColor;
   document.getElementById('repairModalTitle').textContent = status;
   document.getElementById('repairModalVideo').textContent = videoTitle ? '📹 ' + videoTitle : '';
   document.getElementById('repairModalWhat').textContent = data.what;
-  const stepsEl = document.getElementById('repairModalSteps');
-  stepsEl.innerHTML = data.steps.map(s => '<li>' + s + '</li>').join('');
+  var stepsEl = document.getElementById('repairModalSteps');
+  stepsEl.innerHTML = data.steps.map(function(s){ return '<li>' + s + '</li>'; }).join('');
   document.getElementById('repairModalOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -1029,6 +995,22 @@ function closeRepairModal() {
   document.body.style.overflow = '';
 }
 
+// Event delegation — handles pills added dynamically after file upload
+document.addEventListener('click', function(e) {
+  var pill = e.target.closest('.pill-clickable');
+  if (pill) {
+    showRepairModal(pill.dataset.status, pill.dataset.title);
+    return;
+  }
+  var overlay = document.getElementById('repairModalOverlay');
+  if (e.target === overlay) closeRepairModal();
+});
+
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeRepairModal(); });
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('repairModalClose');
+  if (btn) btn.addEventListener('click', closeRepairModal);
+});
+})();
 </script>
 </body>
