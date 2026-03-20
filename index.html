@@ -614,7 +614,7 @@ function renderResults(data) {
       ${watchCell}
       ${subsCell}
       ${momCell}
-      <td><span class="status-pill ${v.statusClass} pill-clickable" data-status="${v.status}" data-title="${(v['Video title']||'').replace(/"/g,'&quot;')}">${v.status}</span></td>
+      <td><span class="status-pill ${v.statusClass} pill-clickable" data-status="${v.status}" data-title="${(v['Video title']||'').replace(/"/g,'&quot;')}"> ${v.status}</span></td>
     </tr>`;
   }).join('');
 
@@ -932,7 +932,7 @@ fileInput.addEventListener('change',()=>handleFile(fileInput.files[0]));
 
 <div class="repair-modal-overlay" id="repairModalOverlay">
   <div class="repair-modal">
-    <button class="repair-modal-close" id="repairModalClose">✕</button>
+    <button class="repair-modal-close" id="repairModalClose">&#x2715;</button>
     <div class="repair-modal-tag" id="repairModalTag"></div>
     <div class="repair-modal-title" id="repairModalTitle"></div>
     <div class="repair-modal-video" id="repairModalVideo"></div>
@@ -950,33 +950,32 @@ fileInput.addEventListener('change',()=>handleFile(fileInput.files[0]));
 <script>
 (function(){
 var REPAIR = {
-  'Repackage': {
-    tag: '🔴 Priority 1 — Repackage', tagColor: 'var(--red)',
-    what: 'This video has enough impressions to generate data but CTR is below 2.5%. The algorithm is serving it but viewers are not clicking. The title and thumbnail are not converting.',
-    steps: ['Open this video in YouTube Studio → Analytics → Reach tab','Check CTR over time — is it flat or declining?','Write 3 new title variations using a stronger hook or specific number','Create a new thumbnail — swap face expression, change text, increase contrast','A/B test the new thumbnail using YouTube built-in A/B Testing','Do not touch the video content — this is a packaging problem']
+  'Repackage':{
+    tag:'🔴 Priority 1 — Repackage',tagColor:'var(--red)',
+    what:'This video has enough impressions to generate data but CTR is below 2.5%. The algorithm is serving it but viewers are not clicking. The title and thumbnail are not converting.',
+    steps:['Open this video in YouTube Studio → Analytics → Reach tab','Check CTR over time — is it flat or declining?','Write 3 new title variations using a stronger hook or specific number','Create a new thumbnail — swap face expression, change text, increase contrast','A/B test the new thumbnail using YouTube built-in A/B Testing','Do not touch the video content — this is a packaging problem']
   },
-  'Improve CTR': {
-    tag: '🟡 Priority 2 — Improve CTR', tagColor: 'var(--yellow)',
-    what: 'CTR is between 2.5% and 4% with solid impressions. The video is being served but underperforming on click-through. Small improvements to title or thumbnail can push this into the performing range.',
-    steps: ['Review the thumbnail — does it communicate a clear benefit or outcome?','Check the title — is the hook in the first 40 characters?','Compare this thumbnail to your highest CTR video on the channel shelf','Test one variable at a time: either title or thumbnail, not both','Target: get CTR above 4% to exit this status']
+  'Improve CTR':{
+    tag:'🟡 Priority 2 — Improve CTR',tagColor:'var(--yellow)',
+    what:'CTR is between 2.5% and 4% with solid impressions. The video is being served but underperforming on click-through. Small improvements to title or thumbnail can push this into the performing range.',
+    steps:['Review the thumbnail — does it communicate a clear benefit or outcome?','Check the title — is the hook in the first 40 characters?','Compare this thumbnail to your highest CTR video on the channel shelf','Test one variable at a time: either title or thumbnail, not both','Target: get CTR above 4% to exit this status']
   },
-  'Boost': {
-    tag: '🟠 Priority 3 — Boost', tagColor: 'var(--amber)',
-    what: 'CTR is strong but impressions are too low for the algorithm to learn. The content is working but not being served enough.',
-    steps: ['Add this video link to end screens on 2-3 other videos','Pin a comment on your other videos mentioning this topic','Include this video URL in your next video description as a related resource','Check that the title uses keywords your audience searches for','Do not change the thumbnail — CTR is already working']
+  'Boost':{
+    tag:'🟠 Priority 3 — Boost',tagColor:'var(--amber)',
+    what:'CTR is strong but impressions are too low for the algorithm to learn. The content is working but not being served enough.',
+    steps:['Add this video link to end screens on 2-3 other videos','Pin a comment on your other videos mentioning this topic','Include this video URL in your next video description as a related resource','Check that the title uses keywords your audience searches for','Do not change the thumbnail — CTR is already working']
   },
-  'Stable': {
-    tag: '🟠 Priority 3 — Stable', tagColor: 'var(--amber)',
-    what: 'This video is neither strongly performing nor clearly broken. It may be too new for a verdict, or sitting in a low-impression plateau. Monitor before making changes.',
-    steps: ['Check days since publish — if under 14 days, wait for more data','Look at impressions — if under 100, the video has not been distributed yet','Verify the title contains a clear searchable topic','Check end screens — is this video linked from other videos?','Revisit in 30 days before deciding to repackage']
+  'Stable':{
+    tag:'🟠 Priority 3 — Stable',tagColor:'var(--amber)',
+    what:'This video is neither strongly performing nor clearly broken. It may be too new for a verdict, or sitting in a low-impression plateau. Monitor before making changes.',
+    steps:['Check days since publish — if under 14 days, wait for more data','Look at impressions — if under 100, the video has not been distributed yet','Verify the title contains a clear searchable topic','Check end screens — is this video linked from other videos?','Revisit in 30 days before deciding to repackage']
   },
-  'Performing': {
-    tag: '🟢 Performing', tagColor: 'var(--green)',
-    what: 'This video is generating strong signal. VPI is above threshold and the algorithm is distributing it. Use this as a benchmark for future thumbnail and title decisions.',
-    steps: ['Screenshot the thumbnail — use as visual reference for future videos','Copy the title structure — identify what made it work','Add end screen links from this video to lower-performing videos','Check Audience Retention — find where viewers drop off to improve future intros','Do not change anything on this video']
+  'Performing':{
+    tag:'🟢 Performing',tagColor:'var(--green)',
+    what:'This video is generating strong signal. VPI is above threshold and the algorithm is distributing it. Use this as a benchmark for future thumbnail and title decisions.',
+    steps:['Screenshot the thumbnail — use as visual reference for future videos','Copy the title structure — identify what made it work','Add end screen links from this video to lower-performing videos','Check Audience Retention — find where viewers drop off to improve future intros','Do not change anything on this video']
   }
 };
-
 function showRepairModal(status, videoTitle) {
   var data = REPAIR[status] || REPAIR['Stable'];
   document.getElementById('repairModalTag').textContent = data.tag;
@@ -984,33 +983,22 @@ function showRepairModal(status, videoTitle) {
   document.getElementById('repairModalTitle').textContent = status;
   document.getElementById('repairModalVideo').textContent = videoTitle ? '📹 ' + videoTitle : '';
   document.getElementById('repairModalWhat').textContent = data.what;
-  var stepsEl = document.getElementById('repairModalSteps');
-  stepsEl.innerHTML = data.steps.map(function(s){ return '<li>' + s + '</li>'; }).join('');
+  var el = document.getElementById('repairModalSteps');
+  el.innerHTML = data.steps.map(function(x){return '<li>'+x+'</li>';}).join('');
   document.getElementById('repairModalOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
 function closeRepairModal() {
   document.getElementById('repairModalOverlay').classList.remove('active');
   document.body.style.overflow = '';
 }
-
-// Event delegation — handles pills added dynamically after file upload
+// Event delegation — handles dynamically generated pills
 document.addEventListener('click', function(e) {
-  var pill = e.target.closest('.pill-clickable');
-  if (pill) {
-    showRepairModal(pill.dataset.status, pill.dataset.title);
-    return;
-  }
-  var overlay = document.getElementById('repairModalOverlay');
-  if (e.target === overlay) closeRepairModal();
+  var pill = e.target.closest ? e.target.closest('.pill-clickable') : null;
+  if (pill) { showRepairModal(pill.dataset.status, pill.dataset.title); return; }
+  if (e.target.id === 'repairModalOverlay' || e.target.id === 'repairModalClose') closeRepairModal();
 });
-
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeRepairModal(); });
-document.addEventListener('DOMContentLoaded', function() {
-  var btn = document.getElementById('repairModalClose');
-  if (btn) btn.addEventListener('click', closeRepairModal);
-});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeRepairModal(); });
 })();
 </script>
 </body>
