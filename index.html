@@ -355,6 +355,17 @@
     });
   }
 
+  function statusLabel(s) {
+    const map = {
+      'not-started': 'No channel yet — building from scratch',
+      'under-6mo':   'Channel exists, under 6 months old',
+      '6-12mo':      'Channel is 6–12 months old',
+      '1-2yr':       'Channel is 1–2 years old',
+      '2yr-plus':    'Channel is 2+ years old'
+    };
+    return map[s] || s;
+  }
+
   function deriveNiche(field, passion, authority, audience) {
     const text = (passion + ' ' + authority + ' ' + audience + ' ' + field).toLowerCase();
     const rules = [
@@ -536,7 +547,7 @@
     section('YOUR UNFAIR ADVANTAGE', reportData.authority);
     section('YOUR TARGET AUDIENCE', reportData.audience);
     section('WHAT YOU WOULD TEACH', reportData.content);
-    section('CHANNEL STATUS', reportData.status);
+    section('CHANNEL STATUS', statusLabel(reportData.status));
 
     // VIDEO IDEAS
     if (reportData.videos && reportData.videos.length) {
@@ -598,7 +609,7 @@
       ['Email', d.email, ''],
       ['Professional Field', d.field, ''],
       ['Years of Experience', d.years, ''],
-      ['Channel Status', d.status, ''],
+      ['Channel Status', statusLabel(d.status), ''],
       ['', '', ''],
       ['POSITIONING OUTPUT', '', ''],
       ['Derived Niche', d.niche, ''],
@@ -624,7 +635,7 @@
     // Sheet 3: Coach Tracker (blank template for Rob/Dave use)
     const trackerData = [
       ['CLIENT NAME','NICHE','LANE','CHANNEL STATUS','SIGNAL SCORE (BASELINE)','SIGNAL SCORE (30 DAYS)','DELTA','NOTES'],
-      [d.name, d.niche, d.density, d.status, '', '', '', ''],
+      [d.name, d.niche, d.density, statusLabel(d.status), '', '', '', ''],
     ];
     const ws3 = XLSX.utils.aoa_to_sheet(trackerData);
     ws3['!cols'] = [{wch:20},{wch:35},{wch:12},{wch:18},{wch:22},{wch:22},{wch:10},{wch:30}];
