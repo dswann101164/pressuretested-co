@@ -295,8 +295,8 @@
     </div>
     <div class="dl-hint">// Download before the diagnostic launches — or come back to pressuretested.co anytime</div>
 
-    <div class="redirect-bar" id="redirectBar"></div>
-    <span class="skip-link" id="skipLink" onclick="goNow()">Skip countdown — launch diagnostic now →</span>
+    <button class="submit-btn" id="launchBtn" onclick="goNow()" style="margin-top:8px;display:none;">Launch My Diagnostic →</button>
+    <div class="redirect-bar" id="redirectBar" style="display:none;"></div>
   </div>
 </div>
 
@@ -433,19 +433,8 @@
     diagnosticUrl = `https://dswann101164.github.io/pressuretested-diagnostic/?${params}`;
 
     // Countdown
-    let count = 8;
-    const bar = document.getElementById('redirectBar');
-    bar.textContent = `Launching diagnostic in ${count} seconds — download your report first`;
-    countdownInterval = setInterval(()=>{
-      count--;
-      if (count > 0) {
-        bar.textContent = `Launching diagnostic in ${count} second${count!==1?'s':''} — download your report first`;
-      } else {
-        clearInterval(countdownInterval);
-        bar.textContent = 'Launching now...';
-        window.location.href = diagnosticUrl;
-      }
-    }, 1000);
+    // Show manual launch button — no auto-redirect
+    document.getElementById('launchBtn').style.display = 'block';
   }
 
   function goNow() {
