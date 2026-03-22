@@ -7,6 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- jsPDF for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- SheetJS for Excel generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
     :root {
       --navy:       #0D1B2A;
@@ -16,6 +20,7 @@
       --white:      #FFFFFF;
       --gray:       #8899aa;
       --border:     rgba(201,168,76,0.2);
+      --green:      #4caf7d;
     }
     *{box-sizing:border-box;margin:0;padding:0;}
     body{background:var(--navy);color:var(--white);font-family:'Montserrat',sans-serif;min-height:100vh;overflow-x:hidden;}
@@ -34,7 +39,7 @@
     .hero-sub{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.7);max-width:560px;margin:0 auto 48px;opacity:0;animation:fadeUp 0.6s ease forwards 0.3s;}
     .hero-sub strong{color:var(--white);}
 
-    .progress-bar{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:48px;opacity:0;animation:fadeUp 0.6s ease forwards 0.35s;}
+    .progress-bar{display:flex;align-items:center;justify-content:center;margin-bottom:48px;opacity:0;animation:fadeUp 0.6s ease forwards 0.35s;}
     .prog-step{display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;color:var(--gray);text-transform:uppercase;}
     .prog-step.active{color:var(--gold);}
     .prog-step.active .prog-dot{background:var(--gold);border-color:var(--gold);}
@@ -47,7 +52,6 @@
     .q-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity 0.2s;}
     .q-card:focus-within{border-color:rgba(201,168,76,0.45);}
     .q-card:focus-within::before{opacity:1;}
-
     .q-num{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
     .q-label{font-size:16px;font-weight:800;letter-spacing:-0.01em;margin-bottom:6px;line-height:1.3;}
     .q-hint{font-size:12px;color:var(--gray);margin-bottom:18px;line-height:1.5;}
@@ -82,6 +86,7 @@
     .trust-item{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--gray);display:flex;align-items:center;gap:5px;}
     .trust-item::before{content:'✓';color:var(--gold);}
 
+    /* SUCCESS */
     .success-wrapper{display:none;max-width:700px;margin:0 auto;padding:0 40px 80px;}
     .success-wrapper.visible{display:block;}
     .success-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:8px;padding:48px;text-align:center;position:relative;overflow:hidden;}
@@ -90,9 +95,23 @@
     .success-title{font-size:26px;font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin-bottom:6px;}
     .success-title span{color:var(--gold);}
     .success-niche{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:rgba(201,168,76,0.08);border:1px solid var(--border);border-radius:4px;padding:12px 20px;margin:18px auto;display:inline-block;letter-spacing:0.04em;max-width:100%;}
-    .success-body{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:24px;max-width:460px;margin-left:auto;margin-right:auto;}
-    .redirect-bar{background:rgba(201,168,76,0.08);border:1px solid var(--border);border-radius:4px;padding:14px 24px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:0.05em;}
+    .success-body{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto;}
 
+    /* DOWNLOAD BUTTONS */
+    .download-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+    .dl-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-radius:4px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;}
+    .dl-btn-pdf{background:var(--gold);color:var(--navy);}
+    .dl-btn-pdf:hover{background:var(--gold-light);}
+    .dl-btn-xlsx{background:transparent;color:var(--green);border:1px solid var(--green);}
+    .dl-btn-xlsx:hover{background:rgba(76,175,125,0.08);}
+    .dl-btn svg{width:16px;height:16px;flex-shrink:0;}
+    .dl-hint{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray);margin-bottom:20px;letter-spacing:0.05em;}
+
+    .redirect-bar{background:rgba(201,168,76,0.08);border:1px solid var(--border);border-radius:4px;padding:14px 24px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:0.05em;}
+    .skip-link{display:block;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray);cursor:pointer;text-decoration:underline;}
+    .skip-link:hover{color:var(--gold);}
+
+    /* THREE LAYERS */
     .layers-section{position:relative;z-index:1;padding:60px 40px 80px;max-width:960px;margin:0 auto;}
     .section-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;text-align:center;}
     .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
@@ -114,7 +133,7 @@
       .hero{padding:100px 20px 40px;}
       .form-wrapper,.success-wrapper{padding:0 20px 60px;}
       .q-card{padding:22px 18px;}
-      .two-col{grid-template-columns:1fr;}
+      .two-col,.download-row{grid-template-columns:1fr;}
       .three-col{grid-template-columns:1fr;}
       footer{flex-direction:column;}
     }
@@ -151,7 +170,6 @@
 
 <div class="form-wrapper" id="formWrapper">
 
-  <!-- Q1 -->
   <div class="q-card">
     <div class="q-num">Question 01 — You</div>
     <div class="q-label">Who are you professionally?</div>
@@ -187,11 +205,10 @@
     </div>
   </div>
 
-  <!-- Q2 -->
   <div class="q-card">
     <div class="q-num">Question 02 — Passion</div>
     <div class="q-label">What do you want the channel to be about?</div>
-    <div class="q-hint">Could be your day job — or something entirely different. Both are valid. <em>Pick a category or describe it in your own words. No YouTube jargon required.</em></div>
+    <div class="q-hint">Could be your day job — or something entirely different. Both are valid. <em>Pick a category or describe it in your own words.</em></div>
     <div class="pill-hint">// Select a category</div>
     <div class="passion-pills" id="passionPills">
       <div class="pill" onclick="togglePill(this,'Career Transition')">Career Transition</div>
@@ -209,7 +226,6 @@
     <textarea id="q2Passion" rows="2" placeholder="Or describe it in your own words..." oninput="updateProgress()"></textarea>
   </div>
 
-  <!-- Q3 -->
   <div class="q-card">
     <div class="q-num">Question 03 — Authority</div>
     <div class="q-label">What's the specific problem you solve that most people in your field can't?</div>
@@ -217,7 +233,6 @@
     <textarea id="q3Authority" rows="3" placeholder="e.g. I translate complex Azure cost data into plain English for non-technical executives — most IT people lose the room when they try." oninput="updateProgress()"></textarea>
   </div>
 
-  <!-- Q4 -->
   <div class="q-card">
     <div class="q-num">Question 04 — Audience</div>
     <div class="q-label">Who suffers most when that problem doesn't get solved?</div>
@@ -225,7 +240,6 @@
     <textarea id="q4Audience" rows="3" placeholder="e.g. Mid-level IT managers who get blindsided by cloud cost overruns and have to explain it to the CFO with no warning." oninput="updateProgress()"></textarea>
   </div>
 
-  <!-- Q5 -->
   <div class="q-card">
     <div class="q-num">Question 05 — The Teaching Hour</div>
     <div class="q-label">If a younger version of you asked for one hour — what would you teach them?</div>
@@ -233,7 +247,6 @@
     <textarea id="q5Content" rows="3" placeholder="e.g. How to read a cloud bill, where the waste actually hides, and how to have the cost conversation with leadership without getting fired." oninput="updateProgress()"></textarea>
   </div>
 
-  <!-- Q6 -->
   <div class="q-card">
     <div class="q-num">Question 06 — Where You Are</div>
     <div class="q-label">Do you have a YouTube channel already?</div>
@@ -247,7 +260,7 @@
       <option value="2yr-plus">2+ years old</option>
     </select>
     <div class="competition-note">
-      <strong>What happens next:</strong> We derive your niche from your answers — you never have to name it. You'll see how crowded your lane is, then land in the Signal Diagnostic with your position already loaded.
+      <strong>What happens next:</strong> We derive your niche from your answers — you never have to name it. You'll see how crowded your lane is, download your Positioning Report, then land in the Signal Diagnostic with your position already loaded.
     </div>
   </div>
 
@@ -268,7 +281,22 @@
     <div class="success-title">Lane <span>Identified</span></div>
     <div class="success-niche" id="successNiche"></div>
     <p class="success-body" id="successBody"></p>
+
+    <!-- DOWNLOADS -->
+    <div class="download-row">
+      <button class="dl-btn dl-btn-pdf" onclick="downloadPDF()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+        Download PDF Report
+      </button>
+      <button class="dl-btn dl-btn-xlsx" onclick="downloadExcel()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+        Download Excel Data
+      </button>
+    </div>
+    <div class="dl-hint">// Download before the diagnostic launches — or come back to pressuretested.co anytime</div>
+
     <div class="redirect-bar" id="redirectBar"></div>
+    <span class="skip-link" id="skipLink" onclick="goNow()">Skip countdown — launch diagnostic now →</span>
   </div>
 </div>
 
@@ -302,6 +330,9 @@
 
 <script>
   let selectedPassion = '';
+  let diagnosticUrl = '';
+  let reportData = {};
+  let countdownInterval = null;
 
   function togglePill(el, value) {
     document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
@@ -327,33 +358,31 @@
   function deriveNiche(field, passion, authority, audience) {
     const text = (passion + ' ' + authority + ' ' + audience + ' ' + field).toLowerCase();
     const rules = [
-      {keys:['azure','cloud','aws','gcp','devops','kubernetes','infrastructure'],   niche:'Cloud Architecture & IT Strategy',          density:'Moderate'},
-      {keys:['finops','cloud cost','cost management','cloud bill','cloud spend'],   niche:'IT FinOps & Cloud Cost Management',          density:'Underserved'},
-      {keys:['career transition','second career','exit ramp','layoff','displacement','job loss'], niche:'Career Transition for Professionals 40+', density:'Underserved'},
-      {keys:['accounting','cpa','tax','audit','bookkeeping'],                       niche:'Accounting & Finance for Professionals',     density:'Moderate'},
-      {keys:['real estate','rental','landlord','property invest'],                  niche:'Real Estate Investing',                     density:'Crowded'},
-      {keys:['personal finance','debt','retire','saving','wealth','money management'], niche:'Personal Finance & Wealth Building',      density:'Crowded'},
-      {keys:['leadership','manager','executive','managing people'],                 niche:'Leadership & Management Advice',            density:'Moderate'},
-      {keys:['legal','lawyer','attorney','contract law'],                           niche:'Legal Guidance for Professionals',          density:'Underserved'},
-      {keys:['health','fitness','workout','nutrition','wellness'],                  niche:'Health & Wellness for Professionals',       density:'Crowded'},
-      {keys:['woodwork','diy','build','craft','tool','workshop'],                   niche:'Woodworking & DIY',                        density:'Moderate'},
-      {keys:['fish','hunt','outdoor','camp','nature','wildlife'],                   niche:'Outdoors & Lifestyle',                     density:'Moderate'},
-      {keys:['cook','food','recipe','kitchen','baking'],                            niche:'Food & Cooking',                           density:'Crowded'},
-      {keys:['teach','education','training','curriculum','learning'],               niche:'Education & Professional Training',         density:'Moderate'},
-      {keys:['it ','technology','software','cybersecurity','network'],              niche:'IT & Technology Career Advice',             density:'Moderate'},
-      {keys:['business','entrepreneur','startup','side hustle'],                    niche:'Business & Entrepreneurship',              density:'Crowded'},
+      {keys:['finops','cloud cost','cost management','cloud bill','cloud spend'],   niche:'IT FinOps & Cloud Cost Management',          density:'Underserved', videos:['How to Read Your First Cloud Bill','Where Cloud Waste Actually Hides','The 5 Cloud Cost Conversations Every IT Leader Dreads','FinOps for Non-Finance IT Managers','How I Cut Cloud Spend by 40% Without Cutting Services']},
+      {keys:['azure','cloud','aws','gcp','devops','kubernetes','infrastructure'],   niche:'Cloud Architecture & IT Strategy',            density:'Moderate',    videos:['Azure Architecture in Plain English','The Cloud Migration Nobody Talks About Honestly','How to Explain Cloud ROI to Your CFO','Infrastructure Decisions That Will Haunt You Later','Why Most Cloud Architectures Fail at Scale']},
+      {keys:['career transition','second career','exit ramp','layoff','displacement','job loss','ai replace'], niche:'Career Transition for Professionals 40+', density:'Underserved', videos:['The AI Displacement Timeline Nobody Is Showing You','How to Build a Second Income Before the Decision Gets Made for You','What 30 Years in Your Field Is Actually Worth on YouTube','The Exit Ramp Strategy for Employed Professionals','Why Starting Now Beats Waiting Until You Have To']},
+      {keys:['accounting','cpa','tax','audit','bookkeeping'],                       niche:'Accounting & Finance for Professionals',       density:'Moderate',    videos:['Tax Mistakes That Cost Professionals the Most','How to Read a Financial Statement Without an Accounting Degree','The Audit Red Flags Nobody Warns You About','Bookkeeping Systems That Actually Scale','What Your Accountant Isn\'t Telling You']},
+      {keys:['real estate','rental','landlord','property invest'],                  niche:'Real Estate Investing',                       density:'Crowded',     videos:['How to Analyze a Rental Property in 20 Minutes','The Real Estate Math Nobody Shows Beginners','Why Most First-Time Landlords Fail in Year Two','Deal Flow for Busy Professionals','The Tax Strategy That Changes Real Estate Math']},
+      {keys:['personal finance','debt','retire','saving','wealth','money management'], niche:'Personal Finance & Wealth Building',        density:'Crowded',     videos:['The Debt Payoff Order That Actually Works','Why Your 401k Math Is Probably Wrong','How to Build a 6-Month Emergency Fund on a Real Salary','The Wealth-Building Sequence for Late Starters','What Financial Independence Actually Looks Like at 55']},
+      {keys:['leadership','manager','executive','managing people','team lead'],     niche:'Leadership & Management for Professionals',   density:'Moderate',    videos:['The Conversation Every Manager Avoids','How to Give Feedback That Actually Changes Behavior','Managing High Performers Without Losing Them','The Meeting Structure That Gets Decisions Made','Why Most Promotions Happen for the Wrong Reasons']},
+      {keys:['legal','lawyer','attorney','contract law'],                           niche:'Legal Guidance for Professionals',            density:'Underserved', videos:['Contracts Every Professional Should Understand','When You Actually Need a Lawyer','The Legal Mistakes Small Business Owners Make First','Employment Law Basics Nobody Teaches You','How to Read a Contract Before You Sign It']},
+      {keys:['health','fitness','workout','nutrition','wellness'],                  niche:'Health & Wellness for Professionals 40+',     density:'Crowded',     videos:['The Fitness Protocol for People With No Time','Why Your Metabolism Changed at 40 (And What to Do)','Nutrition Basics That Actually Fit a Work Schedule','The 20-Minute Workout System for Busy Professionals','Sleep Optimization for High-Performance Work']},
+      {keys:['woodwork','diy','build','craft','tool','workshop'],                   niche:'Woodworking & DIY for Enthusiasts',           density:'Moderate',    videos:['The First 5 Tools Every Woodworker Actually Needs','How to Read Plans Without Going to School for It','Wood Selection for Projects That Last','The Joinery Basics Nobody Teaches Beginners','Setting Up a Small Shop That Works']},
+      {keys:['fish','hunt','outdoor','camp','nature','wildlife'],                   niche:'Outdoors & Lifestyle',                       density:'Moderate',    videos:['Reading Water: Where Fish Actually Are','The Gear That Matters vs. The Gear That Sells','How to Scout New Public Land','The Shot Placement Guide Nobody Simplifies','Building an Outdoor Skill Set From Scratch']},
+      {keys:['cook','food','recipe','kitchen','baking'],                            niche:'Food & Cooking for Real Life',                density:'Crowded',     videos:['The 5 Techniques That Cover 80% of Cooking','Knife Skills in 10 Minutes','How to Cook Without Recipes','The Pantry System That Makes Weeknight Dinners Easy','Why Your Food Doesn\'t Taste Like the Restaurant\'s']},
+      {keys:['teach','education','training','curriculum','learning','instructor'],  niche:'Education & Professional Training',           density:'Moderate',    videos:['How to Teach What You Know Without a Teaching Degree','The Curriculum Design Process in Plain English','Why Most Training Programs Don\'t Stick','How to Create Content That Actually Changes Behavior','The Assessment Method That Proves Learning Happened']},
     ];
     for (const r of rules) {
       if (r.keys.some(k => text.includes(k))) return r;
     }
     const fallback = {
-      'IT / Technology':        {niche:'Technology & IT Career Advice',        density:'Moderate'},
-      'Finance / Accounting':   {niche:'Finance & Accounting for Professionals',density:'Moderate'},
-      'Management / Leadership':{niche:'Leadership & Career Growth',           density:'Moderate'},
-      'Legal':                  {niche:'Legal Guidance & Career',              density:'Underserved'},
-      'Healthcare / Medical':   {niche:'Healthcare Professional Insights',     density:'Underserved'},
+      'IT / Technology':         {niche:'Technology & IT Career Advice',         density:'Moderate',    videos:['What 30 Years in IT Actually Taught Me','The Career Moves That Paid Off vs. The Ones That Didn\'t','How to Stay Relevant When the Tech Changes Under You','The IT Skills That Will Still Matter in 5 Years','Building Authority in a Field That Changes Constantly']},
+      'Finance / Accounting':    {niche:'Finance & Accounting for Professionals', density:'Moderate',    videos:['Financial Concepts Every Professional Should Know','How to Talk About Money Without Sounding Like an Accountant','The Numbers Behind Business Decisions','Reading Financial Statements Without an MBA','Budgeting Systems That Work for Real Income']},
+      'Management / Leadership': {niche:'Leadership & Career Growth',             density:'Moderate',    videos:['The Leadership Lessons That Only Come With Time','Managing Through Change Without Losing Your Team','How to Build Influence Without a Title','The Career Conversations Nobody Has Early Enough','What Great Managers Do Differently']},
+      'Legal':                   {niche:'Legal Guidance & Career',                density:'Underserved', videos:['Legal Basics Every Professional Should Know','When to Get a Lawyer (And When Not To)','Contract Red Flags in Plain English','Your Rights at Work: What Most People Don\'t Know','How the Legal System Actually Works']},
+      'Healthcare / Medical':    {niche:'Healthcare Professional Insights',       density:'Underserved', videos:['What Patients Wish Providers Understood','The Healthcare System From the Inside','Navigating Insurance: What the Codes Actually Mean','Burnout in Healthcare: What\'s Real and What Helps','Career Paths Nobody Tells Healthcare Professionals About']},
     };
-    return fallback[field] || {niche:'Professional Expertise & Knowledge Sharing', density:'Moderate'};
+    return fallback[field] || {niche:'Professional Expertise & Knowledge Sharing', density:'Moderate', videos:['What 20+ Years in Your Field Actually Taught You','The Mistakes Beginners Make That You Can Prevent','How to Build an Audience Around What You Already Know','The Knowledge Gap in Your Industry Nobody Is Filling','Your Expertise as a Second Income Stream']};
   }
 
   function handleSubmit() {
@@ -373,41 +402,246 @@
 
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
-    btn.textContent = 'Processing...';
+    btn.textContent = 'Analyzing...';
 
     const fd = new FormData();
     fd.append('first_name', name);
     fd.append('email_address', email);
     fetch('https://app.convertkit.com/forms/9137267/subscriptions', {method:'POST',body:fd,mode:'no-cors'})
       .catch(()=>{})
-      .finally(()=> showSuccess(name, field, years, passion || selectedPassion, authority, audience, content, status));
+      .finally(()=> showSuccess(name, email, field, years, passion || selectedPassion, authority, audience, content, status));
   }
 
-  function showSuccess(name, field, years, passion, authority, audience, content, status) {
+  function showSuccess(name, email, field, years, passion, authority, audience, content, status) {
     const result = deriveNiche(field, passion, authority, audience);
+
+    // Store globally for download functions
+    reportData = { name, email, field, years, passion, authority, audience, content, status, ...result, date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) };
+
     document.getElementById('formWrapper').style.display = 'none';
     document.getElementById('successWrapper').classList.add('visible');
-    document.getElementById('successNiche').textContent =
-      `Niche: ${result.niche}  //  Lane: ${result.density}`;
+    document.getElementById('successNiche').textContent = `Niche: ${result.niche}  //  Lane: ${result.density}`;
 
     const msgs = {
-      'Crowded':    'Your lane has significant competition. That validates demand — but packaging and topic consistency will be critical. The diagnostic will flag exactly where you need to differentiate.',
-      'Moderate':   'Healthy competition in your lane — enough to validate demand, not so much that you can\'t establish a position. The diagnostic will show you where the gaps are.',
+      'Crowded':    'Your lane has real competition — which validates demand. Packaging and topic consistency will be your edge. The diagnostic will show exactly where to differentiate.',
+      'Moderate':   'Healthy competition in your lane. Enough to validate demand, not so much that you can\'t establish a position. The diagnostic will find your gaps.',
       'Underserved':'Your lane is underserved. That\'s the opportunity. First-mover advantage is real — move fast. The diagnostic will help you build signal before others show up.'
     };
     document.getElementById('successBody').textContent = msgs[result.density];
 
     const params = new URLSearchParams({name, niche:result.niche, density:result.density, background:field, passion, status});
-    const url = `https://dswann101164.github.io/pressuretested-diagnostic/?${params}`;
+    diagnosticUrl = `https://dswann101164.github.io/pressuretested-diagnostic/?${params}`;
 
-    let count = 4;
+    // Countdown
+    let count = 8;
     const bar = document.getElementById('redirectBar');
-    bar.textContent = `Launching your diagnostic in ${count} seconds...`;
-    const iv = setInterval(()=>{
+    bar.textContent = `Launching diagnostic in ${count} seconds — download your report first`;
+    countdownInterval = setInterval(()=>{
       count--;
-      if (count > 0) { bar.textContent = `Launching your diagnostic in ${count} second${count!==1?'s':''}...`; }
-      else { clearInterval(iv); bar.textContent = 'Launching now...'; window.location.href = url; }
+      if (count > 0) {
+        bar.textContent = `Launching diagnostic in ${count} second${count!==1?'s':''} — download your report first`;
+      } else {
+        clearInterval(countdownInterval);
+        bar.textContent = 'Launching now...';
+        window.location.href = diagnosticUrl;
+      }
     }, 1000);
+  }
+
+  function goNow() {
+    if (countdownInterval) clearInterval(countdownInterval);
+    window.location.href = diagnosticUrl;
+  }
+
+  // ─── PDF DOWNLOAD ───────────────────────────────────────────────
+  function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+    const W = doc.internal.pageSize.getWidth();
+    const margin = 48;
+    const col = W - margin * 2;
+    let y = margin;
+
+    // Helper: hex to RGB
+    function hex(h){ const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16); return [r,g,b]; }
+
+    // HEADER BAR
+    doc.setFillColor(...hex('#0D1B2A'));
+    doc.rect(0, 0, W, 80, 'F');
+    doc.setFillColor(...hex('#C9A84C'));
+    doc.rect(0, 77, W, 3, 'F');
+
+    // Logo text
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(20);
+    doc.setTextColor(...hex('#FFFFFF'));
+    doc.text('Pressure', margin, 48);
+    doc.setTextColor(...hex('#C9A84C'));
+    const pw = doc.getTextWidth('Pressure');
+    doc.text('Tested', margin + pw + 2, 48);
+
+    // Badge
+    doc.setFontSize(8);
+    doc.setTextColor(...hex('#C9A84C'));
+    doc.text('POSITIONING REPORT — LAYER 1', W - margin, 48, {align:'right'});
+
+    y = 110;
+
+    // TITLE
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(22);
+    doc.setTextColor(...hex('#0D1B2A'));
+    doc.text('Lane Identified', margin, y);
+    y += 8;
+
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...hex('#8899aa'));
+    doc.text(`Prepared for ${reportData.name}  //  ${reportData.date}`, margin, y + 12);
+    y += 36;
+
+    // NICHE BOX
+    doc.setFillColor(...hex('#F5F0E8'));
+    doc.setDrawColor(...hex('#C9A84C'));
+    doc.setLineWidth(1);
+    doc.roundedRect(margin, y, col, 52, 4, 4, 'FD');
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...hex('#C9A84C'));
+    doc.text('DERIVED NICHE', margin + 16, y + 18);
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(13);
+    doc.setTextColor(...hex('#0D1B2A'));
+    doc.text(reportData.niche, margin + 16, y + 36);
+    const densityColors = {Crowded:'#e05555', Moderate:'#C9A84C', Underserved:'#4caf7d'};
+    doc.setFillColor(...hex(densityColors[reportData.density] || '#C9A84C'));
+    doc.roundedRect(W - margin - 90, y + 14, 74, 22, 4, 4, 'F');
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...hex('#FFFFFF'));
+    doc.text(`LANE: ${reportData.density.toUpperCase()}`, W - margin - 53, y + 29, {align:'center'});
+    y += 72;
+
+    // SECTIONS
+    function section(label, value) {
+      if (!value) return;
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(8);
+      doc.setTextColor(...hex('#C9A84C'));
+      doc.text(label, margin, y);
+      y += 14;
+      doc.setFont('helvetica','normal');
+      doc.setFontSize(10);
+      doc.setTextColor(...hex('#222222'));
+      const lines = doc.splitTextToSize(value, col);
+      doc.text(lines, margin, y);
+      y += lines.length * 14 + 16;
+      // divider
+      doc.setDrawColor(...hex('#e5e5e5'));
+      doc.setLineWidth(0.5);
+      doc.line(margin, y - 8, W - margin, y - 8);
+    }
+
+    section('PROFESSIONAL BACKGROUND', `${reportData.field}${reportData.years ? ' — ' + reportData.years : ''}`);
+    section('PASSION / CHANNEL TOPIC', reportData.passion);
+    section('YOUR UNFAIR ADVANTAGE', reportData.authority);
+    section('YOUR TARGET AUDIENCE', reportData.audience);
+    section('WHAT YOU WOULD TEACH', reportData.content);
+    section('CHANNEL STATUS', reportData.status);
+
+    // VIDEO IDEAS
+    if (reportData.videos && reportData.videos.length) {
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(8);
+      doc.setTextColor(...hex('#C9A84C'));
+      doc.text('5 SUGGESTED FIRST VIDEOS', margin, y);
+      y += 14;
+      reportData.videos.forEach((v, i) => {
+        doc.setFont('helvetica','bold');
+        doc.setFontSize(10);
+        doc.setTextColor(...hex('#0D1B2A'));
+        doc.text(`${i+1}.`, margin, y);
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...hex('#222222'));
+        const lines = doc.splitTextToSize(v, col - 20);
+        doc.text(lines, margin + 18, y);
+        y += lines.length * 14 + 6;
+      });
+      y += 10;
+    }
+
+    // NEXT STEP BOX
+    doc.setFillColor(...hex('#0D1B2A'));
+    doc.roundedRect(margin, y, col, 60, 4, 4, 'F');
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...hex('#C9A84C'));
+    doc.text('NEXT STEP', margin + 16, y + 18);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...hex('#FFFFFF'));
+    doc.text('Upload your YouTube Studio ZIP export to the Signal Diagnostic.', margin + 16, y + 34);
+    doc.setTextColor(...hex('#C9A84C'));
+    doc.text('dswann101164.github.io/pressuretested-diagnostic', margin + 16, y + 50);
+    y += 76;
+
+    // FOOTER
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(8);
+    doc.setTextColor(...hex('#8899aa'));
+    doc.text('Pressure Tested — pressuretested.co  //  Real Stats. No Hype. Late-Start Wins.', margin, y);
+
+    doc.save(`PressureTested_PositioningReport_${reportData.name.replace(/\s+/g,'_')}.pdf`);
+  }
+
+  // ─── EXCEL DOWNLOAD ─────────────────────────────────────────────
+  function downloadExcel() {
+    const d = reportData;
+    const wb = XLSX.utils.book_new();
+
+    // Sheet 1: Summary
+    const summaryData = [
+      ['PRESSURE TESTED — POSITIONING REPORT', '', ''],
+      ['Generated', d.date, ''],
+      ['', '', ''],
+      ['IDENTITY', '', ''],
+      ['Name', d.name, ''],
+      ['Email', d.email, ''],
+      ['Professional Field', d.field, ''],
+      ['Years of Experience', d.years, ''],
+      ['Channel Status', d.status, ''],
+      ['', '', ''],
+      ['POSITIONING OUTPUT', '', ''],
+      ['Derived Niche', d.niche, ''],
+      ['Lane Density', d.density, ''],
+      ['', '', ''],
+      ['INPUT DATA', '', ''],
+      ['Passion / Channel Topic', d.passion, ''],
+      ['Unfair Advantage (Authority)', d.authority, ''],
+      ['Target Audience', d.audience, ''],
+      ['Teaching Hour Content', d.content, ''],
+    ];
+    const ws1 = XLSX.utils.aoa_to_sheet(summaryData);
+    ws1['!cols'] = [{wch:28},{wch:60},{wch:20}];
+    XLSX.utils.book_append_sheet(wb, ws1, 'Positioning Summary');
+
+    // Sheet 2: Video Ideas
+    const videoHeader = [['#','SUGGESTED VIDEO TITLE','NICHE','LANE DENSITY']];
+    const videoRows = (d.videos || []).map((v,i) => [i+1, v, d.niche, d.density]);
+    const ws2 = XLSX.utils.aoa_to_sheet([...videoHeader, ...videoRows]);
+    ws2['!cols'] = [{wch:4},{wch:60},{wch:35},{wch:15}];
+    XLSX.utils.book_append_sheet(wb, ws2, 'Video Ideas');
+
+    // Sheet 3: Coach Tracker (blank template for Rob/Dave use)
+    const trackerData = [
+      ['CLIENT NAME','NICHE','LANE','CHANNEL STATUS','SIGNAL SCORE (BASELINE)','SIGNAL SCORE (30 DAYS)','DELTA','NOTES'],
+      [d.name, d.niche, d.density, d.status, '', '', '', ''],
+    ];
+    const ws3 = XLSX.utils.aoa_to_sheet(trackerData);
+    ws3['!cols'] = [{wch:20},{wch:35},{wch:12},{wch:18},{wch:22},{wch:22},{wch:10},{wch:30}];
+    XLSX.utils.book_append_sheet(wb, ws3, 'Coach Tracker');
+
+    XLSX.writeFile(wb, `PressureTested_Positioning_${d.name.replace(/\s+/g,'_')}.xlsx`);
   }
 </script>
 </body>
