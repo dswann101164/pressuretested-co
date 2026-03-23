@@ -150,9 +150,9 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-eyebrow">Build Something Real — Before You Need It</div>
+  <div class="hero-eyebrow">Professional Survival System</div>
   <h1 class="hero-headline">Find Your <span class="gold">Lane</span><br/>Before You Build</h1>
-  <p class="hero-sub"><strong>You don't need to know your niche.</strong> Answer six questions about what you already know. We'll identify your lane, tell you how crowded it is, and hand you a Positioning Report — so you can start building something real while you still have the luxury of time.</p>
+  <p class="hero-sub"><strong>You don't need to know your niche.</strong> That's what this is for. Answer six questions about what you already know — we'll tell you what to build, how crowded the lane is, and hand you to the diagnostic ready to score.</p>
   <div class="progress-bar">
     <div class="prog-step active" id="ps1"><div class="prog-dot"></div>You</div>
     <div class="prog-line"></div>
@@ -260,7 +260,7 @@
       <option value="2yr-plus">2+ years old</option>
     </select>
     <div class="competition-note">
-      <strong>What happens next:</strong> We derive your niche from your answers — you never have to name it. You'll see how crowded your lane is and get a Positioning Report you can act on in the next 90 days — while you still have the runway to build it right.
+      <strong>What happens next:</strong> We derive your niche from your answers — you never have to name it. You'll see how crowded your lane is, download your Positioning Report, then land in the Signal Diagnostic with your position already loaded.
     </div>
   </div>
 
@@ -297,11 +297,6 @@
 
     <button class="submit-btn" id="launchBtn" onclick="goNow()" style="margin-top:8px;display:none;">Launch My Diagnostic →</button>
     <div class="redirect-bar" id="redirectBar" style="display:none;"></div>
-    <div id="coachingCta" style="display:none;margin-top:20px;border-top:1px solid rgba(201,168,76,0.2);padding-top:20px;">
-      <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8899aa;letter-spacing:0.1em;margin-bottom:12px;">// WANT SOMEONE TO INTERPRET THIS WITH YOU?</p>
-      <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:16px;">Book a <strong style="color:#fff;">Signal Diagnostic Call</strong> — 60 minutes, your data, your roadmap. No generic advice. Build something real before you need it.</p>
-      <a href="mailto:david@pressuretested.co?subject=Signal Diagnostic Call" style="display:inline-block;background:transparent;border:1px solid #C9A84C;color:#C9A84C;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:14px 28px;border-radius:4px;text-decoration:none;transition:all 0.2s;">Book a Call — $500 →</a>
-    </div>
   </div>
 </div>
 
@@ -360,20 +355,10 @@
     });
   }
 
-  function statusLabel(s) {
-    const map = {
-      'not-started': 'No channel yet — building from scratch',
-      'under-6mo':   'Channel exists, under 6 months old',
-      '6-12mo':      'Channel is 6–12 months old',
-      '1-2yr':       'Channel is 1–2 years old',
-      '2yr-plus':    'Channel is 2+ years old'
-    };
-    return map[s] || s;
-  }
-
   function deriveNiche(field, passion, authority, audience) {
     const text = (passion + ' ' + authority + ' ' + audience + ' ' + field).toLowerCase();
     const rules = [
+      {keys:['youtube','signal engineering','signal score','ctr','thumbnail','creator economy','content creator','video creator','channel growth','youtube channel'], niche:'YouTube Creator Education', density:'Underserved', videos:['The YouTube Signal Score Explained','Why Your CTR Is the Only Metric That Actually Matters','How to Diagnose a Stuck Channel With Real Data','The Thumbnail Formula That Changed My Click Rate','YouTube in 90 Days: A Real Data Case Study']},
       {keys:['finops','cloud cost','cost management','cloud bill','cloud spend'],   niche:'IT FinOps & Cloud Cost Management',          density:'Underserved', videos:['How to Read Your First Cloud Bill','Where Cloud Waste Actually Hides','The 5 Cloud Cost Conversations Every IT Leader Dreads','FinOps for Non-Finance IT Managers','How I Cut Cloud Spend by 40% Without Cutting Services']},
       {keys:['azure','cloud','aws','gcp','devops','kubernetes','infrastructure'],   niche:'Cloud Architecture & IT Strategy',            density:'Moderate',    videos:['Azure Architecture in Plain English','The Cloud Migration Nobody Talks About Honestly','How to Explain Cloud ROI to Your CFO','Infrastructure Decisions That Will Haunt You Later','Why Most Cloud Architectures Fail at Scale']},
       {keys:['career transition','second career','exit ramp','layoff','displacement','job loss','ai replace'], niche:'Career Transition for Professionals 40+', density:'Underserved', videos:['The AI Displacement Timeline Nobody Is Showing You','How to Build a Second Income Before the Decision Gets Made for You','What 30 Years in Your Field Is Actually Worth on YouTube','The Exit Ramp Strategy for Employed Professionals','Why Starting Now Beats Waiting Until You Have To']},
@@ -451,7 +436,6 @@
     // Countdown
     // Show manual launch button — no auto-redirect
     document.getElementById('launchBtn').style.display = 'block';
-    document.getElementById('coachingCta').style.display = 'block';
   }
 
   function goNow() {
@@ -553,7 +537,7 @@
     section('YOUR UNFAIR ADVANTAGE', reportData.authority);
     section('YOUR TARGET AUDIENCE', reportData.audience);
     section('WHAT YOU WOULD TEACH', reportData.content);
-    section('CHANNEL STATUS', statusLabel(reportData.status));
+    section('CHANNEL STATUS', reportData.status);
 
     // VIDEO IDEAS
     if (reportData.videos && reportData.videos.length) {
@@ -615,7 +599,7 @@
       ['Email', d.email, ''],
       ['Professional Field', d.field, ''],
       ['Years of Experience', d.years, ''],
-      ['Channel Status', statusLabel(d.status), ''],
+      ['Channel Status', d.status, ''],
       ['', '', ''],
       ['POSITIONING OUTPUT', '', ''],
       ['Derived Niche', d.niche, ''],
@@ -641,7 +625,7 @@
     // Sheet 3: Coach Tracker (blank template for Rob/Dave use)
     const trackerData = [
       ['CLIENT NAME','NICHE','LANE','CHANNEL STATUS','SIGNAL SCORE (BASELINE)','SIGNAL SCORE (30 DAYS)','DELTA','NOTES'],
-      [d.name, d.niche, d.density, statusLabel(d.status), '', '', '', ''],
+      [d.name, d.niche, d.density, d.status, '', '', '', ''],
     ];
     const ws3 = XLSX.utils.aoa_to_sheet(trackerData);
     ws3['!cols'] = [{wch:20},{wch:35},{wch:12},{wch:18},{wch:22},{wch:22},{wch:10},{wch:30}];
