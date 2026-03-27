@@ -185,10 +185,14 @@ document.getElementById('kitForm').addEventListener('submit', function(e) {
   e.preventDefault();
   var email = document.getElementById('email').value;
   if (!email) return;
-  // Submit to Kit
-  var form = e.target;
-  var data = new FormData(form);
-  fetch(form.action, { method: 'POST', body: data, mode: 'no-cors' });
+  // Open Kit form in hidden iframe to POST without redirect
+  var iframe = document.createElement('iframe');
+  iframe.name = 'kit_iframe';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  var form = document.getElementById('kitForm');
+  form.target = 'kit_iframe';
+  form.submit();
   // Redirect to diagnostic after 800ms
   setTimeout(function() {
     window.location.href = 'https://dswann101164.github.io/pressuretested-diagnostic/';
