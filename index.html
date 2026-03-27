@@ -1,638 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pressure Tested — Find Your Lane Before You Build</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <!-- jsPDF for PDF generation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <!-- SheetJS for Excel generation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <style>
-    :root {
-      --navy:       #0D1B2A;
-      --navy-mid:   #112233;
-      --gold:       #C9A84C;
-      --gold-light: #e0be70;
-      --white:      #FFFFFF;
-      --gray:       #8899aa;
-      --border:     rgba(201,168,76,0.2);
-      --green:      #4caf7d;
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--navy);color:var(--white);font-family:'Montserrat',sans-serif;min-height:100vh;overflow-x:hidden;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pressure Tested — Find Out If Your YouTube Channel Is Actually Working</title>
+<meta name="description" content="Get your free Signal Score in 30 seconds. Real data. No hype. Find out exactly what's broken and how to fix it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0D1B2A;
+  --navy2:#0f1e2e;
+  --gold:#C9A84C;
+  --gold-light:#f0c060;
+  --white:#ffffff;
+  --white2:rgba(255,255,255,0.7);
+  --white3:rgba(255,255,255,0.35);
+  --red:#e05252;
+  --green:#4caf7d;
+  --mono:"IBM Plex Mono",monospace;
+  --sans:"IBM Plex Sans",sans-serif;
+  --display:"Barlow Condensed",sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:var(--sans);min-height:100vh;line-height:1.6;}
 
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:rgba(13,27,42,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-    .logo-icon{width:36px;height:36px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--gold);}
-    .logo-text{font-size:15px;font-weight:800;letter-spacing:0.05em;}
-    .logo-text span{color:var(--gold);}
-    .nav-badge{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);border:1px solid var(--border);padding:4px 10px;border-radius:20px;letter-spacing:0.1em;}
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+.logo{font-family:var(--display);font-size:1.4rem;font-weight:700;letter-spacing:0.04em;text-decoration:none;color:var(--white);}
+.logo span{color:var(--gold);}
+.nav-pill{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:4px 12px;}
 
-    .hero{position:relative;z-index:1;padding:130px 40px 50px;text-align:center;max-width:800px;margin:0 auto;}
-    .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp 0.6s ease forwards 0.1s;}
-    .hero-headline{font-size:clamp(36px,6vw,66px);font-weight:900;line-height:1.0;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:16px;opacity:0;animation:fadeUp 0.6s ease forwards 0.2s;}
-    .hero-headline .gold{color:var(--gold);}
-    .hero-sub{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.7);max-width:560px;margin:0 auto 48px;opacity:0;animation:fadeUp 0.6s ease forwards 0.3s;}
-    .hero-sub strong{color:var(--white);}
+/* HERO */
+.hero{max-width:860px;margin:0 auto;padding:5rem 2rem 4rem;text-align:center;}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+.hero-title{font-family:var(--display);font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1.0;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.5rem;}
+.hero-title .gold{color:var(--gold);}
+.hero-title .dim{color:rgba(255,255,255,0.25);}
+.hero-sub{font-size:1.1rem;color:var(--white2);max-width:560px;margin:0 auto 3rem;line-height:1.7;}
 
-    .progress-bar{display:flex;align-items:center;justify-content:center;margin-bottom:48px;opacity:0;animation:fadeUp 0.6s ease forwards 0.35s;}
-    .prog-step{display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;color:var(--gray);text-transform:uppercase;}
-    .prog-step.active{color:var(--gold);}
-    .prog-step.active .prog-dot{background:var(--gold);border-color:var(--gold);}
-    .prog-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--gray);background:transparent;transition:all 0.3s;}
-    .prog-line{width:32px;height:1px;background:var(--border);margin:0 6px;}
+/* FORM */
+.capture-form{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-top:3px solid var(--gold);border-radius:10px;padding:2rem;max-width:480px;margin:0 auto;}
+.form-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white3);margin-bottom:.5rem;display:block;}
+.form-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:.85rem 1rem;font-family:var(--sans);font-size:15px;color:var(--white);outline:none;transition:border-color .2s;margin-bottom:1rem;}
+.form-input:focus{border-color:var(--gold);}
+.form-input::placeholder{color:var(--white3);}
+.form-btn{width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.25rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:6px;padding:1rem;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.form-btn:hover{background:var(--gold-light);}
+.form-note{font-family:var(--mono);font-size:10px;color:var(--white3);text-align:center;margin-top:.75rem;}
 
-    .form-wrapper{max-width:700px;margin:0 auto;padding:0 40px 80px;opacity:0;animation:fadeUp 0.7s ease forwards 0.4s;}
+/* WHAT YOU GET */
+.proof{max-width:860px;margin:4rem auto;padding:0 2rem;}
+.proof-title{font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);text-align:center;margin-bottom:2rem;}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+@media(max-width:640px){.proof-grid{grid-template-columns:1fr;}}
+.proof-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:1.25rem;}
+.proof-num{font-family:var(--display);font-size:2.5rem;font-weight:800;color:var(--gold);line-height:1;}
+.proof-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-top:4px;}
+.proof-desc{font-size:13px;color:var(--white2);margin-top:.5rem;line-height:1.5;}
 
-    .q-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:8px;padding:32px 36px;margin-bottom:14px;position:relative;overflow:hidden;transition:border-color 0.2s;}
-    .q-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity 0.2s;}
-    .q-card:focus-within{border-color:rgba(201,168,76,0.45);}
-    .q-card:focus-within::before{opacity:1;}
-    .q-num{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
-    .q-label{font-size:16px;font-weight:800;letter-spacing:-0.01em;margin-bottom:6px;line-height:1.3;}
-    .q-hint{font-size:12px;color:var(--gray);margin-bottom:18px;line-height:1.5;}
-    .q-hint em{color:rgba(255,255,255,0.45);font-style:normal;}
+/* WHAT IT SHOWS */
+.signals{max-width:860px;margin:0 auto 4rem;padding:0 2rem;}
+.signals-header{text-align:center;margin-bottom:2rem;}
+.signals-title{font-family:var(--display);font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;text-transform:uppercase;letter-spacing:0.04em;}
+.signals-sub{font-size:14px;color:var(--white2);margin-top:.5rem;}
+.signal-list{display:flex;flex-direction:column;gap:.75rem;}
+.signal-item{display:flex;align-items:flex-start;gap:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:1rem 1.25rem;}
+.signal-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;}
+.icon-red{background:rgba(224,82,82,0.15);color:#e05252;}
+.icon-gold{background:rgba(201,168,76,0.15);color:var(--gold);}
+.icon-green{background:rgba(76,175,125,0.15);color:#4caf7d;}
+.signal-text h4{font-size:14px;font-weight:600;color:var(--white);margin-bottom:2px;}
+.signal-text p{font-size:13px;color:var(--white2);}
 
-    input[type=text],input[type=email],select,textarea{
-      background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:4px;
-      color:var(--white);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:500;
-      padding:13px 15px;width:100%;transition:border-color 0.2s,background 0.2s;outline:none;-webkit-appearance:none;resize:none;
-    }
-    input:focus,select:focus,textarea:focus{border-color:var(--gold);background:rgba(201,168,76,0.04);}
-    input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.22);}
-    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
-    select option{background:var(--navy-mid);color:var(--white);}
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-    .mt12{margin-top:12px;}
+/* QUOTE */
+.quote-section{max-width:680px;margin:0 auto 5rem;padding:0 2rem;text-align:center;}
+.quote-text{font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);font-weight:700;line-height:1.3;color:var(--white);letter-spacing:0.02em;}
+.quote-text em{color:var(--gold);font-style:normal;}
+.quote-attr{font-family:var(--mono);font-size:11px;color:var(--white3);margin-top:1rem;letter-spacing:0.08em;}
 
-    .pill-hint{font-size:11px;color:var(--gray);margin-bottom:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;}
-    .passion-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
-    .pill{padding:7px 15px;border:1px solid rgba(255,255,255,0.12);border-radius:20px;font-size:12px;font-weight:600;color:var(--gray);cursor:pointer;transition:all 0.15s;user-select:none;}
-    .pill:hover{border-color:var(--gold);color:var(--white);}
-    .pill.selected{border-color:var(--gold);background:rgba(201,168,76,0.1);color:var(--gold);}
-
-    .competition-note{background:rgba(201,168,76,0.05);border:1px solid var(--border);border-radius:4px;padding:14px 16px;font-size:12px;color:var(--gray);line-height:1.6;margin-top:14px;}
-    .competition-note strong{color:var(--gold);}
-
-    .submit-btn{width:100%;margin-top:4px;background:var(--gold);color:var(--navy);border:none;border-radius:4px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:20px 32px;cursor:pointer;transition:background 0.2s,transform 0.1s;}
-    .submit-btn:hover{background:var(--gold-light);}
-    .submit-btn:active{transform:scale(0.99);}
-    .submit-btn:disabled{opacity:0.6;cursor:not-allowed;}
-    .trust-line{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:14px;flex-wrap:wrap;}
-    .trust-item{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--gray);display:flex;align-items:center;gap:5px;}
-    .trust-item::before{content:'✓';color:var(--gold);}
-
-    /* SUCCESS */
-    .success-wrapper{display:none;max-width:700px;margin:0 auto;padding:0 40px 80px;}
-    .success-wrapper.visible{display:block;}
-    .success-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:8px;padding:48px;text-align:center;position:relative;overflow:hidden;}
-    .success-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
-    .success-icon{font-size:48px;margin-bottom:16px;}
-    .success-title{font-size:26px;font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin-bottom:6px;}
-    .success-title span{color:var(--gold);}
-    .success-niche{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:rgba(201,168,76,0.08);border:1px solid var(--border);border-radius:4px;padding:12px 20px;margin:18px auto;display:inline-block;letter-spacing:0.04em;max-width:100%;}
-    .success-body{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto;}
-
-    /* DOWNLOAD BUTTONS */
-    .download-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
-    .dl-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-radius:4px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;}
-    .dl-btn-pdf{background:var(--gold);color:var(--navy);}
-    .dl-btn-pdf:hover{background:var(--gold-light);}
-    .dl-btn-xlsx{background:transparent;color:var(--green);border:1px solid var(--green);}
-    .dl-btn-xlsx:hover{background:rgba(76,175,125,0.08);}
-    .dl-btn svg{width:16px;height:16px;flex-shrink:0;}
-    .dl-hint{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray);margin-bottom:20px;letter-spacing:0.05em;}
-
-    .redirect-bar{background:rgba(201,168,76,0.08);border:1px solid var(--border);border-radius:4px;padding:14px 24px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:0.05em;}
-    .skip-link{display:block;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray);cursor:pointer;text-decoration:underline;}
-    .skip-link:hover{color:var(--gold);}
-
-    /* THREE LAYERS */
-    .layers-section{position:relative;z-index:1;padding:60px 40px 80px;max-width:960px;margin:0 auto;}
-    .section-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;text-align:center;}
-    .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-    .col-card{border:1px solid var(--border);padding:24px;border-radius:4px;background:rgba(255,255,255,0.02);position:relative;}
-    .col-card.active{border-color:var(--gold);background:rgba(201,168,76,0.04);}
-    .active-badge{position:absolute;top:-1px;right:20px;background:var(--gold);color:var(--navy);font-size:9px;font-weight:800;letter-spacing:0.1em;padding:3px 8px;border-radius:0 0 4px 4px;text-transform:uppercase;}
-    .col-num{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.1em;margin-bottom:8px;}
-    .col-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;}
-    .col-body{font-size:12px;color:var(--gray);line-height:1.6;}
-
-    footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-    .footer-left,.footer-right{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray);}
-    .footer-right a{color:var(--gold);text-decoration:none;}
-
-    @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-
-    @media(max-width:640px){
-      nav{padding:16px 20px;}
-      .hero{padding:100px 20px 40px;}
-      .form-wrapper,.success-wrapper{padding:0 20px 60px;}
-      .q-card{padding:22px 18px;}
-      .two-col,.download-row{grid-template-columns:1fr;}
-      .three-col{grid-template-columns:1fr;}
-      footer{flex-direction:column;}
-    }
-  </style>
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-brand{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--white);}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;}
+</style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">
-    <div class="logo-icon">PT</div>
-    <div class="logo-text">Pressure<span>Tested</span></div>
-  </a>
-  <div class="nav-badge">POSITIONING ENGINE — LAYER 1</div>
+  <a href="/" class="logo">Pressure<span>Tested</span></a>
+  <div class="nav-pill">Free Diagnostic</div>
 </nav>
 
 <section class="hero">
-  <div class="hero-eyebrow">Professional Survival System</div>
-  <h1 class="hero-headline">Find Your <span class="gold">Lane</span><br/>Before You Build</h1>
-  <p class="hero-sub"><strong>You don't need to know your niche.</strong> That's what this is for. Answer six questions about what you already know — we'll tell you what to build, how crowded the lane is, and hand you to the diagnostic ready to score.</p>
-  <div class="progress-bar">
-    <div class="prog-step active" id="ps1"><div class="prog-dot"></div>You</div>
-    <div class="prog-line"></div>
-    <div class="prog-step" id="ps2"><div class="prog-dot"></div>Passion</div>
-    <div class="prog-line"></div>
-    <div class="prog-step" id="ps3"><div class="prog-dot"></div>Authority</div>
-    <div class="prog-line"></div>
-    <div class="prog-step" id="ps4"><div class="prog-dot"></div>Audience</div>
-    <div class="prog-line"></div>
-    <div class="prog-step" id="ps5"><div class="prog-dot"></div>Teaching</div>
-    <div class="prog-line"></div>
-    <div class="prog-step" id="ps6"><div class="prog-dot"></div>Status</div>
+  <div class="hero-eyebrow">YouTube Channel Diagnostic</div>
+  <h1 class="hero-title">
+    Is your channel<br>
+    <span class="gold">actually working</span><br>
+    <span class="dim">or just busy?</span>
+  </h1>
+  <p class="hero-sub">Enter your email and get your free Signal Score in 30 seconds. Real data. No hype. Find out exactly what's broken and how to fix it.</p>
+
+  <div class="capture-form">
+    <form id="kitForm" action="https://app.kit.com/forms/9137267/subscriptions" method="post" target="_blank">
+      <label class="form-label" for="email">Your email address</label>
+      <input class="form-input" type="email" id="email" name="email_address" placeholder="you@example.com" required>
+      <button class="form-btn" type="submit">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Run My Free Diagnostic
+      </button>
+    </form>
+    <p class="form-note">No spam. No pitch. Just your score. Unsubscribe anytime.</p>
   </div>
 </section>
 
-<div class="form-wrapper" id="formWrapper">
-
-  <div class="q-card">
-    <div class="q-num">Question 01 — You</div>
-    <div class="q-label">Who are you professionally?</div>
-    <div class="q-hint">Your field and how long you've been in it. <em>e.g. IT architect, 34 years — or CPA, 20 years in public sector</em></div>
-    <div class="two-col">
-      <input type="text" id="q1Name" placeholder="First name" autocomplete="given-name" oninput="updateProgress()" />
-      <input type="email" id="q1Email" placeholder="Email address" autocomplete="email" oninput="updateProgress()" />
+<section class="proof">
+  <div class="proof-title">What the diagnostic measures</div>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-num">CTR</div>
+      <div class="proof-label">Click-Through Rate</div>
+      <div class="proof-desc">Are people clicking when YouTube shows your video? This is your packaging signal.</div>
     </div>
-    <div class="mt12">
-      <select id="q1Field" onchange="updateProgress()">
-        <option value="" disabled selected>Select your professional field</option>
-        <option>IT / Technology</option>
-        <option>Finance / Accounting</option>
-        <option>Management / Leadership</option>
-        <option>Legal</option>
-        <option>Healthcare / Medical</option>
-        <option>Sales / Marketing</option>
-        <option>Operations / Admin</option>
-        <option>Education</option>
-        <option>Real Estate</option>
-        <option>Trades / Construction</option>
-        <option>Other</option>
-      </select>
+    <div class="proof-card">
+      <div class="proof-num">VPI</div>
+      <div class="proof-label">Views Per Impression</div>
+      <div class="proof-desc">How efficiently your content converts distribution into actual views.</div>
     </div>
-    <div class="mt12">
-      <select id="q1Years" onchange="updateProgress()">
-        <option value="" disabled selected>Years of experience</option>
-        <option>5–10 years</option>
-        <option>10–20 years</option>
-        <option>20–30 years</option>
-        <option>30+ years</option>
-      </select>
+    <div class="proof-card">
+      <div class="proof-num">/100</div>
+      <div class="proof-label">Signal Score</div>
+      <div class="proof-desc">One number that tells you whether the algorithm understands your channel.</div>
     </div>
   </div>
+</section>
 
-  <div class="q-card">
-    <div class="q-num">Question 02 — Passion</div>
-    <div class="q-label">What do you want the channel to be about?</div>
-    <div class="q-hint">Could be your day job — or something entirely different. Both are valid. <em>Pick a category or describe it in your own words.</em></div>
-    <div class="pill-hint">// Select a category</div>
-    <div class="passion-pills" id="passionPills">
-      <div class="pill" onclick="togglePill(this,'Career Transition')">Career Transition</div>
-      <div class="pill" onclick="togglePill(this,'IT & Technology')">IT & Technology</div>
-      <div class="pill" onclick="togglePill(this,'Personal Finance')">Personal Finance</div>
-      <div class="pill" onclick="togglePill(this,'Real Estate')">Real Estate</div>
-      <div class="pill" onclick="togglePill(this,'Business & Entrepreneurship')">Business & Entrepreneurship</div>
-      <div class="pill" onclick="togglePill(this,'Health & Fitness')">Health & Fitness</div>
-      <div class="pill" onclick="togglePill(this,'Woodworking / DIY')">Woodworking / DIY</div>
-      <div class="pill" onclick="togglePill(this,'Cooking / Food')">Cooking / Food</div>
-      <div class="pill" onclick="togglePill(this,'Outdoors / Hunting / Fishing')">Outdoors / Hunting / Fishing</div>
-      <div class="pill" onclick="togglePill(this,'Education / Teaching')">Education / Teaching</div>
-      <div class="pill" onclick="togglePill(this,'Something Else')">Something Else →</div>
+<section class="signals">
+  <div class="signals-header">
+    <h2 class="signals-title">The repair queue tells you what to fix first</h2>
+    <p class="signals-sub">Priority order. No opinion. Just the data.</p>
+  </div>
+  <div class="signal-list">
+    <div class="signal-item">
+      <div class="signal-icon icon-red">1</div>
+      <div class="signal-text">
+        <h4>Packaging / CTR — fix this first</h4>
+        <p>YouTube is testing your video but nobody's clicking. The thumbnail and title aren't matching what your audience expects in the browse feed.</p>
+      </div>
     </div>
-    <textarea id="q2Passion" rows="2" placeholder="Or describe it in your own words..." oninput="updateProgress()"></textarea>
-  </div>
-
-  <div class="q-card">
-    <div class="q-num">Question 03 — Authority</div>
-    <div class="q-label">What's the specific problem you solve that most people in your field can't?</div>
-    <div class="q-hint">Not what you do — what <em>you specifically</em> do that others struggle with. This is your unfair advantage on camera.</div>
-    <textarea id="q3Authority" rows="3" placeholder="e.g. I translate complex Azure cost data into plain English for non-technical executives — most IT people lose the room when they try." oninput="updateProgress()"></textarea>
-  </div>
-
-  <div class="q-card">
-    <div class="q-num">Question 04 — Audience</div>
-    <div class="q-label">Who suffers most when that problem doesn't get solved?</div>
-    <div class="q-hint">Don't think demographics. Think pain. Who loses sleep over the problem you just described? <em>That person is your viewer.</em></div>
-    <textarea id="q4Audience" rows="3" placeholder="e.g. Mid-level IT managers who get blindsided by cloud cost overruns and have to explain it to the CFO with no warning." oninput="updateProgress()"></textarea>
-  </div>
-
-  <div class="q-card">
-    <div class="q-num">Question 05 — The Teaching Hour</div>
-    <div class="q-label">If a younger version of you asked for one hour — what would you teach them?</div>
-    <div class="q-hint">This surfaces your content naturally. <em>What do you wish someone had told you 10 years ago?</em></div>
-    <textarea id="q5Content" rows="3" placeholder="e.g. How to read a cloud bill, where the waste actually hides, and how to have the cost conversation with leadership without getting fired." oninput="updateProgress()"></textarea>
-  </div>
-
-  <div class="q-card">
-    <div class="q-num">Question 06 — Where You Are</div>
-    <div class="q-label">Do you have a YouTube channel already?</div>
-    <div class="q-hint">Honest answer only. The diagnostic needs to know what it's working with.</div>
-    <select id="q6Status" onchange="updateProgress()">
-      <option value="" disabled selected>Select your current status</option>
-      <option value="not-started">No channel yet — building from scratch</option>
-      <option value="under-6mo">Channel exists, under 6 months old</option>
-      <option value="6-12mo">6–12 months old</option>
-      <option value="1-2yr">1–2 years old</option>
-      <option value="2yr-plus">2+ years old</option>
-    </select>
-    <div class="competition-note">
-      <strong>What happens next:</strong> We derive your niche from your answers — you never have to name it. You'll see how crowded your lane is, download your Positioning Report, then land in the Signal Diagnostic with your position already loaded.
+    <div class="signal-item">
+      <div class="signal-icon icon-gold">2</div>
+      <div class="signal-text">
+        <h4>Impression depth — distribution problem</h4>
+        <p>YouTube isn't committing to distributing your content. Fix CTR first — impression volume follows click performance.</p>
+      </div>
+    </div>
+    <div class="signal-item">
+      <div class="signal-icon icon-green">3</div>
+      <div class="signal-text">
+        <h4>Upload velocity — consistency signal</h4>
+        <p>The algorithm learns faster with a consistent data stream. Gaps reset momentum. Focused uploads accelerate channel classification.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <div style="margin-top:8px;">
-    <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Find My Lane →</button>
-    <div class="trust-line">
-      <div class="trust-item">No spam, ever</div>
-      <div class="trust-item">Data stays in your browser</div>
-      <div class="trust-item">Free to use</div>
-    </div>
-  </div>
-</div>
-
-<!-- SUCCESS -->
-<div class="success-wrapper" id="successWrapper">
-  <div class="success-card">
-    <div class="success-icon">⚡</div>
-    <div class="success-title">Lane <span>Identified</span></div>
-    <div class="success-niche" id="successNiche"></div>
-    <p class="success-body" id="successBody"></p>
-
-    <!-- DOWNLOADS -->
-    <div class="download-row">
-      <button class="dl-btn dl-btn-pdf" onclick="downloadPDF()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
-        Download PDF Report
-      </button>
-      <button class="dl-btn dl-btn-xlsx" onclick="downloadExcel()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
-        Download Excel Data
-      </button>
-    </div>
-    <div class="dl-hint">// Download before the diagnostic launches — or come back to pressuretested.co anytime</div>
-
-    <button class="submit-btn" id="launchBtn" onclick="goNow()" style="margin-top:8px;display:none;">Launch My Diagnostic →</button>
-    <div class="redirect-bar" id="redirectBar" style="display:none;"></div>
-  </div>
-</div>
-
-<!-- THREE LAYERS -->
-<section class="layers-section">
-  <div class="section-label">// The Three-Layer System</div>
-  <div class="three-col">
-    <div class="col-card active">
-      <div class="active-badge">You Are Here</div>
-      <div class="col-num">LAYER 01</div>
-      <div class="col-title">Positioning Engine</div>
-      <p class="col-body">Niche discovery before the channel launches. Extracts expertise, maps it to a viable concept, flags how crowded the lane is.</p>
-    </div>
-    <div class="col-card">
-      <div class="col-num">LAYER 02</div>
-      <div class="col-title">Signal Diagnostic</div>
-      <p class="col-body">Scores your live channel against real data. Signal Score /100, CTR, topic consistency, ranked repair queue.</p>
-    </div>
-    <div class="col-card">
-      <div class="col-num">LAYER 03</div>
-      <div class="col-title">Coaching Calls</div>
-      <p class="col-body">Interprets both layers. Call 1: diagnostic + roadmap. Call 2: did the numbers move? Data-driven, not opinion-based.</p>
-    </div>
-  </div>
+<section class="quote-section">
+  <p class="quote-text">"I don't guarantee you'll go viral. I guarantee you'll know <em>exactly what's broken</em> and exactly how to fix it."</p>
+  <p class="quote-attr">— David Swann, Azure Architect &amp; Pressure Tested</p>
 </section>
 
 <footer>
-  <div class="footer-left">© 2026 Pressure Tested — pressuretested.co</div>
-  <div class="footer-right">Built by a 34-year IT veteran. <a href="https://youtube.com/@pressure-tester" target="_blank">Watch the channel →</a></div>
+  <div>
+    <div class="footer-brand">Pressure<span>Tested</span></div>
+    <div class="footer-tagline">Real Stats. No Hype. Late-Start Wins.</div>
+  </div>
+  <div class="footer-tagline">pressuretested.co</div>
 </footer>
 
 <script>
-  let selectedPassion = '';
-  let diagnosticUrl = '';
-  let reportData = {};
-  let countdownInterval = null;
-
-  function togglePill(el, value) {
-    document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
-    el.classList.add('selected');
-    selectedPassion = value;
-    updateProgress();
-  }
-
-  function updateProgress() {
-    const checks = [
-      document.getElementById('q1Name').value && document.getElementById('q1Email').value && document.getElementById('q1Field').value,
-      selectedPassion || document.getElementById('q2Passion').value,
-      document.getElementById('q3Authority').value,
-      document.getElementById('q4Audience').value,
-      document.getElementById('q5Content').value,
-      document.getElementById('q6Status').value
-    ];
-    ['ps1','ps2','ps3','ps4','ps5','ps6'].forEach((id, i) => {
-      document.getElementById(id).classList.toggle('active', !!checks[i]);
-    });
-  }
-
-  function deriveNiche(field, passion, authority, audience) {
-    const text = (passion + ' ' + authority + ' ' + audience + ' ' + field).toLowerCase();
-    const rules = [
-      {keys:['youtube','signal engineering','signal score','ctr','thumbnail','creator economy','content creator','video creator','channel growth','youtube channel'], niche:'YouTube Creator Education', density:'Underserved', videos:['The YouTube Signal Score Explained','Why Your CTR Is the Only Metric That Actually Matters','How to Diagnose a Stuck Channel With Real Data','The Thumbnail Formula That Changed My Click Rate','YouTube in 90 Days: A Real Data Case Study']},
-      {keys:['finops','cloud cost','cost management','cloud bill','cloud spend'],   niche:'IT FinOps & Cloud Cost Management',          density:'Underserved', videos:['How to Read Your First Cloud Bill','Where Cloud Waste Actually Hides','The 5 Cloud Cost Conversations Every IT Leader Dreads','FinOps for Non-Finance IT Managers','How I Cut Cloud Spend by 40% Without Cutting Services']},
-      {keys:['azure','cloud','aws','gcp','devops','kubernetes','infrastructure'],   niche:'Cloud Architecture & IT Strategy',            density:'Moderate',    videos:['Azure Architecture in Plain English','The Cloud Migration Nobody Talks About Honestly','How to Explain Cloud ROI to Your CFO','Infrastructure Decisions That Will Haunt You Later','Why Most Cloud Architectures Fail at Scale']},
-      {keys:['career transition','second career','exit ramp','layoff','displacement','job loss','ai replace'], niche:'Career Transition for Professionals 40+', density:'Underserved', videos:['The AI Displacement Timeline Nobody Is Showing You','How to Build a Second Income Before the Decision Gets Made for You','What 30 Years in Your Field Is Actually Worth on YouTube','The Exit Ramp Strategy for Employed Professionals','Why Starting Now Beats Waiting Until You Have To']},
-      {keys:['accounting','cpa','tax','audit','bookkeeping'],                       niche:'Accounting & Finance for Professionals',       density:'Moderate',    videos:['Tax Mistakes That Cost Professionals the Most','How to Read a Financial Statement Without an Accounting Degree','The Audit Red Flags Nobody Warns You About','Bookkeeping Systems That Actually Scale','What Your Accountant Isn\'t Telling You']},
-      {keys:['real estate','rental','landlord','property invest'],                  niche:'Real Estate Investing',                       density:'Crowded',     videos:['How to Analyze a Rental Property in 20 Minutes','The Real Estate Math Nobody Shows Beginners','Why Most First-Time Landlords Fail in Year Two','Deal Flow for Busy Professionals','The Tax Strategy That Changes Real Estate Math']},
-      {keys:['personal finance','debt','retire','saving','wealth','money management'], niche:'Personal Finance & Wealth Building',        density:'Crowded',     videos:['The Debt Payoff Order That Actually Works','Why Your 401k Math Is Probably Wrong','How to Build a 6-Month Emergency Fund on a Real Salary','The Wealth-Building Sequence for Late Starters','What Financial Independence Actually Looks Like at 55']},
-      {keys:['leadership','manager','executive','managing people','team lead'],     niche:'Leadership & Management for Professionals',   density:'Moderate',    videos:['The Conversation Every Manager Avoids','How to Give Feedback That Actually Changes Behavior','Managing High Performers Without Losing Them','The Meeting Structure That Gets Decisions Made','Why Most Promotions Happen for the Wrong Reasons']},
-      {keys:['legal','lawyer','attorney','contract law'],                           niche:'Legal Guidance for Professionals',            density:'Underserved', videos:['Contracts Every Professional Should Understand','When You Actually Need a Lawyer','The Legal Mistakes Small Business Owners Make First','Employment Law Basics Nobody Teaches You','How to Read a Contract Before You Sign It']},
-      {keys:['health','fitness','workout','nutrition','wellness'],                  niche:'Health & Wellness for Professionals 40+',     density:'Crowded',     videos:['The Fitness Protocol for People With No Time','Why Your Metabolism Changed at 40 (And What to Do)','Nutrition Basics That Actually Fit a Work Schedule','The 20-Minute Workout System for Busy Professionals','Sleep Optimization for High-Performance Work']},
-      {keys:['woodwork','diy','build','craft','tool','workshop'],                   niche:'Woodworking & DIY for Enthusiasts',           density:'Moderate',    videos:['The First 5 Tools Every Woodworker Actually Needs','How to Read Plans Without Going to School for It','Wood Selection for Projects That Last','The Joinery Basics Nobody Teaches Beginners','Setting Up a Small Shop That Works']},
-      {keys:['fish','hunt','outdoor','camp','nature','wildlife'],                   niche:'Outdoors & Lifestyle',                       density:'Moderate',    videos:['Reading Water: Where Fish Actually Are','The Gear That Matters vs. The Gear That Sells','How to Scout New Public Land','The Shot Placement Guide Nobody Simplifies','Building an Outdoor Skill Set From Scratch']},
-      {keys:['cook','food','recipe','kitchen','baking'],                            niche:'Food & Cooking for Real Life',                density:'Crowded',     videos:['The 5 Techniques That Cover 80% of Cooking','Knife Skills in 10 Minutes','How to Cook Without Recipes','The Pantry System That Makes Weeknight Dinners Easy','Why Your Food Doesn\'t Taste Like the Restaurant\'s']},
-      {keys:['teach','education','training','curriculum','learning','instructor'],  niche:'Education & Professional Training',           density:'Moderate',    videos:['How to Teach What You Know Without a Teaching Degree','The Curriculum Design Process in Plain English','Why Most Training Programs Don\'t Stick','How to Create Content That Actually Changes Behavior','The Assessment Method That Proves Learning Happened']},
-    ];
-    for (const r of rules) {
-      if (r.keys.some(k => text.includes(k))) return r;
-    }
-    const fallback = {
-      'IT / Technology':         {niche:'Technology & IT Career Advice',         density:'Moderate',    videos:['What 30 Years in IT Actually Taught Me','The Career Moves That Paid Off vs. The Ones That Didn\'t','How to Stay Relevant When the Tech Changes Under You','The IT Skills That Will Still Matter in 5 Years','Building Authority in a Field That Changes Constantly']},
-      'Finance / Accounting':    {niche:'Finance & Accounting for Professionals', density:'Moderate',    videos:['Financial Concepts Every Professional Should Know','How to Talk About Money Without Sounding Like an Accountant','The Numbers Behind Business Decisions','Reading Financial Statements Without an MBA','Budgeting Systems That Work for Real Income']},
-      'Management / Leadership': {niche:'Leadership & Career Growth',             density:'Moderate',    videos:['The Leadership Lessons That Only Come With Time','Managing Through Change Without Losing Your Team','How to Build Influence Without a Title','The Career Conversations Nobody Has Early Enough','What Great Managers Do Differently']},
-      'Legal':                   {niche:'Legal Guidance & Career',                density:'Underserved', videos:['Legal Basics Every Professional Should Know','When to Get a Lawyer (And When Not To)','Contract Red Flags in Plain English','Your Rights at Work: What Most People Don\'t Know','How the Legal System Actually Works']},
-      'Healthcare / Medical':    {niche:'Healthcare Professional Insights',       density:'Underserved', videos:['What Patients Wish Providers Understood','The Healthcare System From the Inside','Navigating Insurance: What the Codes Actually Mean','Burnout in Healthcare: What\'s Real and What Helps','Career Paths Nobody Tells Healthcare Professionals About']},
-    };
-    return fallback[field] || {niche:'Professional Expertise & Knowledge Sharing', density:'Moderate', videos:['What 20+ Years in Your Field Actually Taught You','The Mistakes Beginners Make That You Can Prevent','How to Build an Audience Around What You Already Know','The Knowledge Gap in Your Industry Nobody Is Filling','Your Expertise as a Second Income Stream']};
-  }
-
-  function handleSubmit() {
-    const name      = document.getElementById('q1Name').value.trim();
-    const email     = document.getElementById('q1Email').value.trim();
-    const field     = document.getElementById('q1Field').value;
-    const years     = document.getElementById('q1Years').value;
-    const passion   = document.getElementById('q2Passion').value.trim();
-    const authority = document.getElementById('q3Authority').value.trim();
-    const audience  = document.getElementById('q4Audience').value.trim();
-    const content   = document.getElementById('q5Content').value.trim();
-    const status    = document.getElementById('q6Status').value;
-
-    if (!name || !email || !field) { alert('Please complete Question 1 — name, email, and field.'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
-    if (!passion && !selectedPassion) { alert('Please answer Question 2 — what do you want the channel to be about?'); return; }
-
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Analyzing...';
-
-    const fd = new FormData();
-    fd.append('first_name', name);
-    fd.append('email_address', email);
-    fetch('https://app.convertkit.com/forms/9137267/subscriptions', {method:'POST',body:fd,mode:'no-cors'})
-      .catch(()=>{})
-      .finally(()=> showSuccess(name, email, field, years, passion || selectedPassion, authority, audience, content, status));
-  }
-
-  function showSuccess(name, email, field, years, passion, authority, audience, content, status) {
-    const result = deriveNiche(field, passion, authority, audience);
-
-    // Store globally for download functions
-    reportData = { name, email, field, years, passion, authority, audience, content, status, ...result, date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) };
-
-    document.getElementById('formWrapper').style.display = 'none';
-    document.getElementById('successWrapper').classList.add('visible');
-    document.getElementById('successNiche').textContent = `Niche: ${result.niche}  //  Lane: ${result.density}`;
-
-    const msgs = {
-      'Crowded':    'Your lane has real competition — which validates demand. Packaging and topic consistency will be your edge. The diagnostic will show exactly where to differentiate.',
-      'Moderate':   'Healthy competition in your lane. Enough to validate demand, not so much that you can\'t establish a position. The diagnostic will find your gaps.',
-      'Underserved':'Your lane is underserved. That\'s the opportunity. First-mover advantage is real — move fast. The diagnostic will help you build signal before others show up.'
-    };
-    document.getElementById('successBody').textContent = msgs[result.density];
-
-    const params = new URLSearchParams({name, niche:result.niche, density:result.density, background:field, passion, status});
-    diagnosticUrl = `https://dswann101164.github.io/pressuretested-diagnostic/?${params}`;
-
-    // Countdown
-    // Show manual launch button — no auto-redirect
-    document.getElementById('launchBtn').style.display = 'block';
-  }
-
-  function goNow() {
-    if (countdownInterval) clearInterval(countdownInterval);
-    window.location.href = diagnosticUrl;
-  }
-
-  // ─── PDF DOWNLOAD ───────────────────────────────────────────────
-  function downloadPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ unit: 'pt', format: 'letter' });
-    const W = doc.internal.pageSize.getWidth();
-    const margin = 48;
-    const col = W - margin * 2;
-    let y = margin;
-
-    // Helper: hex to RGB
-    function hex(h){ const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16); return [r,g,b]; }
-
-    // HEADER BAR
-    doc.setFillColor(...hex('#0D1B2A'));
-    doc.rect(0, 0, W, 80, 'F');
-    doc.setFillColor(...hex('#C9A84C'));
-    doc.rect(0, 77, W, 3, 'F');
-
-    // Logo text
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(20);
-    doc.setTextColor(...hex('#FFFFFF'));
-    doc.text('Pressure', margin, 48);
-    doc.setTextColor(...hex('#C9A84C'));
-    const pw = doc.getTextWidth('Pressure');
-    doc.text('Tested', margin + pw + 2, 48);
-
-    // Badge
-    doc.setFontSize(8);
-    doc.setTextColor(...hex('#C9A84C'));
-    doc.text('POSITIONING REPORT — LAYER 1', W - margin, 48, {align:'right'});
-
-    y = 110;
-
-    // TITLE
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(22);
-    doc.setTextColor(...hex('#0D1B2A'));
-    doc.text('Lane Identified', margin, y);
-    y += 8;
-
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(10);
-    doc.setTextColor(...hex('#8899aa'));
-    doc.text(`Prepared for ${reportData.name}  //  ${reportData.date}`, margin, y + 12);
-    y += 36;
-
-    // NICHE BOX
-    doc.setFillColor(...hex('#F5F0E8'));
-    doc.setDrawColor(...hex('#C9A84C'));
-    doc.setLineWidth(1);
-    doc.roundedRect(margin, y, col, 52, 4, 4, 'FD');
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(9);
-    doc.setTextColor(...hex('#C9A84C'));
-    doc.text('DERIVED NICHE', margin + 16, y + 18);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(13);
-    doc.setTextColor(...hex('#0D1B2A'));
-    doc.text(reportData.niche, margin + 16, y + 36);
-    const densityColors = {Crowded:'#e05555', Moderate:'#C9A84C', Underserved:'#4caf7d'};
-    doc.setFillColor(...hex(densityColors[reportData.density] || '#C9A84C'));
-    doc.roundedRect(W - margin - 90, y + 14, 74, 22, 4, 4, 'F');
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(9);
-    doc.setTextColor(...hex('#FFFFFF'));
-    doc.text(`LANE: ${reportData.density.toUpperCase()}`, W - margin - 53, y + 29, {align:'center'});
-    y += 72;
-
-    // SECTIONS
-    function section(label, value) {
-      if (!value) return;
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(8);
-      doc.setTextColor(...hex('#C9A84C'));
-      doc.text(label, margin, y);
-      y += 14;
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(10);
-      doc.setTextColor(...hex('#222222'));
-      const lines = doc.splitTextToSize(value, col);
-      doc.text(lines, margin, y);
-      y += lines.length * 14 + 16;
-      // divider
-      doc.setDrawColor(...hex('#e5e5e5'));
-      doc.setLineWidth(0.5);
-      doc.line(margin, y - 8, W - margin, y - 8);
-    }
-
-    section('PROFESSIONAL BACKGROUND', `${reportData.field}${reportData.years ? ' — ' + reportData.years : ''}`);
-    section('PASSION / CHANNEL TOPIC', reportData.passion);
-    section('YOUR UNFAIR ADVANTAGE', reportData.authority);
-    section('YOUR TARGET AUDIENCE', reportData.audience);
-    section('WHAT YOU WOULD TEACH', reportData.content);
-    section('CHANNEL STATUS', reportData.status);
-
-    // VIDEO IDEAS
-    if (reportData.videos && reportData.videos.length) {
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(8);
-      doc.setTextColor(...hex('#C9A84C'));
-      doc.text('5 SUGGESTED FIRST VIDEOS', margin, y);
-      y += 14;
-      reportData.videos.forEach((v, i) => {
-        doc.setFont('helvetica','bold');
-        doc.setFontSize(10);
-        doc.setTextColor(...hex('#0D1B2A'));
-        doc.text(`${i+1}.`, margin, y);
-        doc.setFont('helvetica','normal');
-        doc.setTextColor(...hex('#222222'));
-        const lines = doc.splitTextToSize(v, col - 20);
-        doc.text(lines, margin + 18, y);
-        y += lines.length * 14 + 6;
-      });
-      y += 10;
-    }
-
-    // NEXT STEP BOX
-    doc.setFillColor(...hex('#0D1B2A'));
-    doc.roundedRect(margin, y, col, 60, 4, 4, 'F');
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(9);
-    doc.setTextColor(...hex('#C9A84C'));
-    doc.text('NEXT STEP', margin + 16, y + 18);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(10);
-    doc.setTextColor(...hex('#FFFFFF'));
-    doc.text('Upload your YouTube Studio ZIP export to the Signal Diagnostic.', margin + 16, y + 34);
-    doc.setTextColor(...hex('#C9A84C'));
-    doc.text('dswann101164.github.io/pressuretested-diagnostic', margin + 16, y + 50);
-    y += 76;
-
-    // FOOTER
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(8);
-    doc.setTextColor(...hex('#8899aa'));
-    doc.text('Pressure Tested — pressuretested.co  //  Real Stats. No Hype. Late-Start Wins.', margin, y);
-
-    doc.save(`PressureTested_PositioningReport_${reportData.name.replace(/\s+/g,'_')}.pdf`);
-  }
-
-  // ─── EXCEL DOWNLOAD ─────────────────────────────────────────────
-  function downloadExcel() {
-    const d = reportData;
-    const wb = XLSX.utils.book_new();
-
-    // Sheet 1: Summary
-    const summaryData = [
-      ['PRESSURE TESTED — POSITIONING REPORT', '', ''],
-      ['Generated', d.date, ''],
-      ['', '', ''],
-      ['IDENTITY', '', ''],
-      ['Name', d.name, ''],
-      ['Email', d.email, ''],
-      ['Professional Field', d.field, ''],
-      ['Years of Experience', d.years, ''],
-      ['Channel Status', d.status, ''],
-      ['', '', ''],
-      ['POSITIONING OUTPUT', '', ''],
-      ['Derived Niche', d.niche, ''],
-      ['Lane Density', d.density, ''],
-      ['', '', ''],
-      ['INPUT DATA', '', ''],
-      ['Passion / Channel Topic', d.passion, ''],
-      ['Unfair Advantage (Authority)', d.authority, ''],
-      ['Target Audience', d.audience, ''],
-      ['Teaching Hour Content', d.content, ''],
-    ];
-    const ws1 = XLSX.utils.aoa_to_sheet(summaryData);
-    ws1['!cols'] = [{wch:28},{wch:60},{wch:20}];
-    XLSX.utils.book_append_sheet(wb, ws1, 'Positioning Summary');
-
-    // Sheet 2: Video Ideas
-    const videoHeader = [['#','SUGGESTED VIDEO TITLE','NICHE','LANE DENSITY']];
-    const videoRows = (d.videos || []).map((v,i) => [i+1, v, d.niche, d.density]);
-    const ws2 = XLSX.utils.aoa_to_sheet([...videoHeader, ...videoRows]);
-    ws2['!cols'] = [{wch:4},{wch:60},{wch:35},{wch:15}];
-    XLSX.utils.book_append_sheet(wb, ws2, 'Video Ideas');
-
-    // Sheet 3: Coach Tracker (blank template for Rob/Dave use)
-    const trackerData = [
-      ['CLIENT NAME','NICHE','LANE','CHANNEL STATUS','SIGNAL SCORE (BASELINE)','SIGNAL SCORE (30 DAYS)','DELTA','NOTES'],
-      [d.name, d.niche, d.density, d.status, '', '', '', ''],
-    ];
-    const ws3 = XLSX.utils.aoa_to_sheet(trackerData);
-    ws3['!cols'] = [{wch:20},{wch:35},{wch:12},{wch:18},{wch:22},{wch:22},{wch:10},{wch:30}];
-    XLSX.utils.book_append_sheet(wb, ws3, 'Coach Tracker');
-
-    XLSX.writeFile(wb, `PressureTested_Positioning_${d.name.replace(/\s+/g,'_')}.xlsx`);
-  }
+document.getElementById('kitForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var email = document.getElementById('email').value;
+  if (!email) return;
+  // Submit to Kit
+  var form = e.target;
+  var data = new FormData(form);
+  fetch(form.action, { method: 'POST', body: data, mode: 'no-cors' });
+  // Redirect to diagnostic after 800ms
+  setTimeout(function() {
+    window.location.href = 'https://dswann101164.github.io/pressuretested-diagnostic/';
+  }, 800);
+});
 </script>
+
 </body>
 </html>
