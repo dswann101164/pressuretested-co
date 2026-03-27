@@ -104,7 +104,7 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.5rem 2rem;display:f
   <p class="hero-sub">Enter your email and get your free Signal Score in 30 seconds. Real data. No hype. Find out exactly what's broken and how to fix it.</p>
 
   <div class="capture-form">
-    <form id="kitForm" action="https://app.kit.com/forms/9137267/subscriptions" method="post" target="_blank">
+    <form id="kitForm" action="https://app.kit.com/forms/9137267/subscriptions" method="post">
       <label class="form-label" for="email">Your email address</label>
       <input class="form-input" type="email" id="email" name="email_address" placeholder="you@example.com" required>
       <button class="form-btn" type="submit">
@@ -180,25 +180,7 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.5rem 2rem;display:f
   <div class="footer-tagline">pressuretested.co</div>
 </footer>
 
-<script>
-document.getElementById('kitForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  var email = document.getElementById('email').value;
-  if (!email) return;
-  // Open Kit form in hidden iframe to POST without redirect
-  var iframe = document.createElement('iframe');
-  iframe.name = 'kit_iframe';
-  iframe.style.display = 'none';
-  document.body.appendChild(iframe);
-  var form = document.getElementById('kitForm');
-  form.target = 'kit_iframe';
-  form.submit();
-  // Redirect to diagnostic after 800ms
-  setTimeout(function() {
-    window.location.href = 'https://dswann101164.github.io/pressuretested-diagnostic/';
-  }, 800);
-});
-</script>
+<!-- Kit handles the redirect to the diagnostic after subscription -->
 
 </body>
 </html>
