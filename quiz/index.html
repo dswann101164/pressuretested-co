@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal Challenge — Think You Know YouTube? | Pressure Tested</title>
+<meta name="description" content="Think you know YouTube? Take the Signal Challenge — 10 questions based on the real signals YouTube uses to score your channel. Free. No hype. Real data.">
+<link rel="canonical" href="https://pressuretested.co/quiz/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0D1B2A;--navy2:#0f1e2e;--navy3:#152436;
+  --gold:#C9A84C;--gold-light:#f0c060;
+  --white:#ffffff;--white2:rgba(255,255,255,0.72);--white3:rgba(255,255,255,0.38);
+  --red:#e05252;--green:#4caf7d;--blue:#4a9edd;
+  --mono:"IBM Plex Mono",monospace;--sans:"IBM Plex Sans",sans-serif;--display:"Barlow Condensed",sans-serif;
+  --border:rgba(255,255,255,0.08);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:var(--sans);min-height:100vh;line-height:1.6;overflow-x:hidden;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.04em;text-decoration:none;color:var(--white);}
+.logo span{color:var(--gold);}
+.nav-right{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);}
+.nav-right a{color:var(--gold);text-decoration:none;margin-left:1rem;}
+
+/* SCREENS */
+.screen{display:none;max-width:720px;margin:0 auto;padding:3rem 2rem;}
+.screen.active{display:block;}
+
+/* INTRO SCREEN */
+.intro-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.25);border-radius:20px;padding:6px 16px;margin-bottom:2rem;}
+.intro-title{font-family:var(--display);font-size:clamp(3rem,8vw,5.5rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.5rem;}
+.intro-title .gold{color:var(--gold);}
+.intro-title .dim{color:rgba(255,255,255,0.2);}
+.intro-sub{font-size:1rem;color:var(--white2);line-height:1.75;margin-bottom:2rem;max-width:560px;}
+.intro-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin-bottom:2.5rem;}
+.intro-stat{background:var(--navy2);padding:1.25rem;text-align:center;}
+.intro-stat-num{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--gold);line-height:1;}
+.intro-stat-label{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-top:4px;}
+.start-btn{display:block;width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:8px;padding:1.1rem 2rem;cursor:pointer;transition:background .2s;text-align:center;}
+.start-btn:hover{background:var(--gold-light);}
+.intro-note{font-family:var(--mono);font-size:10px;color:var(--white3);text-align:center;margin-top:.75rem;}
+
+/* QUIZ SCREEN */
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;}
+.quiz-progress-wrap{flex:1;}
+.quiz-progress-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-bottom:.4rem;}
+.quiz-progress-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;}
+.quiz-progress-fill{height:4px;background:var(--gold);border-radius:2px;transition:width .4s ease;}
+.quiz-timer{font-family:var(--display);font-size:2.5rem;font-weight:800;color:var(--gold);min-width:60px;text-align:right;line-height:1;}
+.quiz-timer.warning{color:var(--red);animation:timerPulse .5s infinite;}
+@keyframes timerPulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+.question-num{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);margin-bottom:.75rem;}
+.question-text{font-family:var(--display);font-size:clamp(1.5rem,4vw,2rem);font-weight:700;line-height:1.25;margin-bottom:2rem;color:var(--white);}
+
+.answers{display:flex;flex-direction:column;gap:.75rem;}
+.answer-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;font-family:var(--sans);font-size:.95rem;color:var(--white2);cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:1rem;}
+.answer-btn:hover:not(:disabled){background:rgba(201,168,76,0.08);border-color:rgba(201,168,76,0.3);color:var(--white);}
+.answer-btn.correct{background:rgba(76,175,125,0.15);border-color:var(--green);color:var(--white);}
+.answer-btn.wrong{background:rgba(224,82,82,0.15);border-color:var(--red);color:var(--white);}
+.answer-btn:disabled{cursor:default;}
+.answer-letter{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--gold);min-width:24px;}
+.answer-btn.correct .answer-letter{color:var(--green);}
+.answer-btn.wrong .answer-letter{color:var(--red);}
+
+.explanation{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-top:1.25rem;font-size:.9rem;color:var(--white2);line-height:1.6;display:none;}
+.explanation.show{display:block;}
+.explanation strong{color:var(--white);}
+
+.next-btn{display:block;width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:8px;padding:.9rem 2rem;cursor:pointer;transition:background .2s;margin-top:1.5rem;display:none;}
+.next-btn.show{display:block;}
+.next-btn:hover{background:var(--gold-light);}
+
+/* SCORE SCREEN */
+.score-hero{text-align:center;margin-bottom:3rem;}
+.score-label{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.score-big{font-family:var(--display);font-size:clamp(5rem,15vw,9rem);font-weight:800;line-height:1;color:var(--gold);}
+.score-denom{font-family:var(--display);font-size:clamp(2rem,6vw,3.5rem);font-weight:400;color:var(--white3);}
+.score-grade{font-family:var(--display);font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-top:.5rem;}
+.score-grade.excellent{color:var(--green);}
+.score-grade.good{color:var(--gold);}
+.score-grade.fair{color:#f0a040;}
+.score-grade.poor{color:var(--red);}
+.score-message{font-size:1rem;color:var(--white2);max-width:500px;margin:.75rem auto 0;line-height:1.7;}
+
+.score-breakdown{margin:2rem 0;}
+.breakdown-title{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);margin-bottom:1rem;}
+.breakdown-list{display:flex;flex-direction:column;gap:.5rem;}
+.breakdown-item{display:flex;align-items:center;gap:.75rem;font-size:.9rem;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.breakdown-item:last-child{border-bottom:none;}
+.breakdown-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.dot-correct{background:var(--green);}
+.dot-wrong{background:var(--red);}
+.breakdown-q{color:var(--white2);flex:1;}
+.breakdown-status{font-family:var(--mono);font-size:10px;color:var(--white3);}
+
+.cta-stack{display:flex;flex-direction:column;gap:.75rem;margin-top:2.5rem;}
+.cta-primary{display:block;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.4rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:8px;padding:1rem 2rem;cursor:pointer;transition:background .2s;text-align:center;text-decoration:none;}
+.cta-primary:hover{background:var(--gold-light);}
+.cta-secondary{display:block;background:transparent;color:var(--gold);font-family:var(--display);font-size:1.2rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:1rem 2rem;cursor:pointer;transition:all .2s;text-align:center;text-decoration:none;}
+.cta-secondary:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);}
+
+/* LEADERBOARD SUBMIT */
+.submit-section{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:8px;padding:1.5rem;margin-top:2rem;}
+.submit-title{font-family:var(--display);font-size:1.3rem;font-weight:700;text-transform:uppercase;margin-bottom:.5rem;}
+.submit-sub{font-size:.9rem;color:var(--white2);margin-bottom:1.25rem;}
+.submit-fields{display:flex;flex-direction:column;gap:.75rem;}
+.submit-input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:.75rem 1rem;font-family:var(--sans);font-size:14px;color:var(--white);outline:none;transition:border-color .2s;}
+.submit-input:focus{border-color:var(--gold);}
+.submit-input::placeholder{color:var(--white3);}
+.submit-btn{background:var(--navy3);color:var(--gold);font-family:var(--display);font-size:1.1rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:.75rem;cursor:pointer;transition:all .2s;}
+.submit-btn:hover{background:rgba(201,168,76,0.1);border-color:var(--gold);}
+.submit-success{font-family:var(--mono);font-size:12px;color:var(--green);text-align:center;margin-top:.75rem;display:none;}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.screen.active{animation:fadeIn .3s ease;}
+
+footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;margin-top:3rem;}
+.footer-brand{font-family:var(--display);font-size:1rem;font-weight:800;color:var(--white);}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;margin-top:4px;}
+
+@media(max-width:580px){
+  .intro-stats{grid-template-columns:1fr 1fr 1fr;}
+  .intro-stat{padding:.75rem .5rem;}
+  .intro-stat-num{font-size:1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Pressure<span>Tested</span></a>
+    <div class="nav-right">
+      The Signal Challenge
+      <a href="/leaderboard/">Leaderboard →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- INTRO SCREEN -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-badge">⚡ Signal Challenge · 10 Questions · 15 Seconds Each</div>
+  <h1 class="intro-title">
+    Think you<br>know<br><span class="gold">YouTube?</span>
+  </h1>
+  <p class="intro-sub">Most creators optimize what they can see — upload schedule, keywords, hashtags. The algorithm measures something different. This quiz tests whether you know what that is. 10 questions. 15 seconds each. No hype. Real signals only.</p>
+
+  <div class="intro-stats">
+    <div class="intro-stat">
+      <div class="intro-stat-num">10</div>
+      <div class="intro-stat-label">Questions</div>
+    </div>
+    <div class="intro-stat">
+      <div class="intro-stat-num">15s</div>
+      <div class="intro-stat-label">Per Question</div>
+    </div>
+    <div class="intro-stat">
+      <div class="intro-stat-num">/100</div>
+      <div class="intro-stat-label">Signal Score</div>
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="startQuiz()">Start the Signal Challenge →</button>
+  <p class="intro-note">After the quiz, run your real channel diagnostic free at app.pressuretested.co</p>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-header">
+    <div class="quiz-progress-wrap">
+      <div class="quiz-progress-label" id="progress-label">Question 1 of 10</div>
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="progress-fill" style="width:10%;"></div>
+      </div>
+    </div>
+    <div class="quiz-timer" id="timer">15</div>
+  </div>
+
+  <div class="question-num" id="question-num">01 / 10</div>
+  <div class="question-text" id="question-text"></div>
+
+  <div class="answers" id="answers"></div>
+
+  <div class="explanation" id="explanation"></div>
+
+  <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question →</button>
+</div>
+
+<!-- SCORE SCREEN -->
+<div class="screen" id="screen-score">
+  <div class="score-hero">
+    <div class="score-label">Your Signal Challenge Score</div>
+    <div>
+      <span class="score-big" id="score-big">0</span>
+      <span class="score-denom">/10</span>
+    </div>
+    <div class="score-grade" id="score-grade"></div>
+    <p class="score-message" id="score-message"></p>
+  </div>
+
+  <div class="score-breakdown">
+    <div class="breakdown-title">Question Breakdown</div>
+    <div class="breakdown-list" id="breakdown-list"></div>
+  </div>
+
+  <div class="submit-section">
+    <div class="submit-title">Enter the Leaderboard</div>
+    <p class="submit-sub">Submit your score to the Signal Challenge leaderboard. Your name, score, and the date are all that's stored.</p>
+    <div class="submit-fields">
+      <input class="submit-input" id="submit-name" type="text" placeholder="Your name or channel handle" maxlength="50">
+      <input class="submit-input" id="submit-email" type="email" placeholder="Email (optional — only for leaderboard updates)">
+      <button class="submit-btn" onclick="submitScore()">Submit to Leaderboard →</button>
+    </div>
+    <div class="submit-success" id="submit-success">✓ Score submitted. Check the leaderboard to see where you rank.</div>
+  </div>
+
+  <div class="cta-stack">
+    <a href="https://app.pressuretested.co" class="cta-primary">Now Run Your Real Channel Diagnostic →</a>
+    <a href="/leaderboard/" class="cta-secondary">View the Leaderboard →</a>
+    <button class="cta-secondary" onclick="restartQuiz()">Try Again</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Pressure<span>Tested</span></div>
+  <div class="footer-tagline">Real Stats. No Hype. Late-Start Wins. · pressuretested.co</div>
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "YouTube shows your video to 1,000 people and 18 click to watch. What is your CTR?",
+    answers: ["0.18%", "1.8%", "18%", "180%"],
+    correct: 1,
+    explanation: "<strong>1.8%</strong> — CTR = (Views ÷ Impressions) × 100. 18 ÷ 1,000 = 0.018 × 100 = 1.8%. This is below the 4% threshold where the algorithm starts investing in distribution. At 1.8%, YouTube is likely to reduce how often it tests this video."
+  },
+  {
+    q: "What CTR range does YouTube consider 'performing' for a channel under 50K subscribers?",
+    answers: ["1–2%", "2–3%", "4–8%", "10–15%"],
+    correct: 2,
+    explanation: "<strong>4–8%</strong> is the performing range for small channels. Below 4% and the algorithm reads it as the packaging not earning the click. Above 8% is excellent. 2–3% is survivable but signals a packaging problem that needs attention."
+  },
+  {
+    q: "Your CTR is 5% but viewers leave after 15 seconds on a 10-minute video. What does this tell you?",
+    answers: ["The title is too long", "Packaging over-promised — content didn't deliver", "Upload velocity is too low", "The thumbnail needs more text"],
+    correct: 1,
+    explanation: "<strong>Packaging over-promised.</strong> Good CTR means the thumbnail and title earned the click. A 15-second average view duration means the content didn't deliver on the implicit promise. YouTube reads this as the viewer being deceived — and penalizes distribution as a result."
+  },
+  {
+    q: "What does VPI (Views Per Impression) measure that CTR alone doesn't?",
+    answers: ["How many people subscribed after watching", "Whether the click converted to a real watched view — combines CTR and watch time", "How many comments a video received", "The total number of unique viewers"],
+    correct: 1,
+    explanation: "<strong>VPI combines CTR and watch time</strong> into one efficiency ratio. A channel can have a reasonable CTR but terrible VPI if viewers click and immediately leave. VPI is the full conversion — from impression to click to a view that counts. It's a more honest signal than CTR alone."
+  },
+  {
+    q: "A video has 2,000 impressions and 0.6% CTR. What is the highest-priority repair?",
+    answers: ["Add more keywords to the description", "Repackage — new thumbnail and title", "Delete the video and re-upload", "Increase upload frequency"],
+    correct: 1,
+    explanation: "<strong>Repackage first.</strong> 0.6% CTR on 2,000 impressions means YouTube is actively testing this video and the audience is rejecting the packaging. The content hasn't even had a chance to be judged. New thumbnail with a single focal point, high contrast, and a title that leads with the situation — not the topic."
+  },
+  {
+    q: "You publish 6 videos in one week then go silent for 5 weeks. What signal does this send?",
+    answers: ["Strong initial spike — the algorithm rewards volume", "Upload velocity gap — momentum resets and classification slows", "YouTube doesn't care about publishing schedule", "It only affects subscriber notifications"],
+    correct: 1,
+    explanation: "<strong>Upload velocity gap resets momentum.</strong> The algorithm learns your channel from consistent data. A 5-week gap is like unplugging a machine mid-process. The classification signal weakens, the algorithm reduces how often it tests your videos, and you essentially restart the learning curve when you resume."
+  },
+  {
+    q: "What does a Signal Score of 55/100 typically mean for a channel?",
+    answers: ["The channel is failing and should be deleted", "Algorithm is aware of the channel but not yet invested in distributing it", "The channel is performing at maximum capacity", "CTR is the only metric being measured"],
+    correct: 1,
+    explanation: "<strong>Aware but not invested.</strong> 55/100 puts a channel in the 'aware' phase — the algorithm knows it exists, is occasionally testing it, but hasn't committed to broad distribution. This is a normal position for a channel under 6 months old. The path forward is moving the primary constraint — usually CTR or VPI."
+  },
+  {
+    q: "Your channel has one video doing 60% of total watch time. What does this flag?",
+    answers: ["Strong content quality — double down on this format", "Watch time concentration — possible topic scatter and classification problem", "Upload velocity is too high", "The channel has reached its maximum audience"],
+    correct: 1,
+    explanation: "<strong>Watch time concentration flags topic scatter.</strong> When one video does 60% of total watch time, the algorithm is being trained to classify the channel around that one video's topic — not your overall content. If the rest of your videos are different topics, the algorithm can't consistently categorize your channel, which limits distribution across the board."
+  },
+  {
+    q: "Which is more important to fix first on a channel with both low CTR and low watch time?",
+    answers: ["Watch time — content quality is the foundation", "CTR first — packaging is upstream of everything else", "Fix both simultaneously for maximum impact", "Neither — subscriber count is the priority"],
+    correct: 1,
+    explanation: "<strong>CTR first, always.</strong> Nobody watches what they don't click. If your CTR is below threshold, your watch time data is based on a tiny unrepresentative sample — the few people who happened to find the video through search or direct links. Fix the packaging, get real click volume, then evaluate watch time with actual data."
+  },
+  {
+    q: "The Pressure Tested Signal Score has four layers. Which layer carries the most weight?",
+    answers: ["Upload Velocity (0–20 points)", "Impression Depth (0–25 points)", "CTR Signal (0–30 points)", "Views Per Impression (0–25 points)"],
+    correct: 2,
+    explanation: "<strong>CTR Signal at 0–30 points</strong> is the highest-weighted layer — 30% of the total score. This reflects YouTube's own weighting: CTR is the primary signal the algorithm uses to decide whether to invest in distribution. Fix CTR and you often move multiple other metrics simultaneously."
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let userAnswers = [];
+let timerInterval = null;
+let timeLeft = 15;
+let answered = false;
+
+function startQuiz() {
+  document.getElementById('screen-intro').classList.remove('active');
+  document.getElementById('screen-quiz').classList.add('active');
+  currentQuestion = 0;
+  score = 0;
+  userAnswers = [];
+  loadQuestion();
+}
+
+function loadQuestion() {
+  answered = false;
+  timeLeft = 15;
+  const q = QUESTIONS[currentQuestion];
+  
+  document.getElementById('progress-label').textContent = `Question ${currentQuestion + 1} of ${QUESTIONS.length}`;
+  document.getElementById('progress-fill').style.width = `${((currentQuestion + 1) / QUESTIONS.length) * 100}%`;
+  document.getElementById('question-num').textContent = `${String(currentQuestion + 1).padStart(2, '0')} / ${QUESTIONS.length}`;
+  document.getElementById('question-text').textContent = q.q;
+  
+  const answersEl = document.getElementById('answers');
+  answersEl.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+  q.answers.forEach((answer, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.innerHTML = `<span class="answer-letter">${letters[i]}</span><span>${answer}</span>`;
+    btn.onclick = () => selectAnswer(i);
+    answersEl.appendChild(btn);
+  });
+  
+  document.getElementById('explanation').classList.remove('show');
+  document.getElementById('explanation').textContent = '';
+  document.getElementById('next-btn').classList.remove('show');
+  
+  const timerEl = document.getElementById('timer');
+  timerEl.textContent = timeLeft;
+  timerEl.classList.remove('warning');
+  
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timerEl.textContent = timeLeft;
+    if (timeLeft <= 5) timerEl.classList.add('warning');
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timeExpired();
+    }
+  }, 1000);
+}
+
+function selectAnswer(index) {
+  if (answered) return;
+  answered = true;
+  clearInterval(timerInterval);
+  
+  const q = QUESTIONS[currentQuestion];
+  const buttons = document.querySelectorAll('.answer-btn');
+  
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.correct) btn.classList.add('correct');
+    else if (i === index && index !== q.correct) btn.classList.add('wrong');
+  });
+  
+  const isCorrect = index === q.correct;
+  if (isCorrect) score++;
+  userAnswers.push({ questionIndex: currentQuestion, selected: index, correct: isCorrect });
+  
+  const expEl = document.getElementById('explanation');
+  expEl.innerHTML = q.explanation;
+  expEl.classList.add('show');
+  
+  document.getElementById('next-btn').classList.add('show');
+  document.getElementById('next-btn').textContent = currentQuestion < QUESTIONS.length - 1 ? 'Next Question →' : 'See My Score →';
+}
+
+function timeExpired() {
+  if (answered) return;
+  answered = true;
+  
+  const q = QUESTIONS[currentQuestion];
+  const buttons = document.querySelectorAll('.answer-btn');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.correct) btn.classList.add('correct');
+  });
+  
+  userAnswers.push({ questionIndex: currentQuestion, selected: -1, correct: false });
+  
+  const expEl = document.getElementById('explanation');
+  expEl.innerHTML = '<strong>Time\'s up.</strong> ' + q.explanation;
+  expEl.classList.add('show');
+  
+  document.getElementById('next-btn').classList.add('show');
+  document.getElementById('next-btn').textContent = currentQuestion < QUESTIONS.length - 1 ? 'Next Question →' : 'See My Score →';
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  if (currentQuestion >= QUESTIONS.length) {
+    showScore();
+  } else {
+    document.getElementById('screen-quiz').classList.remove('active');
+    document.getElementById('screen-quiz').classList.add('active');
+    loadQuestion();
+  }
+}
+
+function showScore() {
+  clearInterval(timerInterval);
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-score').classList.add('active');
+  
+  document.getElementById('score-big').textContent = score;
+  
+  const gradeEl = document.getElementById('score-grade');
+  const msgEl = document.getElementById('score-message');
+  
+  if (score >= 9) {
+    gradeEl.textContent = 'Signal Expert';
+    gradeEl.className = 'score-grade excellent';
+    msgEl.textContent = 'You understand how the algorithm actually works. Now run your real channel diagnostic — the knowledge needs to meet the data.';
+  } else if (score >= 7) {
+    gradeEl.textContent = 'Signal Aware';
+    gradeEl.className = 'score-grade good';
+    msgEl.textContent = 'You understand the framework. The gap is in application — which specific signal is constraining your channel. The diagnostic tells you exactly which one.';
+  } else if (score >= 5) {
+    gradeEl.textContent = 'Packaging Phase';
+    gradeEl.className = 'score-grade fair';
+    msgEl.textContent = 'You know YouTube exists as a platform. You\'re still optimizing the wrong things. The diagnostic will show you where your 45 missing points are hiding.';
+  } else {
+    gradeEl.textContent = 'Guessing Phase';
+    gradeEl.className = 'score-grade poor';
+    msgEl.textContent = 'Most creators are exactly here — optimizing for things the algorithm doesn\'t measure. The diagnostic is where this gets real. Run it before you publish another video.';
+  }
+  
+  const breakdownEl = document.getElementById('breakdown-list');
+  breakdownEl.innerHTML = '';
+  userAnswers.forEach((ua, i) => {
+    const item = document.createElement('div');
+    item.className = 'breakdown-item';
+    const shortQ = QUESTIONS[ua.questionIndex].q.length > 60 
+      ? QUESTIONS[ua.questionIndex].q.substring(0, 57) + '...' 
+      : QUESTIONS[ua.questionIndex].q;
+    item.innerHTML = `
+      <div class="breakdown-dot ${ua.correct ? 'dot-correct' : 'dot-wrong'}"></div>
+      <div class="breakdown-q">${shortQ}</div>
+      <div class="breakdown-status">${ua.correct ? '✓ Correct' : ua.selected === -1 ? 'Time up' : '✗ Wrong'}</div>
+    `;
+    breakdownEl.appendChild(item);
+  });
+}
+
+function submitScore() {
+  const name = document.getElementById('submit-name').value.trim();
+  if (!name) {
+    document.getElementById('submit-name').focus();
+    document.getElementById('submit-name').style.borderColor = 'var(--red)';
+    return;
+  }
+  
+  const email = document.getElementById('submit-email').value.trim();
+  const grade = document.getElementById('score-grade').textContent;
+  
+  const data = {
+    name: name,
+    email: email,
+    score: score,
+    total: QUESTIONS.length,
+    grade: grade,
+    date: new Date().toISOString()
+  };
+  
+  fetch('https://htagojtlqatnagjsydnv.supabase.co/rest/v1/quiz_leaderboard', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': 'sb_publishable_dWO-jisLPddhxfIwcKeS8g_JLFi2tSb',
+      'Authorization': 'Bearer sb_publishable_dWO-jisLPddhxfIwcKeS8g_JLFi2tSb',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(data)
+  }).then(r => {
+    document.getElementById('submit-success').style.display = 'block';
+    document.querySelector('.submit-btn').disabled = true;
+    document.querySelector('.submit-btn').textContent = 'Score Submitted ✓';
+  }).catch(() => {
+    document.getElementById('submit-success').style.display = 'block';
+    document.getElementById('submit-success').textContent = '✓ Score recorded. Check the leaderboard.';
+  });
+}
+
+function restartQuiz() {
+  document.getElementById('screen-score').classList.remove('active');
+  startQuiz();
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal Challenge Leaderboard — Pressure Tested</title>
+<meta name="description" content="The Pressure Tested Signal Challenge leaderboard. Who knows YouTube signals best? Real scores. Real channels. No hype.">
+<link rel="canonical" href="https://pressuretested.co/leaderboard/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#0D1B2A;--navy2:#0f1e2e;--navy3:#152436;--gold:#C9A84C;--gold-light:#f0c060;--white:#ffffff;--white2:rgba(255,255,255,0.72);--white3:rgba(255,255,255,0.38);--white4:rgba(255,255,255,0.1);--red:#e05252;--green:#4caf7d;--mono:"IBM Plex Mono",monospace;--sans:"IBM Plex Sans",sans-serif;--display:"Barlow Condensed",sans-serif;--border:rgba(255,255,255,0.08);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:var(--sans);min-height:100vh;line-height:1.6;}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.04em;text-decoration:none;color:var(--white);}
+.logo span{color:var(--gold);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);background:var(--gold);border-radius:4px;padding:8px 16px;text-decoration:none;font-weight:500;transition:background .2s;}
+.nav-cta:hover{background:var(--gold-light);}
+.page-header{max-width:760px;margin:0 auto;padding:4rem 2rem 2rem;text-align:center;}
+.page-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.page-title{font-family:var(--display);font-size:clamp(3rem,7vw,5rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1rem;}
+.page-title .gold{color:var(--gold);}
+.page-sub{font-size:1rem;color:var(--white2);max-width:500px;margin:0 auto 2rem;}
+.play-btn{display:inline-block;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.2rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;padding:.85rem 2.5rem;transition:background .2s;margin-bottom:3rem;}
+.play-btn:hover{background:var(--gold-light);}
+.content{max-width:760px;margin:0 auto;padding:0 2rem 5rem;}
+.section-label{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);margin-bottom:1rem;}
+.leaderboard-table{width:100%;border-collapse:collapse;margin-bottom:3rem;}
+.leaderboard-table th{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);padding:.75rem 1rem;text-align:left;border-bottom:1px solid var(--border);}
+.leaderboard-table td{padding:.9rem 1rem;border-bottom:1px solid var(--border);font-size:.9rem;color:var(--white2);}
+.leaderboard-table tr:last-child td{border-bottom:none;}
+.rank-col{font-family:var(--display);font-size:1.2rem;font-weight:800;color:var(--white3);width:50px;}
+.rank-1{color:var(--gold);}
+.rank-2{color:#C0C0C0;}
+.rank-3{color:#CD7F32;}
+.name-col{font-weight:500;color:var(--white);}
+.score-col{font-family:var(--display);font-size:1.2rem;font-weight:800;color:var(--gold);}
+.grade-col{font-family:var(--mono);font-size:10px;letter-spacing:0.05em;color:var(--white3);}
+.date-col{font-family:var(--mono);font-size:10px;color:var(--white3);}
+.loading{text-align:center;padding:3rem;font-family:var(--mono);font-size:12px;color:var(--white3);}
+.empty-state{text-align:center;padding:3rem;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;}
+.empty-state h3{font-family:var(--display);font-size:1.5rem;font-weight:700;text-transform:uppercase;margin-bottom:.5rem;}
+.empty-state p{font-size:.9rem;color:var(--white2);}
+.david-row td{background:rgba(201,168,76,0.04);}
+.david-badge{font-family:var(--mono);font-size:9px;color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:3px;padding:1px 5px;margin-left:.5rem;}
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;}
+.footer-brand{font-family:var(--display);font-size:1rem;font-weight:800;color:var(--white);}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;margin-top:4px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Pressure<span>Tested</span></a>
+    <a href="/quiz/" class="nav-cta">Take the Challenge →</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-eyebrow">Signal Challenge</div>
+  <h1 class="page-title">The<br><span class="gold">Leaderboard</span></h1>
+  <p class="page-sub">Who actually knows YouTube signals? Real scores from real creators. No hype. Updated live.</p>
+  <a href="/quiz/" class="play-btn">Take the Signal Challenge →</a>
+</div>
+
+<div class="content">
+  <div class="section-label">Top Scores — Signal Challenge</div>
+  <div id="leaderboard-container">
+    <div class="loading">Loading scores...</div>
+  </div>
+
+  <div class="section-label" style="margin-top:3rem;">After the Quiz</div>
+  <p style="font-size:.95rem;color:var(--white2);line-height:1.75;margin-bottom:1rem;">The Signal Challenge tests your knowledge of YouTube signals. Your real channel diagnostic scores your actual channel against the same signals — CTR, VPI, Impression Depth, Upload Velocity — using your real analytics data.</p>
+  <p style="font-size:.95rem;color:var(--white2);line-height:1.75;margin-bottom:1.5rem;">You can score 10/10 on this quiz and still have a 40/100 Signal Score. Knowledge and execution are different things. The diagnostic tells you which one is your problem.</p>
+  <a href="https://app.pressuretested.co" style="display:inline-block;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.1rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;padding:.85rem 2rem;transition:background .2s;">Run Your Free Channel Diagnostic →</a>
+</div>
+
+<footer>
+  <div class="footer-brand">Pressure<span>Tested</span></div>
+  <div class="footer-tagline">Real Stats. No Hype. Late-Start Wins. · pressuretested.co</div>
+</footer>
+
+<script>
+async function loadLeaderboard() {
+  const container = document.getElementById('leaderboard-container');
+  
+  try {
+    const response = await fetch(
+      'https://htagojtlqatnagjsydnv.supabase.co/rest/v1/quiz_leaderboard?select=*&order=score.desc,created_at.asc&limit=50',
+      {
+        headers: {
+          'apikey': 'sb_publishable_dWO-jisLPddhxfIwcKeS8g_JLFi2tSb',
+          'Authorization': 'Bearer sb_publishable_dWO-jisLPddhxfIwcKeS8g_JLFi2tSb'
+        }
+      }
+    );
+    
+    const data = await response.json();
+    
+    if (!data || data.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <h3>No scores yet</h3>
+          <p>Be the first to take the Signal Challenge and claim the top spot.</p>
+        </div>
+      `;
+      return;
+    }
+    
+    const rankClasses = ['rank-1', 'rank-2', 'rank-3'];
+    const medals = ['🥇', '🥈', '🥉'];
+    
+    let html = `
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Score</th>
+            <th>Grade</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+    
+    data.forEach((entry, i) => {
+      const rank = i + 1;
+      const rankClass = rank <= 3 ? rankClasses[rank - 1] : '';
+      const medal = rank <= 3 ? medals[rank - 1] : rank;
+      const date = new Date(entry.created_at || entry.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
+      const isDavid = entry.name && entry.name.toLowerCase().includes('david swann');
+      
+      html += `
+        <tr ${isDavid ? 'class="david-row"' : ''}>
+          <td class="rank-col ${rankClass}">${medal}</td>
+          <td class="name-col">${escapeHtml(entry.name)}${isDavid ? '<span class="david-badge">Builder</span>' : ''}</td>
+          <td class="score-col">${entry.score}/${entry.total || 10}</td>
+          <td class="grade-col">${escapeHtml(entry.grade || '')}</td>
+          <td class="date-col">${date}</td>
+        </tr>
+      `;
+    });
+    
+    html += '</tbody></table>';
+    container.innerHTML = html;
+    
+  } catch (err) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <h3>No scores yet</h3>
+        <p>Take the challenge and be first on the board.</p>
+      </div>
+    `;
+  }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+loadLeaderboard();
+</script>
+
+</body>
+</html>
