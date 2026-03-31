@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About David Swann — Pressure Tested</title>
+<meta name="description" content="61-year-old Azure Architect with 33 years in IT, building a second income stream publicly before AI displacement makes the decision for him. Real data. No hype.">
+<link rel="canonical" href="https://pressuretested.co/about/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#0D1B2A;--navy2:#0f1e2e;--navy3:#152436;--gold:#C9A84C;--gold-light:#f0c060;--white:#ffffff;--white2:rgba(255,255,255,0.72);--white3:rgba(255,255,255,0.38);--white4:rgba(255,255,255,0.1);--red:#e05252;--green:#4caf7d;--mono:"IBM Plex Mono",monospace;--sans:"IBM Plex Sans",sans-serif;--display:"Barlow Condensed",sans-serif;--border:rgba(255,255,255,0.08);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:var(--sans);min-height:100vh;line-height:1.6;}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.04em;text-decoration:none;color:var(--white);}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--white3);text-decoration:none;padding:8px 14px;border-radius:4px;transition:color .2s,background .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);background:var(--white4);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);background:var(--gold);border-radius:4px;padding:8px 16px;text-decoration:none;font-weight:500;transition:background .2s;}
+.nav-cta:hover{background:var(--gold-light);}
+.page-header{max-width:760px;margin:0 auto;padding:5rem 2rem 3rem;}
+.breadcrumb{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-bottom:1.5rem;}
+.breadcrumb a{color:var(--white3);text-decoration:none;}
+.breadcrumb a:hover{color:var(--gold);}
+.page-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.page-title{font-family:var(--display);font-size:clamp(3rem,7vw,5rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.5rem;}
+.page-title .gold{color:var(--gold);}
+.page-intro{font-size:1.1rem;color:var(--white2);line-height:1.75;max-width:640px;}
+.content{max-width:760px;margin:0 auto;padding:0 2rem 5rem;}
+.credentials{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin:3rem 0;}
+.cred-item{background:var(--navy2);padding:1.25rem;text-align:center;}
+.cred-num{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--gold);line-height:1;}
+.cred-label{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-top:4px;}
+.content h2{font-family:var(--display);font-size:1.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;margin:3rem 0 1rem;color:var(--white);}
+.content p{font-size:1rem;color:var(--white2);line-height:1.8;margin-bottom:1.25rem;}
+.content p strong{color:var(--white);font-weight:600;}
+.principle{border-left:3px solid rgba(201,168,76,0.3);padding:.75rem 0 .75rem 1.5rem;margin:1rem 0;}
+.principle p{margin-bottom:0;font-size:.95rem;}
+.principle strong{color:var(--gold);}
+.channel-stats{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin:2rem 0;}
+.stats-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white3);margin-bottom:1rem;}
+.stats-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:14px;}
+.stats-row:last-child{border-bottom:none;}
+.stats-row-label{color:var(--white3);}
+.stats-row-val{color:var(--white);font-family:var(--mono);font-size:12px;}
+.cta-block{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:2rem;margin:3rem 0;text-align:center;}
+.cta-block h3{font-family:var(--display);font-size:1.8rem;font-weight:800;text-transform:uppercase;margin-bottom:.75rem;}
+.cta-block p{font-size:.95rem;color:var(--white2);margin-bottom:1.5rem;}
+.cta-btn{display:inline-block;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.1rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;padding:.85rem 2rem;transition:background .2s;margin:.4rem;}
+.cta-btn:hover{background:var(--gold-light);}
+.cta-btn-outline{display:inline-block;color:var(--gold);font-family:var(--display);font-size:1.1rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;padding:.85rem 2rem;border:1px solid rgba(201,168,76,0.35);transition:background .2s,border-color .2s;margin:.4rem;}
+.cta-btn-outline:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);}
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;}
+.footer-brand{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--white);}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;margin-top:4px;}
+@media(max-width:680px){.nav-links{display:none;}.credentials{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Pressure<span>Tested</span></a>
+    <ul class="nav-links">
+      <li><a href="/what-is-youtube-ctr/">What is CTR?</a></li>
+      <li><a href="/what-is-signal-score/">Signal Score</a></li>
+      <li><a href="/what-is-vpi/">What is VPI?</a></li>
+      <li><a href="/why-youtube-channel-not-growing/">Why Not Growing?</a></li>
+      <li><a href="/about/" class="active">About</a></li>
+      <li><a href="/work-with-me/">Work With Me</a></li>
+    </ul>
+    <a href="https://dswann101164.github.io/pressuretested-diagnostic" class="nav-cta">Free Diagnostic →</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="/">Home</a> → About</div>
+  <div class="page-eyebrow">The Builder</div>
+  <h1 class="page-title">61 years old.<br><span class="gold">Still employed.</span><br>Building anyway.</h1>
+  <p class="page-intro">I'm David Swann. Azure Architect at Pinnacle Financial Partners. 33 years in enterprise IT. Building a second income stream publicly, with real data, before AI displacement makes the decision for me.</p>
+</div>
+
+<div class="content">
+  <div class="credentials">
+    <div class="cred-item">
+      <div class="cred-num">61</div>
+      <div class="cred-label">Years Old</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">33yr</div>
+      <div class="cred-label">Enterprise IT</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">18</div>
+      <div class="cred-label">Videos Published</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">55/100</div>
+      <div class="cred-label">Current Score</div>
+    </div>
+  </div>
+
+  <h2>Why I built this</h2>
+  <p>I've spent 33 years in enterprise IT — Azure architecture, Power BI, KQL, DAX, systems design. I know how to build things that work. I also know what AI displacement looks like from the inside of a corporate environment, because I'm watching it happen in real time from my desk at Pinnacle Financial Partners.</p>
+  <p>The window is 12–18 months for a lot of professionals in my position. Managers, IT workers, accountants, lawyers — the jobs that mid-level corporate America runs on. Not the jobs at the bottom, not the jobs at the top. The ones in the middle, where AI is most efficient at replacing human judgment.</p>
+  <p>I decided to build something before the decision gets made for me. Not after.</p>
+
+  <h2>Why YouTube</h2>
+  <p>YouTube is the only platform where 33 years of specific expertise — the kind you can't fake, the kind that comes from watching a dozen technology cycles come and go — is actually a competitive advantage. The 25-year-olds building AI content channels don't have what I have. They haven't been through a corporate environment at scale. They haven't managed budgets with real consequences. They haven't had to explain technical decisions to a CFO who doesn't care about the technology.</p>
+  <p>The professional over 40 who is watching AI displacement coming — that person is being served content by people who've never been in their shoes. That's the gap. That's the channel.</p>
+
+  <h2>The core principle</h2>
+  <p>Every YouTube coach in this space sells a guarantee. If the channel grows — they take credit. If it doesn't — you didn't do the work. The customer absorbs all the risk. The coach absorbs none.</p>
+  <p>I built the diagnostic tool to remove that escape hatch. Baseline before engagement. Measurable delta after. Either the numbers moved or they didn't. That's not a weaker promise — for a professional over 40 who's been sold snake oil before, that's a stronger one.</p>
+
+  <div class="principle">
+    <p><strong>"I don't tell you how. I show you mine."</strong><br>Every video on the Pressure Tested channel is a live case study — my channel, my data, my numbers. If the framework works, the numbers will prove it. If it doesn't, those numbers will say that too.</p>
+  </div>
+
+  <h2>Current channel stats</h2>
+  <div class="channel-stats">
+    <div class="stats-label">As of March 31, 2026 — Updated in real time</div>
+    <div class="stats-row"><span class="stats-row-label">Signal Score</span><span class="stats-row-val">55 / 100</span></div>
+    <div class="stats-row"><span class="stats-row-label">Total Videos Published</span><span class="stats-row-val">18</span></div>
+    <div class="stats-row"><span class="stats-row-label">Total Channel Impressions</span><span class="stats-row-val">3,927</span></div>
+    <div class="stats-row"><span class="stats-row-label">Average CTR</span><span class="stats-row-val">2.09%</span></div>
+    <div class="stats-row"><span class="stats-row-label">Best Video CTR</span><span class="stats-row-val">5.26% — "61 Years Old, Still Employed"</span></div>
+    <div class="stats-row"><span class="stats-row-label">Primary Constraint</span><span class="stats-row-val">CTR Signal (10/30)</span></div>
+    <div class="stats-row"><span class="stats-row-label">Upload Velocity Score</span><span class="stats-row-val">20/20 — Full points</span></div>
+  </div>
+
+  <div class="cta-block">
+    <h3>Run your own diagnostic</h3>
+    <p>Or book a 30-minute call. You bring your score. I bring the interpretation. No pitch. No program to sell. Just the data and what to do with it.</p>
+    <a href="https://dswann101164.github.io/pressuretested-diagnostic" class="cta-btn">Free Diagnostic →</a>
+    <a href="/work-with-me/" class="cta-btn-outline">Book a Call →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Pressure<span>Tested</span></div>
+  <div class="footer-tagline">Real Stats. No Hype. Late-Start Wins. · pressuretested.co</div>
+</footer>
+
+</body>
+</html>

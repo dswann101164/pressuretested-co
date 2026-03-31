@@ -3,105 +3,221 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pressure Tested — Find Out If Your YouTube Channel Is Actually Working</title>
-<meta name="description" content="Get your free Signal Score in 30 seconds. Real data. No hype. Find out exactly what's broken and how to fix it.">
+<title>Pressure Tested — YouTube Channel Diagnostic for Professionals Over 40</title>
+<meta name="description" content="Is your YouTube channel actually working or just busy? Get your free Signal Score in 30 seconds. Real data. No hype. Built by a 61-year-old Azure Architect building publicly.">
+<meta name="keywords" content="youtube channel diagnostic, youtube signal score, youtube CTR, youtube channel not growing, youtube for professionals">
+<meta property="og:title" content="Pressure Tested — YouTube Channel Diagnostic">
+<meta property="og:description" content="Get your free Signal Score. Real data. No hype. Find out exactly what's broken and how to fix it.">
+<meta property="og:url" content="https://pressuretested.co">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://pressuretested.co">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Pressure Tested",
+  "url": "https://pressuretested.co",
+  "description": "YouTube channel diagnostic platform for employed professionals over 40 facing AI displacement",
+  "author": {
+    "@type": "Person",
+    "name": "David Swann",
+    "jobTitle": "Azure Architect",
+    "description": "61-year-old IT professional building a second income stream publicly"
+  }
+}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --navy:#0D1B2A;
   --navy2:#0f1e2e;
+  --navy3:#152436;
   --gold:#C9A84C;
   --gold-light:#f0c060;
   --white:#ffffff;
-  --white2:rgba(255,255,255,0.7);
-  --white3:rgba(255,255,255,0.35);
+  --white2:rgba(255,255,255,0.72);
+  --white3:rgba(255,255,255,0.38);
+  --white4:rgba(255,255,255,0.1);
   --red:#e05252;
   --green:#4caf7d;
   --mono:"IBM Plex Mono",monospace;
   --sans:"IBM Plex Sans",sans-serif;
   --display:"Barlow Condensed",sans-serif;
+  --border:rgba(255,255,255,0.08);
 }
 html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--white);font-family:var(--sans);min-height:100vh;line-height:1.6;}
 
 /* NAV */
-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid rgba(255,255,255,0.06);}
-.logo{font-family:var(--display);font-size:1.4rem;font-weight:700;letter-spacing:0.04em;text-decoration:none;color:var(--white);}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.04em;text-decoration:none;color:var(--white);}
 .logo span{color:var(--gold);}
-.nav-pill{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:4px 12px;}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--white3);text-decoration:none;padding:8px 14px;border-radius:4px;transition:color .2s,background .2s;}
+.nav-links a:hover{color:var(--white);background:var(--white4);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);background:var(--gold);border-radius:4px;padding:8px 16px;text-decoration:none;font-weight:500;transition:background .2s;}
+.nav-cta:hover{background:var(--gold-light);}
+.nav-mobile-toggle{display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:4px;}
 
 /* HERO */
-.hero{max-width:860px;margin:0 auto;padding:5rem 2rem 4rem;text-align:center;}
-.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
-.hero-title{font-family:var(--display);font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1.0;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.5rem;}
+.hero{max-width:900px;margin:0 auto;padding:6rem 2rem 4rem;text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.25);border-radius:20px;padding:6px 16px;margin-bottom:2rem;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-title{font-family:var(--display);font-size:clamp(3.2rem,8vw,6rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.5rem;}
 .hero-title .gold{color:var(--gold);}
-.hero-title .dim{color:rgba(255,255,255,0.25);}
-.hero-sub{font-size:1.1rem;color:var(--white2);max-width:560px;margin:0 auto 3rem;line-height:1.7;}
+.hero-title .dim{color:rgba(255,255,255,0.2);}
+.hero-sub{font-size:1.1rem;color:var(--white2);max-width:560px;margin:0 auto 1rem;line-height:1.75;}
+.hero-proof{font-family:var(--mono);font-size:11px;color:var(--white3);margin-bottom:3rem;letter-spacing:0.05em;}
+.hero-proof strong{color:var(--gold);}
 
 /* FORM */
-.capture-form{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-top:3px solid var(--gold);border-radius:10px;padding:2rem;max-width:480px;margin:0 auto;}
+.capture-form{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-top:3px solid var(--gold);border-radius:10px;padding:2rem;max-width:480px;margin:0 auto 1.5rem;}
 .form-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white3);margin-bottom:.5rem;display:block;}
 .form-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:.85rem 1rem;font-family:var(--sans);font-size:15px;color:var(--white);outline:none;transition:border-color .2s;margin-bottom:1rem;}
 .form-input:focus{border-color:var(--gold);}
 .form-input::placeholder{color:var(--white3);}
-.form-btn{width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.25rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:6px;padding:1rem;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.form-btn{width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:6px;padding:1rem;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:10px;}
 .form-btn:hover{background:var(--gold-light);}
 .form-note{font-family:var(--mono);font-size:10px;color:var(--white3);text-align:center;margin-top:.75rem;}
+.direct-book{text-align:center;font-family:var(--mono);font-size:11px;color:var(--white3);}
+.direct-book a{color:var(--gold);text-decoration:none;}
+.direct-book a:hover{text-decoration:underline;}
 
-/* WHAT YOU GET */
-.proof{max-width:860px;margin:4rem auto;padding:0 2rem;}
-.proof-title{font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);text-align:center;margin-bottom:2rem;}
-.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
-@media(max-width:640px){.proof-grid{grid-template-columns:1fr;}}
-.proof-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:1.25rem;}
-.proof-num{font-family:var(--display);font-size:2.5rem;font-weight:800;color:var(--gold);line-height:1;}
-.proof-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-top:4px;}
-.proof-desc{font-size:13px;color:var(--white2);margin-top:.5rem;line-height:1.5;}
+/* STATS BAR */
+.stats-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem;margin:0 auto;max-width:900px;}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.stat-item{background:var(--navy);padding:1.5rem 2rem;text-align:center;}
+.stat-num{font-family:var(--display);font-size:2.8rem;font-weight:800;color:var(--gold);line-height:1;}
+.stat-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-top:6px;}
 
-/* WHAT IT SHOWS */
-.signals{max-width:860px;margin:0 auto 4rem;padding:0 2rem;}
-.signals-header{text-align:center;margin-bottom:2rem;}
-.signals-title{font-family:var(--display);font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;text-transform:uppercase;letter-spacing:0.04em;}
-.signals-sub{font-size:14px;color:var(--white2);margin-top:.5rem;}
-.signal-list{display:flex;flex-direction:column;gap:.75rem;}
-.signal-item{display:flex;align-items:flex-start;gap:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:1rem 1.25rem;}
-.signal-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;}
-.icon-red{background:rgba(224,82,82,0.15);color:#e05252;}
-.icon-gold{background:rgba(201,168,76,0.15);color:var(--gold);}
-.icon-green{background:rgba(76,175,125,0.15);color:#4caf7d;}
-.signal-text h4{font-size:14px;font-weight:600;color:var(--white);margin-bottom:2px;}
-.signal-text p{font-size:13px;color:var(--white2);}
+/* SECTION HEADER */
+.section{max-width:900px;margin:0 auto;padding:5rem 2rem;}
+.section-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.section-title{font-family:var(--display);font-size:clamp(2rem,4vw,3rem);font-weight:800;text-transform:uppercase;letter-spacing:0.03em;line-height:1.1;margin-bottom:1rem;}
+.section-sub{font-size:1rem;color:var(--white2);max-width:600px;line-height:1.7;}
+
+/* SCORE EXPLAINER */
+.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;}
+@media(max-width:680px){.score-grid{grid-template-columns:1fr;}}
+.score-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.5rem;}
+.score-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.score-card-name{font-family:var(--display);font-size:1.1rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;}
+.score-card-max{font-family:var(--mono);font-size:11px;color:var(--white3);}
+.score-bar-track{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:.75rem;}
+.score-bar-fill{height:6px;border-radius:3px;}
+.fill-red{background:var(--red);width:33%;}
+.fill-gold{background:var(--gold);width:80%;}
+.fill-green{background:var(--green);width:40%;}
+.fill-blue{background:#4a9edd;width:75%;}
+.score-card-desc{font-size:13px;color:var(--white2);line-height:1.6;}
+.score-card-link{display:inline-block;font-family:var(--mono);font-size:10px;color:var(--gold);text-decoration:none;margin-top:.75rem;letter-spacing:0.05em;}
+.score-card-link:hover{text-decoration:underline;}
+
+/* VIDEO SECTION */
+.video-section{background:var(--navy3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.video-inner{max-width:900px;margin:0 auto;padding:5rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+@media(max-width:720px){.video-inner{grid-template-columns:1fr;}}
+.video-embed{aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:1px solid var(--border);}
+.video-embed iframe{width:100%;height:100%;border:none;}
+.video-text .section-eyebrow{margin-bottom:.75rem;}
+.video-text h2{font-family:var(--display);font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;text-transform:uppercase;line-height:1.1;margin-bottom:1rem;}
+.video-text p{font-size:.95rem;color:var(--white2);line-height:1.7;margin-bottom:1.5rem;}
+.video-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(201,168,76,0.3);border-radius:4px;padding:10px 16px;transition:background .2s,border-color .2s;}
+.video-cta:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);}
+
+/* HOW IT WORKS */
+.steps{display:flex;flex-direction:column;gap:0;margin-top:3rem;}
+.step{display:flex;gap:2rem;align-items:flex-start;padding:1.5rem 0;border-bottom:1px solid var(--border);}
+.step:last-child{border-bottom:none;}
+.step-num{font-family:var(--display);font-size:3rem;font-weight:800;color:rgba(201,168,76,0.2);line-height:1;min-width:60px;}
+.step-content h3{font-family:var(--display);font-size:1.3rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:.4rem;}
+.step-content p{font-size:14px;color:var(--white2);line-height:1.6;}
+
+/* ABOUT */
+.about-section{background:var(--navy3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.about-inner{max-width:900px;margin:0 auto;padding:5rem 2rem;display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:start;}
+@media(max-width:680px){.about-inner{grid-template-columns:1fr;}}
+.about-avatar{width:120px;height:120px;border-radius:50%;background:var(--navy2);border:2px solid rgba(201,168,76,0.3);overflow:hidden;flex-shrink:0;}
+.about-avatar img{width:100%;height:100%;object-fit:cover;}
+.about-avatar-placeholder{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--navy2),var(--navy3));border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:2.5rem;font-weight:800;color:var(--gold);flex-shrink:0;}
+.about-content .section-eyebrow{margin-bottom:.75rem;}
+.about-content h2{font-family:var(--display);font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;text-transform:uppercase;line-height:1.1;margin-bottom:1rem;}
+.about-content p{font-size:.95rem;color:var(--white2);line-height:1.75;margin-bottom:1rem;}
+.about-stats{display:flex;gap:2rem;margin-top:1.5rem;flex-wrap:wrap;}
+.about-stat{text-align:center;}
+.about-stat-num{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--gold);}
+.about-stat-label{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;}
 
 /* QUOTE */
-.quote-section{max-width:680px;margin:0 auto 5rem;padding:0 2rem;text-align:center;}
-.quote-text{font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);font-weight:700;line-height:1.3;color:var(--white);letter-spacing:0.02em;}
+.quote-section{max-width:720px;margin:0 auto;padding:5rem 2rem;text-align:center;}
+.quote-marks{font-family:var(--display);font-size:5rem;color:rgba(201,168,76,0.15);line-height:.5;margin-bottom:1rem;}
+.quote-text{font-family:var(--display);font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:700;line-height:1.3;color:var(--white);letter-spacing:0.02em;}
 .quote-text em{color:var(--gold);font-style:normal;}
-.quote-attr{font-family:var(--mono);font-size:11px;color:var(--white3);margin-top:1rem;letter-spacing:0.08em;}
+.quote-attr{font-family:var(--mono);font-size:11px;color:var(--white3);margin-top:1.5rem;letter-spacing:0.08em;}
+
+/* GLOSSARY PREVIEW */
+.glossary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem;}
+@media(max-width:680px){.glossary-grid{grid-template-columns:1fr;}}
+.glossary-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-decoration:none;transition:border-color .2s,background .2s;display:block;}
+.glossary-card:hover{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04);}
+.glossary-term{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.04em;}
+.glossary-def{font-size:13px;color:var(--white2);margin-top:.4rem;line-height:1.5;}
+.glossary-read{font-family:var(--mono);font-size:10px;color:var(--white3);margin-top:.75rem;letter-spacing:0.06em;}
 
 /* FOOTER */
-footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.footer-brand{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--white);}
+footer{border-top:1px solid var(--border);padding:3rem 2rem;}
+.footer-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;}
+@media(max-width:580px){.footer-inner{grid-template-columns:1fr;}}
+.footer-brand{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--white);}
 .footer-brand span{color:var(--gold);}
-.footer-tagline{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;}
+.footer-tagline{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;margin-top:4px;}
+.footer-links{display:flex;flex-direction:column;gap:6px;text-align:right;}
+@media(max-width:580px){.footer-links{text-align:left;}}
+.footer-links a{font-family:var(--mono);font-size:10px;color:var(--white3);text-decoration:none;letter-spacing:0.06em;transition:color .2s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-bottom{max-width:900px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-family:var(--mono);font-size:10px;color:var(--white3);}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .nav-mobile-toggle{display:block;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="logo">Pressure<span>Tested</span></a>
-  <div class="nav-pill">Free Diagnostic</div>
+  <div class="nav-inner">
+    <a href="/" class="logo">Pressure<span>Tested</span></a>
+    <ul class="nav-links">
+      <li><a href="/what-is-youtube-ctr/">What is CTR?</a></li>
+      <li><a href="/what-is-signal-score/">Signal Score</a></li>
+      <li><a href="/what-is-vpi/">What is VPI?</a></li>
+      <li><a href="/why-youtube-channel-not-growing/">Why Not Growing?</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/work-with-me/">Work With Me</a></li>
+    </ul>
+    <a href="https://dswann101164.github.io/pressuretested-diagnostic" class="nav-cta">Free Diagnostic →</a>
+  </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-eyebrow">YouTube Channel Diagnostic</div>
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Building Publicly · 18 Videos · Real Data
+  </div>
   <h1 class="hero-title">
     Is your channel<br>
     <span class="gold">actually working</span><br>
     <span class="dim">or just busy?</span>
   </h1>
-  <p class="hero-sub">Enter your email and get your free Signal Score in 30 seconds. Real data. No hype. Find out exactly what's broken and how to fix it.</p>
+  <p class="hero-sub">Enter your email and get your free Signal Score — the only number that tells you whether YouTube's algorithm is working for your channel or against it.</p>
+  <p class="hero-proof">Built by a <strong>61-year-old Azure Architect</strong> with 33 years in IT. Real data. No hype. No sales call dressed as a discovery call.</p>
 
   <div class="capture-form">
     <form id="kitForm" action="https://app.kit.com/forms/9137267/subscriptions" method="post">
@@ -114,73 +230,212 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.5rem 2rem;display:f
     </form>
     <p class="form-note">No spam. No pitch. Just your score. Unsubscribe anytime.</p>
   </div>
+  <p class="direct-book">Already know you want to talk? <a href="https://calendly.com/swanndavid67/30min">Book a 30-minute diagnostic call →</a></p>
 </section>
 
-<section class="proof">
-  <div class="proof-title">What the diagnostic measures</div>
-  <div class="proof-grid">
-    <div class="proof-card">
-      <div class="proof-num">CTR</div>
-      <div class="proof-label">Click-Through Rate</div>
-      <div class="proof-desc">Are people clicking when YouTube shows your video? This is your packaging signal.</div>
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">55</div>
+      <div class="stat-label">My current Signal Score /100</div>
     </div>
-    <div class="proof-card">
-      <div class="proof-num">VPI</div>
-      <div class="proof-label">Views Per Impression</div>
-      <div class="proof-desc">How efficiently your content converts distribution into actual views.</div>
+    <div class="stat-item">
+      <div class="stat-num">18</div>
+      <div class="stat-label">Videos published publicly</div>
     </div>
-    <div class="proof-card">
-      <div class="proof-num">/100</div>
-      <div class="proof-label">Signal Score</div>
-      <div class="proof-desc">One number that tells you whether the algorithm understands your channel.</div>
+    <div class="stat-item">
+      <div class="stat-num">5.26%</div>
+      <div class="stat-label">Best CTR on the channel</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">33yr</div>
+      <div class="stat-label">Enterprise IT experience</div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-eyebrow">The Signal Score</div>
+  <h2 class="section-title">Four signals.<br>One number.</h2>
+  <p class="section-sub">The Signal Score measures the four things YouTube's algorithm actually uses to decide whether to distribute your channel. Not opinions. Not best practices. The data.</p>
+
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="score-card-header">
+        <span class="score-card-name">CTR Signal</span>
+        <span class="score-card-max">0–30 pts</span>
+      </div>
+      <div class="score-bar-track"><div class="score-bar-fill fill-red"></div></div>
+      <p class="score-card-desc">Click-through rate measures whether your thumbnail and title earn the click when YouTube shows your video. Below 4% means packaging is failing. This is the most common channel killer.</p>
+      <a href="/what-is-youtube-ctr/" class="score-card-link">What is YouTube CTR? →</a>
+    </div>
+    <div class="score-card">
+      <div class="score-card-header">
+        <span class="score-card-name">Impression Depth</span>
+        <span class="score-card-max">0–25 pts</span>
+      </div>
+      <div class="score-bar-track"><div class="score-bar-fill fill-gold"></div></div>
+      <p class="score-card-desc">How deeply YouTube is distributing your channel. Low impression volume means the algorithm hasn't committed to serving your content — usually because CTR hasn't earned that trust yet.</p>
+    </div>
+    <div class="score-card">
+      <div class="score-card-header">
+        <span class="score-card-name">Views Per Impression</span>
+        <span class="score-card-max">0–25 pts</span>
+      </div>
+      <div class="score-bar-track"><div class="score-bar-fill fill-green"></div></div>
+      <p class="score-card-desc">How efficiently your channel converts distribution into actual views. VPI combines CTR and watch time — a low VPI means you're wasting the impressions YouTube is giving you.</p>
+      <a href="/what-is-vpi/" class="score-card-link">What is VPI? →</a>
+    </div>
+    <div class="score-card">
+      <div class="score-card-header">
+        <span class="score-card-name">Upload Velocity</span>
+        <span class="score-card-max">0–20 pts</span>
+      </div>
+      <div class="score-bar-track"><div class="score-bar-fill fill-blue"></div></div>
+      <p class="score-card-desc">Publishing consistency. The algorithm learns your channel faster with a regular data stream. Gaps reset momentum. Two videos per week is the threshold — anything below that slows classification.</p>
     </div>
   </div>
 </section>
 
-<section class="signals">
-  <div class="signals-header">
-    <h2 class="signals-title">The repair queue tells you what to fix first</h2>
-    <p class="signals-sub">Priority order. No opinion. Just the data.</p>
+<div class="video-section">
+  <div class="video-inner">
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/utu0b5BYwOc" title="I Applied to a YouTube Coach. Here's What the Data Says Instead." allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-text">
+      <div class="section-eyebrow">Latest Video</div>
+      <h2>I Applied to a YouTube Coach. Here's What the Data Says Instead.</h2>
+      <p>Every YouTube coach runs the same intake. Name. Email. Channel URL. Your goals. No baseline. No score. No measurement of where you actually stand before they sell you a program. This video documents why that's broken — and what I built instead.</p>
+      <a href="https://youtube.com/@pressure-tester" class="video-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.5 12 3.5 12 3.5s-7.51 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14C4.49 20.5 12 20.5 12 20.5s7.51 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.75 15.52V8.48L15.5 12l-5.75 3.52z"/></svg>
+        Watch on YouTube →
+      </a>
+    </div>
   </div>
-  <div class="signal-list">
-    <div class="signal-item">
-      <div class="signal-icon icon-red">1</div>
-      <div class="signal-text">
-        <h4>Packaging / CTR — fix this first</h4>
-        <p>YouTube is testing your video but nobody's clicking. The thumbnail and title aren't matching what your audience expects in the browse feed.</p>
+</div>
+
+<section class="section">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title">Three steps.<br>No sales call.</h2>
+  <p class="section-sub">The first thing you get from Pressure Tested is a score — not a pitch, not a discovery call dressed as a consultation. The data first. Everything else follows from that.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Upload your analytics or connect YouTube</h3>
+        <p>Export your YouTube Studio data as a ZIP and upload it — or connect directly via OAuth for a 30-second score. No credentials stored. Read-only access. Revoke anytime in Google settings.</p>
       </div>
     </div>
-    <div class="signal-item">
-      <div class="signal-icon icon-gold">2</div>
-      <div class="signal-text">
-        <h4>Impression depth — distribution problem</h4>
-        <p>YouTube isn't committing to distributing your content. Fix CTR first — impression volume follows click performance.</p>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Get your Signal Score and repair queue</h3>
+        <p>The diagnostic scores your channel across four signal layers and produces a ranked repair queue — what to fix first, what to fix second, in priority order. No opinion. Just the data.</p>
       </div>
     </div>
-    <div class="signal-item">
-      <div class="signal-icon icon-green">3</div>
-      <div class="signal-text">
-        <h4>Upload velocity — consistency signal</h4>
-        <p>The algorithm learns faster with a consistent data stream. Gaps reset momentum. Focused uploads accelerate channel classification.</p>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Book a call if you want the interpretation</h3>
+        <p>The score tells you what's broken. A 30-minute diagnostic call walks through what it means for your specific channel, your niche, your audience, and your runway. You walk in with data. So do I.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<div class="about-section">
+  <div class="about-inner">
+    <div class="about-avatar-placeholder">DS</div>
+    <div class="about-content">
+      <div class="section-eyebrow">Who Built This</div>
+      <h2>61 years old.<br>Still employed.<br>Building anyway.</h2>
+      <p>I'm David Swann. Azure Architect at Pinnacle Financial Partners. 33 years in enterprise IT. I see AI displacement coming from inside a corporate environment — and I'm building a second income stream before the decision gets made for me.</p>
+      <p>This channel and this tool are the build, documented publicly in real time with real data. No outlier results. No managed launches. No testimonial ecosystems. If it works, the numbers will say so. If it doesn't, those numbers will say that too.</p>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-num">33yr</div>
+          <div class="about-stat-label">Enterprise IT</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">18</div>
+          <div class="about-stat-label">Videos Live</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">55/100</div>
+          <div class="about-stat-label">Current Score</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-eyebrow">The Glossary</div>
+  <h2 class="section-title">YouTube explained<br>for professionals.</h2>
+  <p class="section-sub">CTR. VPI. Signal Score. Impression depth. Every term your channel depends on, explained in plain language for the professional over 40 who has never heard them before.</p>
+
+  <div class="glossary-grid">
+    <a href="/what-is-youtube-ctr/" class="glossary-card">
+      <div class="glossary-term">CTR</div>
+      <div class="glossary-def">Click-through rate. The percentage of impressions that turn into views. YouTube's primary packaging signal.</div>
+      <div class="glossary-read">Read the full explanation →</div>
+    </a>
+    <a href="/what-is-signal-score/" class="glossary-card">
+      <div class="glossary-term">Signal Score</div>
+      <div class="glossary-def">A composite score out of 100 that measures whether the algorithm understands and is investing in your channel.</div>
+      <div class="glossary-read">Read the full explanation →</div>
+    </a>
+    <a href="/what-is-vpi/" class="glossary-card">
+      <div class="glossary-term">VPI</div>
+      <div class="glossary-def">Views per impression. How efficiently your channel converts distribution into actual views.</div>
+      <div class="glossary-read">Read the full explanation →</div>
+    </a>
+    <a href="/why-youtube-channel-not-growing/" class="glossary-card">
+      <div class="glossary-term">Why Not Growing?</div>
+      <div class="glossary-def">The five reasons most channels plateau — and how to diagnose which one is yours.</div>
+      <div class="glossary-read">Read the diagnosis →</div>
+    </a>
+    <a href="/about/" class="glossary-card">
+      <div class="glossary-term">The Build</div>
+      <div class="glossary-def">18 videos. Real data. A 61-year-old Azure Architect building publicly before AI makes the decision for him.</div>
+      <div class="glossary-read">Read the story →</div>
+    </a>
+    <a href="/work-with-me/" class="glossary-card">
+      <div class="glossary-term">Work With Me</div>
+      <div class="glossary-def">The 30-minute diagnostic call. You bring your score. I bring the interpretation. No pitch. No program to sell.</div>
+      <div class="glossary-read">Book the call →</div>
+    </a>
   </div>
 </section>
 
 <section class="quote-section">
-  <p class="quote-text">"I don't guarantee you'll go viral. I guarantee you'll know <em>exactly what's broken</em> and exactly how to fix it."</p>
-  <p class="quote-attr">— David Swann, Azure Architect &amp; Pressure Tested</p>
+  <div class="quote-marks">"</div>
+  <p class="quote-text">"I don't guarantee you'll go viral. I guarantee you'll know <em>exactly what's broken</em> and exactly how to fix it. What you do with that is on you."</p>
+  <p class="quote-attr">— David Swann · Azure Architect · Pressure Tested</p>
 </section>
 
 <footer>
-  <div>
-    <div class="footer-brand">Pressure<span>Tested</span></div>
-    <div class="footer-tagline">Real Stats. No Hype. Late-Start Wins.</div>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Pressure<span>Tested</span></div>
+      <div class="footer-tagline">Real Stats. No Hype. Late-Start Wins.</div>
+    </div>
+    <div class="footer-links">
+      <a href="/what-is-youtube-ctr/">What is YouTube CTR?</a>
+      <a href="/what-is-signal-score/">What is a Signal Score?</a>
+      <a href="/what-is-vpi/">What is VPI?</a>
+      <a href="/why-youtube-channel-not-growing/">Why Isn't My Channel Growing?</a>
+      <a href="/about/">About David Swann</a>
+      <a href="/work-with-me/">Work With Me</a>
+      <a href="https://youtube.com/@pressure-tester">YouTube Channel</a>
+    </div>
   </div>
-  <div class="footer-tagline">pressuretested.co</div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Pressure Tested · pressuretested.co · david@pressuretested.co</div>
+    <div class="footer-copy">Built publicly. Real data. No hype.</div>
+  </div>
 </footer>
-
-<!-- Kit handles the redirect to the diagnostic after subscription -->
 
 </body>
 </html>

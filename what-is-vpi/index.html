@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is VPI (Views Per Impression)? — Pressure Tested</title>
+<meta name="description" content="VPI (Views Per Impression) is the metric most YouTube creators have never heard of — and it may be the real reason your channel isn't growing. Plain-language explanation.">
+<meta name="keywords" content="what is VPI youtube, views per impression youtube, youtube VPI explained, youtube views per impression, improve youtube VPI">
+<link rel="canonical" href="https://pressuretested.co/what-is-vpi/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#0D1B2A;--navy2:#0f1e2e;--navy3:#152436;--gold:#C9A84C;--gold-light:#f0c060;--white:#ffffff;--white2:rgba(255,255,255,0.72);--white3:rgba(255,255,255,0.38);--white4:rgba(255,255,255,0.1);--red:#e05252;--green:#4caf7d;--mono:"IBM Plex Mono",monospace;--sans:"IBM Plex Sans",sans-serif;--display:"Barlow Condensed",sans-serif;--border:rgba(255,255,255,0.08);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:var(--sans);min-height:100vh;line-height:1.6;}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.04em;text-decoration:none;color:var(--white);}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--white3);text-decoration:none;padding:8px 14px;border-radius:4px;transition:color .2s,background .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);background:var(--white4);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);background:var(--gold);border-radius:4px;padding:8px 16px;text-decoration:none;font-weight:500;transition:background .2s;}
+.nav-cta:hover{background:var(--gold-light);}
+.page-header{max-width:760px;margin:0 auto;padding:5rem 2rem 3rem;}
+.breadcrumb{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-bottom:1.5rem;}
+.breadcrumb a{color:var(--white3);text-decoration:none;}
+.breadcrumb a:hover{color:var(--gold);}
+.page-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.page-title{font-family:var(--display);font-size:clamp(3rem,7vw,5rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.5rem;}
+.page-title .gold{color:var(--gold);}
+.page-intro{font-size:1.1rem;color:var(--white2);line-height:1.75;max-width:640px;}
+.content{max-width:760px;margin:0 auto;padding:0 2rem 5rem;}
+.definition-box{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:1.5rem 2rem;margin:3rem 0;}
+.def-label{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.def-text{font-family:var(--display);font-size:1.5rem;font-weight:700;color:var(--white);line-height:1.3;}
+.content h2{font-family:var(--display);font-size:1.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;margin:3rem 0 1rem;color:var(--white);}
+.content p{font-size:1rem;color:var(--white2);line-height:1.8;margin-bottom:1.25rem;}
+.content p strong{color:var(--white);font-weight:600;}
+.formula-box{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin:2rem 0;text-align:center;}
+.formula{font-family:var(--mono);font-size:1.2rem;color:var(--gold);letter-spacing:0.05em;}
+.formula-note{font-family:var(--mono);font-size:11px;color:var(--white3);margin-top:.75rem;}
+.callout{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin:2rem 0;}
+.callout-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white3);margin-bottom:.75rem;}
+.callout p{margin-bottom:0;font-size:.95rem;}
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2rem 0;}
+.comp-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.25rem;}
+.comp-card.bad{border-color:rgba(224,82,82,0.25);}
+.comp-card.good{border-color:rgba(76,175,125,0.25);}
+.comp-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:.75rem;}
+.comp-label.bad{color:var(--red);}
+.comp-label.good{color:var(--green);}
+.comp-card p{font-size:13px;color:var(--white2);margin-bottom:0;line-height:1.6;}
+.cta-block{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:2rem;margin:3rem 0;text-align:center;}
+.cta-block h3{font-family:var(--display);font-size:1.8rem;font-weight:800;text-transform:uppercase;margin-bottom:.75rem;}
+.cta-block p{font-size:.95rem;color:var(--white2);margin-bottom:1.5rem;}
+.cta-btn{display:inline-block;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.1rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;padding:.85rem 2rem;transition:background .2s;}
+.cta-btn:hover{background:var(--gold-light);}
+.related{margin:3rem 0;}
+.related-title{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);margin-bottom:1rem;}
+.related-links{display:flex;flex-direction:column;gap:.5rem;}
+.related-links a{font-size:.95rem;color:var(--gold);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.related-links a:hover{color:var(--gold-light);}
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;}
+.footer-brand{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--white);}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;margin-top:4px;}
+@media(max-width:680px){.nav-links{display:none;}.comparison{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Pressure<span>Tested</span></a>
+    <ul class="nav-links">
+      <li><a href="/what-is-youtube-ctr/">What is CTR?</a></li>
+      <li><a href="/what-is-signal-score/">Signal Score</a></li>
+      <li><a href="/what-is-vpi/" class="active">What is VPI?</a></li>
+      <li><a href="/why-youtube-channel-not-growing/">Why Not Growing?</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/work-with-me/">Work With Me</a></li>
+    </ul>
+    <a href="https://dswann101164.github.io/pressuretested-diagnostic" class="nav-cta">Free Diagnostic →</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="/">Home</a> → What is VPI?</div>
+  <div class="page-eyebrow">YouTube Glossary</div>
+  <h1 class="page-title">What is<br><span class="gold">VPI?</span></h1>
+  <p class="page-intro">Views Per Impression is the metric most YouTube creators have never heard of. It may be the real reason your channel isn't growing — and it measures something CTR alone can't see.</p>
+</div>
+
+<div class="content">
+  <div class="definition-box">
+    <div class="def-label">Definition</div>
+    <div class="def-text">VPI (Views Per Impression) measures how efficiently a YouTube channel converts the distribution it receives into actual views. It combines your CTR and watch time signals into a single efficiency ratio.</div>
+  </div>
+
+  <h2>The formula</h2>
+  <div class="formula-box">
+    <div class="formula">VPI = Views ÷ Impressions</div>
+    <div class="formula-note">Example: 100 views from 2,000 impressions = VPI of 0.05 (5%)</div>
+  </div>
+
+  <p>VPI is essentially your CTR expressed as a decimal. But its value isn't in the number itself — it's in what changes when you compare it across videos on the same channel, and what it reveals when it diverges unexpectedly from your CTR.</p>
+
+  <h2>How VPI differs from CTR</h2>
+  <p>CTR measures whether someone clicked your thumbnail. VPI measures whether the combination of your thumbnail, title, and content quality is producing sustainable views from the impressions YouTube serves.</p>
+  <p><strong>A video can have a strong CTR and weak VPI.</strong> This happens when a thumbnail earns clicks out of curiosity or confusion — but viewers click away immediately when the content doesn't match the promise of the packaging. YouTube reads the short watch time and reduces distribution.</p>
+  <p>VPI captures the full conversion — from impression to click to watched view — in one number. CTR only captures half of it.</p>
+
+  <h2>What causes an anomalous VPI?</h2>
+  <p>Sometimes a video shows a VPI that's much higher than its CTR would predict. This usually means the video is receiving external traffic — direct links, embeds, shares outside of YouTube — rather than browse feed distribution.</p>
+
+  <div class="callout">
+    <div class="callout-label">From the Pressure Tested channel</div>
+    <p>Video "What Actually Builds Signal" showed a VPI of 0.602 — significantly higher than its 2.21% CTR would predict. That anomaly flagged external traffic, not browse feed performance. The Signal Score diagnostic surfaces these patterns because they affect how you interpret the channel's overall VPI number.</p>
+  </div>
+
+  <h2>What's a good VPI on YouTube?</h2>
+  <p>For channels under 50,000 subscribers, a VPI above 0.05 (5%) indicates healthy conversion. Below 0.02 (2%) suggests either very low CTR, very poor watch time retention, or both.</p>
+  <p>The more useful comparison is relative VPI across your own videos. A video with consistently higher VPI than your channel average is performing well and should be studied for what made it work. A video with significantly lower VPI is a drag on channel authority.</p>
+
+  <h2>VPI and channel authority</h2>
+  <p>YouTube's algorithm uses aggregate VPI across your channel as a signal of quality. A channel that consistently converts impressions into views — and keeps those viewers watching — earns more distribution. A channel with erratic or low VPI gets tested less frequently because the algorithm has learned it doesn't reliably convert.</p>
+
+  <div class="comparison">
+    <div class="comp-card bad">
+      <div class="comp-label bad">Low VPI Channel</div>
+      <p>Gets impressions → few clicks → short watches → algorithm reduces distribution → fewer impressions → fewer views. The cycle compounds downward.</p>
+    </div>
+    <div class="comp-card good">
+      <div class="comp-label good">High VPI Channel</div>
+      <p>Gets impressions → strong clicks → full watches → algorithm increases distribution → more impressions → more views. The cycle compounds upward.</p>
+    </div>
+  </div>
+
+  <h2>How to improve your VPI</h2>
+  <p><strong>If your CTR is low:</strong> Fix the thumbnail and title first. VPI can't improve if people aren't clicking. The packaging problem is upstream of everything else.</p>
+  <p><strong>If your CTR is acceptable but VPI is still low:</strong> The problem is watch time. Your video isn't delivering on the promise of the thumbnail and title — viewers are clicking and leaving. The hook (first 30–45 seconds) needs to immediately validate the click and establish why this video is worth their time.</p>
+  <p><strong>If VPI is anomalously high on one video:</strong> Investigate the traffic source. High VPI from external traffic isn't a bad thing — but it means your YouTube browse performance may be weaker than the aggregate number suggests.</p>
+
+  <div class="cta-block">
+    <h3>What's your VPI score?</h3>
+    <p>The Signal Score diagnostic scores your VPI against your CTR and flags anomalies — external traffic, underperforming videos, and the specific repair actions that will move the number.</p>
+    <a href="https://dswann101164.github.io/pressuretested-diagnostic" class="cta-btn">Run the Free Diagnostic →</a>
+  </div>
+
+  <div class="related">
+    <div class="related-title">Related Topics</div>
+    <div class="related-links">
+      <a href="/what-is-youtube-ctr/">What is YouTube CTR? →</a>
+      <a href="/what-is-signal-score/">What is a Signal Score? →</a>
+      <a href="/why-youtube-channel-not-growing/">Why Isn't My YouTube Channel Growing? →</a>
+      <a href="/work-with-me/">Book a Diagnostic Call →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Pressure<span>Tested</span></div>
+  <div class="footer-tagline">Real Stats. No Hype. Late-Start Wins. · pressuretested.co</div>
+</footer>
+
+</body>
+</html>

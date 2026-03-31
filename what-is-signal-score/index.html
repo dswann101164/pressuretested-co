@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is a YouTube Signal Score? — Pressure Tested</title>
+<meta name="description" content="The Signal Score is a composite score out of 100 that measures whether YouTube's algorithm is working for your channel or against it. Here's exactly how it's calculated.">
+<meta name="keywords" content="youtube signal score, youtube channel score, youtube diagnostic score, youtube analytics score, channel health score">
+<link rel="canonical" href="https://pressuretested.co/what-is-signal-score/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#0D1B2A;--navy2:#0f1e2e;--navy3:#152436;--gold:#C9A84C;--gold-light:#f0c060;--white:#ffffff;--white2:rgba(255,255,255,0.72);--white3:rgba(255,255,255,0.38);--white4:rgba(255,255,255,0.1);--red:#e05252;--green:#4caf7d;--mono:"IBM Plex Mono",monospace;--sans:"IBM Plex Sans",sans-serif;--display:"Barlow Condensed",sans-serif;--border:rgba(255,255,255,0.08);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:var(--sans);min-height:100vh;line-height:1.6;}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.04em;text-decoration:none;color:var(--white);}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--white3);text-decoration:none;padding:8px 14px;border-radius:4px;transition:color .2s,background .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);background:var(--white4);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);background:var(--gold);border-radius:4px;padding:8px 16px;text-decoration:none;font-weight:500;transition:background .2s;}
+.nav-cta:hover{background:var(--gold-light);}
+.page-header{max-width:760px;margin:0 auto;padding:5rem 2rem 3rem;}
+.breadcrumb{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-bottom:1.5rem;}
+.breadcrumb a{color:var(--white3);text-decoration:none;}
+.breadcrumb a:hover{color:var(--gold);}
+.page-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.page-title{font-family:var(--display);font-size:clamp(3rem,7vw,5rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.5rem;}
+.page-title .gold{color:var(--gold);}
+.page-intro{font-size:1.1rem;color:var(--white2);line-height:1.75;max-width:640px;}
+.content{max-width:760px;margin:0 auto;padding:0 2rem 5rem;}
+.definition-box{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:1.5rem 2rem;margin:3rem 0;}
+.def-label{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.def-text{font-family:var(--display);font-size:1.5rem;font-weight:700;color:var(--white);line-height:1.3;}
+.content h2{font-family:var(--display);font-size:1.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;margin:3rem 0 1rem;color:var(--white);}
+.content p{font-size:1rem;color:var(--white2);line-height:1.8;margin-bottom:1.25rem;}
+.content p strong{color:var(--white);font-weight:600;}
+.score-breakdown{display:flex;flex-direction:column;gap:1rem;margin:2rem 0;}
+.score-layer{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;}
+.score-layer-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;}
+.score-layer-name{font-family:var(--display);font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;}
+.score-layer-pts{font-family:var(--mono);font-size:11px;color:var(--gold);}
+.score-bar-track{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:.75rem;}
+.score-bar-fill{height:6px;border-radius:3px;}
+.fill-red{background:var(--red);}
+.fill-gold{background:var(--gold);}
+.fill-green{background:var(--green);}
+.fill-blue{background:#4a9edd;}
+.score-layer-desc{font-size:13px;color:var(--white2);line-height:1.6;}
+.score-total{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;margin:1rem 0;}
+.score-total-label{font-family:var(--display);font-size:1.2rem;font-weight:700;text-transform:uppercase;}
+.score-total-num{font-family:var(--display);font-size:3rem;font-weight:800;color:var(--gold);line-height:1;}
+.score-range{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin:2rem 0;}
+.range-item{background:var(--navy2);padding:1.25rem;text-align:center;}
+.range-val{font-family:var(--display);font-size:1.5rem;font-weight:800;line-height:1;}
+.range-label{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
+.range-desc{font-size:11px;color:var(--white2);margin-top:.4rem;}
+.range-red{color:var(--red);}
+.range-gold{color:var(--gold);}
+.range-green{color:var(--green);}
+.range-blue{color:#4a9edd;}
+.callout{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin:2rem 0;}
+.callout-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white3);margin-bottom:.75rem;}
+.callout p{margin-bottom:0;font-size:.95rem;}
+.cta-block{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:2rem;margin:3rem 0;text-align:center;}
+.cta-block h3{font-family:var(--display);font-size:1.8rem;font-weight:800;text-transform:uppercase;margin-bottom:.75rem;}
+.cta-block p{font-size:.95rem;color:var(--white2);margin-bottom:1.5rem;}
+.cta-btn{display:inline-block;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.1rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;padding:.85rem 2rem;transition:background .2s;}
+.cta-btn:hover{background:var(--gold-light);}
+.related{margin:3rem 0;}
+.related-title{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);margin-bottom:1rem;}
+.related-links{display:flex;flex-direction:column;gap:.5rem;}
+.related-links a{font-size:.95rem;color:var(--gold);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.related-links a:hover{color:var(--gold-light);}
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;}
+.footer-brand{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--white);}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;margin-top:4px;}
+@media(max-width:680px){.nav-links{display:none;}.score-range{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Pressure<span>Tested</span></a>
+    <ul class="nav-links">
+      <li><a href="/what-is-youtube-ctr/">What is CTR?</a></li>
+      <li><a href="/what-is-signal-score/" class="active">Signal Score</a></li>
+      <li><a href="/what-is-vpi/">What is VPI?</a></li>
+      <li><a href="/why-youtube-channel-not-growing/">Why Not Growing?</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/work-with-me/">Work With Me</a></li>
+    </ul>
+    <a href="https://dswann101164.github.io/pressuretested-diagnostic" class="nav-cta">Free Diagnostic →</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="/">Home</a> → What is a Signal Score?</div>
+  <div class="page-eyebrow">YouTube Glossary</div>
+  <h1 class="page-title">What is a<br><span class="gold">Signal Score?</span></h1>
+  <p class="page-intro">The Signal Score is a single number out of 100 that tells you whether YouTube's algorithm understands your channel and is investing in distributing it — or not.</p>
+</div>
+
+<div class="content">
+  <div class="definition-box">
+    <div class="def-label">Definition</div>
+    <div class="def-text">A Signal Score is a composite diagnostic score that measures your channel's health across four signal layers: CTR Signal, Impression Depth, Views Per Impression, and Upload Velocity.</div>
+  </div>
+
+  <h2>The four layers</h2>
+  <p>The Signal Score breaks down your channel's performance into the four signals that YouTube's algorithm actually uses to decide whether to distribute your content. Each layer is scored independently — so you can see exactly which signal is your primary constraint.</p>
+
+  <div class="score-breakdown">
+    <div class="score-layer">
+      <div class="score-layer-header">
+        <span class="score-layer-name">CTR Signal</span>
+        <span class="score-layer-pts">0–30 points</span>
+      </div>
+      <div class="score-bar-track"><div class="score-bar-fill fill-red" style="width:33%;"></div></div>
+      <p class="score-layer-desc">The highest-weighted layer. Measures your channel's click-through rate against the 4–8% threshold. A low CTR Signal means thumbnails and titles aren't earning the click — and the algorithm responds by reducing distribution.</p>
+    </div>
+    <div class="score-layer">
+      <div class="score-layer-header">
+        <span class="score-layer-name">Impression Depth</span>
+        <span class="score-layer-pts">0–25 points</span>
+      </div>
+      <div class="score-bar-track"><div class="score-bar-fill fill-gold" style="width:80%;"></div></div>
+      <p class="score-layer-desc">Measures the volume and consistency of impressions YouTube is serving. Low impression depth means the algorithm hasn't committed to distributing your content — usually because CTR hasn't earned that investment yet.</p>
+    </div>
+    <div class="score-layer">
+      <div class="score-layer-header">
+        <span class="score-layer-name">Views Per Impression</span>
+        <span class="score-layer-pts">0–25 points</span>
+      </div>
+      <div class="score-bar-track"><div class="score-bar-fill fill-green" style="width:40%;"></div></div>
+      <p class="score-layer-desc">How efficiently the channel converts distribution into actual views. VPI combines CTR and watch time — a channel that gets clicks but loses viewers quickly will show a low VPI despite a reasonable CTR.</p>
+    </div>
+    <div class="score-layer">
+      <div class="score-layer-header">
+        <span class="score-layer-name">Upload Velocity</span>
+        <span class="score-layer-pts">0–20 points</span>
+      </div>
+      <div class="score-bar-track"><div class="score-bar-fill fill-blue" style="width:75%;"></div></div>
+      <p class="score-layer-desc">Publishing consistency. The algorithm learns your channel faster with a regular data stream. Channels publishing twice per week earn full points. Gaps in publishing reset momentum and slow classification.</p>
+    </div>
+    <div class="score-total">
+      <span class="score-total-label">Total Signal Score</span>
+      <span class="score-total-num">/ 100</span>
+    </div>
+  </div>
+
+  <h2>What does my score mean?</h2>
+  <div class="score-range">
+    <div class="range-item">
+      <div class="range-val range-red">0–35</div>
+      <div class="range-label">Not Indexed</div>
+      <div class="range-desc">Algorithm doesn't understand the channel yet</div>
+    </div>
+    <div class="range-item">
+      <div class="range-val range-gold">36–55</div>
+      <div class="range-label">Aware</div>
+      <div class="range-desc">Algorithm is aware but not invested in distribution</div>
+    </div>
+    <div class="range-item">
+      <div class="range-val range-green">56–75</div>
+      <div class="range-label">Invested</div>
+      <div class="range-desc">Algorithm is actively testing and distributing</div>
+    </div>
+    <div class="range-item">
+      <div class="range-val range-blue">76–100</div>
+      <div class="range-label">Compounding</div>
+      <div class="range-desc">Channel has earned sustained algorithmic trust</div>
+    </div>
+  </div>
+
+  <h2>Why a score instead of individual metrics?</h2>
+  <p>YouTube's algorithm doesn't evaluate your channel on one metric. It evaluates a combination of signals simultaneously. A high CTR with terrible watch time doesn't earn distribution. Perfect upload consistency with zero impressions doesn't move the needle.</p>
+  <p>The Signal Score reflects this reality. It weights each layer by its actual impact on distribution and produces a single number that tells you where you stand — and more importantly, which layer is your primary constraint.</p>
+
+  <h2>The primary constraint</h2>
+  <p>The most important output of the Signal Score isn't the total — it's the primary constraint. The primary constraint is the one signal layer with the largest gap between your current score and the maximum possible score for that layer.</p>
+  <p><strong>Why this matters:</strong> Most channels have one bottleneck. Fix the bottleneck and the other metrics often improve automatically. If your CTR Signal is 10/30, that's your 20-point gap — and fixing it will likely improve your VPI and Impression Depth at the same time, because more clicks mean more data for the algorithm.</p>
+
+  <div class="callout">
+    <div class="callout-label">Pressure Tested Score — March 31, 2026</div>
+    <p>Signal Score: 55/100. CTR Signal: 10/30 (primary constraint). Impression Depth: 20/25. Views Per Impression: 5/25. Upload Velocity: 20/20. The 45-point gap is concentrated in two layers — CTR and VPI — both downstream of the same root cause: packaging. Fix the thumbnails, both metrics move.</p>
+  </div>
+
+  <h2>How is the Signal Score different from vidIQ or TubeBuddy scores?</h2>
+  <p>vidIQ and TubeBuddy score individual videos based on SEO optimization — keyword density, tag coverage, title formatting. That's a pre-upload optimization score, not a post-live diagnostic.</p>
+  <p><strong>The Signal Score measures what happened after you published.</strong> It reads your actual analytics data — real impressions, real CTR, real view counts — and tells you what the market is saying about your channel. You can have a perfect vidIQ score and a terrible Signal Score. The vidIQ score tells you you optimized the right keywords. The Signal Score tells you whether anyone clicked.</p>
+
+  <div class="cta-block">
+    <h3>Run your Signal Score</h3>
+    <p>Upload your YouTube Studio analytics export and get your score in 30 seconds. No account required. Free while the platform is in beta.</p>
+    <a href="https://dswann101164.github.io/pressuretested-diagnostic" class="cta-btn">Get Your Signal Score →</a>
+  </div>
+
+  <div class="related">
+    <div class="related-title">Related Topics</div>
+    <div class="related-links">
+      <a href="/what-is-youtube-ctr/">What is YouTube CTR? →</a>
+      <a href="/what-is-vpi/">What is VPI (Views Per Impression)? →</a>
+      <a href="/why-youtube-channel-not-growing/">Why Isn't My YouTube Channel Growing? →</a>
+      <a href="/work-with-me/">Book a Diagnostic Call →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Pressure<span>Tested</span></div>
+  <div class="footer-tagline">Real Stats. No Hype. Late-Start Wins. · pressuretested.co</div>
+</footer>
+
+</body>
+</html>

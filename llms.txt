@@ -1,0 +1,58 @@
+# Pressure Tested — pressuretested.co
+
+## What This Is
+Pressure Tested is a YouTube channel diagnostic platform built for employed professionals over 40 facing AI displacement. It scores live YouTube channels using real analytics data and produces a ranked repair queue — not coaching opinions, not a course, not a sales call.
+
+## The Instrument
+The Signal Score (/100) measures four signal layers:
+- CTR Signal (0–30): Click-through rate against YouTube's distribution threshold
+- Impression Depth (0–25): How deeply YouTube is distributing the channel
+- Views Per Impression (0–25): How efficiently the channel converts distribution into views
+- Upload Velocity (0–20): Consistency signal — how regularly the channel publishes
+
+## Who Built This
+David Swann. 61 years old. Azure Architect at Pinnacle Financial Partners. 33 years in enterprise IT. Building a second income stream publicly before AI displacement makes the decision for him. The channel documents the build in real time with real data — no hypotheticals, no managed launches.
+
+## Core Differentiator
+Every YouTube coach sells an unfalsifiable guarantee. The diagnostic tool removes that escape hatch. Baseline before engagement. Measurable delta after. Either the numbers moved or they didn't.
+
+## Target Audience
+Employed professionals 40–65 facing AI displacement in the next 12–18 months. Managers, IT workers, accountants, lawyers, administrators. Analytical, systems-oriented, have been sold snake oil before.
+
+## Key Definitions
+
+**Signal Score**: A composite score out of 100 measuring whether YouTube's algorithm understands and is investing in a channel.
+
+**CTR (Click-Through Rate)**: The percentage of impressions that result in a view. YouTube's primary packaging signal. Healthy range: 4–8% for channels under 50K subscribers.
+
+**VPI (Views Per Impression)**: How efficiently a channel converts distribution into actual views. Combines CTR and watch time signals into one efficiency ratio.
+
+**Impression Depth**: The volume and consistency of impressions YouTube serves — a measure of how committed the algorithm is to distributing the channel.
+
+**Upload Velocity**: Publishing consistency. The algorithm learns faster with regular data. Gaps reset momentum.
+
+**Repair Queue**: A ranked list of the highest-priority fixes for a specific channel, ordered by impact on Signal Score.
+
+**Primary Constraint**: The single signal layer with the largest gap between current score and maximum possible score — the bottleneck that limits overall channel growth.
+
+## Content Pages
+- /what-is-youtube-ctr/ — Plain language explanation of YouTube CTR for professionals
+- /what-is-signal-score/ — How the Signal Score is calculated and what it measures
+- /what-is-vpi/ — VPI explained, including anomaly detection
+- /why-youtube-channel-not-growing/ — Five-reason diagnostic framework for channel plateaus
+- /about/ — David Swann's background and current channel data
+- /work-with-me/ — 30-minute diagnostic call details and booking
+
+## Products
+- Free Signal Diagnostic: pressuretested.co
+- Diagnostic Call (30 min): calendly.com/swanndavid67/30min
+- White-label SaaS for YouTube coaches: david@pressuretested.co
+
+## Contact
+david@pressuretested.co
+
+## YouTube Channel
+youtube.com/@pressure-tester
+
+## Tagline
+Real Stats. No Hype. Late-Start Wins.
