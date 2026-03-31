@@ -54,31 +54,50 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-fi
 .nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);background:var(--gold);border-radius:4px;padding:8px 16px;text-decoration:none;font-weight:500;transition:background .2s;}
 .nav-cta:hover{background:var(--gold-light);}
 
-/* HERO — SPLIT LAYOUT */
-.hero{max-width:1100px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:560px;align-items:stretch;}
-.hero-image{position:relative;overflow:hidden;}
-.hero-image img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
-.hero-image-overlay{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,var(--navy),transparent);}
-.hero-content{display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 4rem 3rem;border-left:1px solid var(--border);}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.25);border-radius:20px;padding:6px 16px;margin-bottom:1.5rem;width:fit-content;}
+/* HERO */
+.hero{max-width:1100px;margin:0 auto;padding:5rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.25);border-radius:20px;padding:6px 16px;margin-bottom:1.5rem;}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero-title{font-family:var(--display);font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-title{font-family:var(--display);font-size:clamp(2.8rem,5vw,4.5rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.25rem;}
 .hero-title .gold{color:var(--gold);}
 .hero-title .dim{color:rgba(255,255,255,0.2);}
 .hero-sub{font-size:1rem;color:var(--white2);line-height:1.75;margin-bottom:.75rem;}
 .hero-proof{font-family:var(--mono);font-size:11px;color:var(--white3);margin-bottom:2rem;letter-spacing:0.05em;}
 .hero-proof strong{color:var(--gold);}
-.hero-cta-stack{display:flex;flex-direction:column;gap:.75rem;}
-.hero-btn-primary{display:block;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.2rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:6px;padding:.9rem 1.5rem;cursor:pointer;transition:background .2s;text-align:center;text-decoration:none;}
+.hero-btn-primary{display:block;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.2rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border-radius:6px;padding:.9rem 1.5rem;transition:background .2s;text-align:center;text-decoration:none;margin-bottom:.75rem;}
 .hero-btn-primary:hover{background:var(--gold-light);}
-.hero-btn-secondary{display:block;font-family:var(--mono);font-size:11px;color:var(--white3);text-align:center;text-decoration:none;}
+.hero-btn-secondary{font-family:var(--mono);font-size:11px;color:var(--white3);text-align:center;display:block;}
 .hero-btn-secondary a{color:var(--gold);text-decoration:none;}
 .hero-btn-secondary a:hover{text-decoration:underline;}
 
+/* SCORE CARD */
+.score-card{background:var(--navy2);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:2rem;position:relative;overflow:hidden;}
+.score-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--gold),var(--gold-light));}
+.score-card-label{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white3);margin-bottom:.5rem;}
+.score-card-name{font-family:var(--display);font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:1.5rem;color:var(--white);}
+.score-big{display:flex;align-items:baseline;gap:.25rem;margin-bottom:.5rem;}
+.score-number{font-family:var(--display);font-size:5rem;font-weight:800;color:var(--gold);line-height:1;}
+.score-denom{font-family:var(--display);font-size:2rem;font-weight:400;color:var(--white3);}
+.score-status{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;padding:.4rem .8rem;background:rgba(201,168,76,0.1);border-radius:4px;display:inline-block;}
+.score-layers{display:flex;flex-direction:column;gap:1rem;}
+.score-layer{display:flex;flex-direction:column;gap:.35rem;}
+.score-layer-header{display:flex;justify-content:space-between;align-items:center;}
+.score-layer-name{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--white2);}
+.score-layer-pts{font-family:var(--mono);font-size:10px;color:var(--white3);}
+.score-bar-track{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;}
+.score-bar-fill{height:5px;border-radius:3px;}
+.fill-red{background:var(--red);width:33%;}
+.fill-gold{background:var(--gold);width:80%;}
+.fill-green{background:var(--green);width:20%;}
+.fill-blue{background:#4a9edd;width:100%;}
+.score-card-cta{display:block;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);text-decoration:none;margin-top:1.5rem;padding:.75rem;border:1px solid var(--border);border-radius:6px;transition:all .2s;}
+.score-card-cta:hover{border-color:rgba(201,168,76,0.3);color:var(--gold);}
+.score-card-cta span{color:var(--gold);}
+
 /* STATS BAR */
 .stats-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);max-width:100%;}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
 .stat-item{background:var(--navy);padding:1.5rem 2rem;text-align:center;}
 .stat-num{font-family:var(--display);font-size:2.5rem;font-weight:800;color:var(--gold);line-height:1;}
 .stat-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-top:6px;}
@@ -105,16 +124,16 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-fi
 /* SCORE GRID */
 .score-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;}
 @media(max-width:680px){.score-grid{grid-template-columns:1fr;}}
-.score-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.5rem;}
+.score-card-sm{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1.5rem;}
 .score-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
-.score-card-name{font-family:var(--display);font-size:1.1rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;}
+.score-card-name-sm{font-family:var(--display);font-size:1.1rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;}
 .score-card-max{font-family:var(--mono);font-size:11px;color:var(--white3);}
-.score-bar-track{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:.75rem;}
-.score-bar-fill{height:6px;border-radius:3px;}
-.fill-red{background:var(--red);width:33%;}
-.fill-gold{background:var(--gold);width:80%;}
-.fill-green{background:var(--green);width:40%;}
-.fill-blue{background:#4a9edd;width:75%;}
+.score-bar-track-sm{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:.75rem;}
+.score-bar-fill-sm{height:6px;border-radius:3px;}
+.fill-sm-red{background:var(--red);width:33%;}
+.fill-sm-gold{background:var(--gold);width:80%;}
+.fill-sm-green{background:var(--green);width:40%;}
+.fill-sm-blue{background:#4a9edd;width:75%;}
 .score-card-desc{font-size:13px;color:var(--white2);line-height:1.6;}
 .score-card-link{display:inline-block;font-family:var(--mono);font-size:10px;color:var(--gold);text-decoration:none;margin-top:.75rem;letter-spacing:0.05em;}
 .score-card-link:hover{text-decoration:underline;}
@@ -148,7 +167,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-fi
 .about-content h2{font-family:var(--display);font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;text-transform:uppercase;line-height:1.1;margin-bottom:1rem;}
 .about-content p{font-size:.95rem;color:var(--white2);line-height:1.75;margin-bottom:1rem;}
 .about-stats{display:flex;gap:2rem;margin-top:1.5rem;flex-wrap:wrap;}
-.about-stat{text-align:center;}
 .about-stat-num{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--gold);}
 .about-stat-label{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;}
 
@@ -196,9 +214,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;}
 .footer-copy{font-family:var(--mono);font-size:10px;color:var(--white3);}
 
 @media(max-width:768px){
-  .hero{grid-template-columns:1fr;}
-  .hero-image{height:300px;}
-  .hero-content{padding:2rem;}
+  .hero{grid-template-columns:1fr;gap:3rem;padding:3rem 2rem;}
   .stats-inner{grid-template-columns:repeat(2,1fr);}
   .proof-steps{grid-template-columns:1fr;gap:.75rem;}
   .proof-arrow{display:none;}
@@ -220,12 +236,8 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;}
   </div>
 </nav>
 
-<!-- HERO — YOUR FACE LEADS -->
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-image">
-    <img src="/images/still_waiting.png" alt="David Swann — Pressure Tested">
-    <div class="hero-image-overlay"></div>
-  </div>
   <div class="hero-content">
     <div class="hero-badge">
       <span class="badge-dot"></span>
@@ -238,9 +250,49 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;}
     </h1>
     <p class="hero-sub">Get your free Signal Score in 30 seconds. Real data. No hype. Find out exactly what's broken and how to fix it.</p>
     <p class="hero-proof">Built by a <strong>61-year-old Azure Architect</strong> with 34 years in IT. No sales call. No pitch. Just the score.</p>
-    <div class="hero-cta-stack">
-      <a href="https://app.pressuretested.co" class="hero-btn-primary">Run My Free Diagnostic →</a>
-      <p class="hero-btn-secondary">Or <a href="/quiz/">take the Signal Challenge</a> to test your YouTube knowledge first.</p>
+    <a href="https://app.pressuretested.co" class="hero-btn-primary">Run My Free Diagnostic →</a>
+    <p class="hero-btn-secondary">Or <a href="/quiz/">take the Signal Challenge</a> to test your YouTube knowledge first.</p>
+  </div>
+  <div>
+    <div class="score-card">
+      <div class="score-card-label">Live Channel Score</div>
+      <div class="score-card-name">Pressure Tested · @pressure-tester</div>
+      <div class="score-big">
+        <span class="score-number">55</span>
+        <span class="score-denom">/100</span>
+      </div>
+      <div class="score-status">Aware — Not Yet Invested</div>
+      <div class="score-layers">
+        <div class="score-layer">
+          <div class="score-layer-header">
+            <span class="score-layer-name">CTR Signal</span>
+            <span class="score-layer-pts">10 / 30 pts · Primary Constraint</span>
+          </div>
+          <div class="score-bar-track"><div class="score-bar-fill fill-red"></div></div>
+        </div>
+        <div class="score-layer">
+          <div class="score-layer-header">
+            <span class="score-layer-name">Impression Depth</span>
+            <span class="score-layer-pts">20 / 25 pts</span>
+          </div>
+          <div class="score-bar-track"><div class="score-bar-fill fill-gold"></div></div>
+        </div>
+        <div class="score-layer">
+          <div class="score-layer-header">
+            <span class="score-layer-name">Views Per Impression</span>
+            <span class="score-layer-pts">5 / 25 pts</span>
+          </div>
+          <div class="score-bar-track"><div class="score-bar-fill fill-green"></div></div>
+        </div>
+        <div class="score-layer">
+          <div class="score-layer-header">
+            <span class="score-layer-name">Upload Velocity</span>
+            <span class="score-layer-pts">20 / 20 pts</span>
+          </div>
+          <div class="score-bar-track"><div class="score-bar-fill fill-blue"></div></div>
+        </div>
+      </div>
+      <a href="https://app.pressuretested.co" class="score-card-cta">Run this on your channel → <span>It's free</span></a>
     </div>
   </div>
 </div>
@@ -308,38 +360,38 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;}
   <p class="section-sub">The Signal Score measures the four things YouTube's algorithm actually uses to decide whether to distribute your channel. Not opinions. Not best practices. The data.</p>
 
   <div class="score-grid">
-    <div class="score-card">
+    <div class="score-card-sm">
       <div class="score-card-header">
-        <span class="score-card-name">CTR Signal</span>
+        <span class="score-card-name-sm">CTR Signal</span>
         <span class="score-card-max">0–30 pts</span>
       </div>
-      <div class="score-bar-track"><div class="score-bar-fill fill-red"></div></div>
+      <div class="score-bar-track-sm"><div class="score-bar-fill-sm fill-sm-red"></div></div>
       <p class="score-card-desc">Click-through rate measures whether your thumbnail and title earn the click when YouTube shows your video. Below 4% means packaging is failing. This is the most common channel killer.</p>
       <a href="/what-is-youtube-ctr/" class="score-card-link">What is YouTube CTR? →</a>
     </div>
-    <div class="score-card">
+    <div class="score-card-sm">
       <div class="score-card-header">
-        <span class="score-card-name">Impression Depth</span>
+        <span class="score-card-name-sm">Impression Depth</span>
         <span class="score-card-max">0–25 pts</span>
       </div>
-      <div class="score-bar-track"><div class="score-bar-fill fill-gold"></div></div>
+      <div class="score-bar-track-sm"><div class="score-bar-fill-sm fill-sm-gold"></div></div>
       <p class="score-card-desc">How deeply YouTube is distributing your channel. Low impression volume means the algorithm hasn't committed to serving your content — usually because CTR hasn't earned that trust yet.</p>
     </div>
-    <div class="score-card">
+    <div class="score-card-sm">
       <div class="score-card-header">
-        <span class="score-card-name">Views Per Impression</span>
+        <span class="score-card-name-sm">Views Per Impression</span>
         <span class="score-card-max">0–25 pts</span>
       </div>
-      <div class="score-bar-track"><div class="score-bar-fill fill-green"></div></div>
+      <div class="score-bar-track-sm"><div class="score-bar-fill-sm fill-sm-green"></div></div>
       <p class="score-card-desc">How efficiently your channel converts distribution into actual views. VPI combines CTR and watch time — a low VPI means you're wasting the impressions YouTube is giving you.</p>
       <a href="/what-is-vpi/" class="score-card-link">What is VPI? →</a>
     </div>
-    <div class="score-card">
+    <div class="score-card-sm">
       <div class="score-card-header">
-        <span class="score-card-name">Upload Velocity</span>
+        <span class="score-card-name-sm">Upload Velocity</span>
         <span class="score-card-max">0–20 pts</span>
       </div>
-      <div class="score-bar-track"><div class="score-bar-fill fill-blue"></div></div>
+      <div class="score-bar-track-sm"><div class="score-bar-fill-sm fill-sm-blue"></div></div>
       <p class="score-card-desc">Publishing consistency. The algorithm learns your channel faster with a regular data stream. Gaps reset momentum. Two videos per week is the threshold — anything below that slows classification.</p>
     </div>
   </div>
