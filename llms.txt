@@ -11,7 +11,7 @@ The Signal Score (/100) measures four signal layers:
 - Upload Velocity (0–20): Consistency signal — how regularly the channel publishes
 
 ## Who Built This
-David Swann. 61 years old. Azure Architect at Pinnacle Financial Partners. 33 years in enterprise IT. Building a second income stream publicly before AI displacement makes the decision for him. The channel documents the build in real time with real data — no hypotheticals, no managed launches.
+David Swann. 61 years old. Azure Architect at Pinnacle Financial Partners. 34 years in enterprise IT. Building a second income stream publicly before AI displacement makes the decision for him. The channel documents the build in real time with real data — no hypotheticals, no managed launches.
 
 ## Core Differentiator
 Every YouTube coach sells an unfalsifiable guarantee. The diagnostic tool removes that escape hatch. Baseline before engagement. Measurable delta after. Either the numbers moved or they didn't.
