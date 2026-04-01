@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Signal Challenge — Think You Know YouTube? | Pressure Tested</title>
-<meta name="description" content="Think you know YouTube? Take the Signal Challenge — 10 questions based on the real signals YouTube uses to score your channel. Free. No hype. Real data.">
+<meta name="description" content="20 questions. 20 seconds each. Based on the real signals YouTube uses to score your channel. Free. No hype. Real data.">
 <link rel="canonical" href="https://pressuretested.co/quiz/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -21,44 +21,42 @@
 html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--white);font-family:var(--sans);min-height:100vh;line-height:1.6;overflow-x:hidden;}
 
-nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
-.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+nav{padding:1.5rem 2rem;}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:50px;padding:.6rem 1rem .6rem 1.5rem;}
 .logo{font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.04em;text-decoration:none;color:var(--white);}
 .logo span{color:var(--gold);}
 .nav-right{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);}
 .nav-right a{color:var(--gold);text-decoration:none;margin-left:1rem;}
 
-/* SCREENS */
-.screen{display:none;max-width:720px;margin:0 auto;padding:3rem 2rem;}
-.screen.active{display:block;}
+.screen{display:none;max-width:740px;margin:0 auto;padding:3rem 2rem;}
+.screen.active{display:block;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* INTRO SCREEN */
+/* INTRO */
 .intro-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.25);border-radius:20px;padding:6px 16px;margin-bottom:2rem;}
-.intro-title{font-family:var(--display);font-size:clamp(3rem,8vw,5.5rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.5rem;}
-.intro-title .gold{color:var(--gold);}
-.intro-title .dim{color:rgba(255,255,255,0.2);}
+.intro-title{font-family:var(--display);font-size:clamp(3.5rem,9vw,6rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:1.5rem;color:var(--white);}
+.intro-title .accent{color:var(--gold);}
 .intro-sub{font-size:1rem;color:var(--white2);line-height:1.75;margin-bottom:2rem;max-width:560px;}
-.intro-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin-bottom:2.5rem;}
+.intro-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin-bottom:2.5rem;}
 .intro-stat{background:var(--navy2);padding:1.25rem;text-align:center;}
-.intro-stat-num{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--gold);line-height:1;}
+.intro-stat-num{font-family:var(--display);font-size:1.8rem;font-weight:800;color:var(--gold);line-height:1;}
 .intro-stat-label{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-top:4px;}
-.start-btn{display:block;width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:8px;padding:1.1rem 2rem;cursor:pointer;transition:background .2s;text-align:center;}
+.start-btn{display:block;width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:8px;padding:1.1rem 2rem;cursor:pointer;transition:background .2s;}
 .start-btn:hover{background:var(--gold-light);}
 .intro-note{font-family:var(--mono);font-size:10px;color:var(--white3);text-align:center;margin-top:.75rem;}
 
-/* QUIZ SCREEN */
+/* QUIZ */
 .quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;}
 .quiz-progress-wrap{flex:1;}
 .quiz-progress-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-bottom:.4rem;}
 .quiz-progress-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;}
 .quiz-progress-fill{height:4px;background:var(--gold);border-radius:2px;transition:width .4s ease;}
 .quiz-timer{font-family:var(--display);font-size:2.5rem;font-weight:800;color:var(--gold);min-width:60px;text-align:right;line-height:1;}
-.quiz-timer.warning{color:var(--red);animation:timerPulse .5s infinite;}
-@keyframes timerPulse{0%,100%{opacity:1}50%{opacity:.5}}
-
+.quiz-timer.warning{color:var(--red);animation:pulse .5s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.question-layer{font-family:var(--mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);margin-bottom:.4rem;}
 .question-num{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);margin-bottom:.75rem;}
 .question-text{font-family:var(--display);font-size:clamp(1.5rem,4vw,2rem);font-weight:700;line-height:1.25;margin-bottom:2rem;color:var(--white);}
-
 .answers{display:flex;flex-direction:column;gap:.75rem;}
 .answer-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;font-family:var(--sans);font-size:.95rem;color:var(--white2);cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:1rem;}
 .answer-btn:hover:not(:disabled){background:rgba(201,168,76,0.08);border-color:rgba(201,168,76,0.3);color:var(--white);}
@@ -68,14 +66,39 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-fi
 .answer-letter{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--gold);min-width:24px;}
 .answer-btn.correct .answer-letter{color:var(--green);}
 .answer-btn.wrong .answer-letter{color:var(--red);}
-
 .explanation{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-top:1.25rem;font-size:.9rem;color:var(--white2);line-height:1.6;display:none;}
 .explanation.show{display:block;}
 .explanation strong{color:var(--white);}
-
-.next-btn{display:block;width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:8px;padding:.9rem 2rem;cursor:pointer;transition:background .2s;margin-top:1.5rem;display:none;}
+.next-btn{display:none;width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:8px;padding:.9rem 2rem;cursor:pointer;transition:background .2s;margin-top:1.5rem;}
 .next-btn.show{display:block;}
 .next-btn:hover{background:var(--gold-light);}
+
+/* LAYER PROGRESS */
+.layer-progress{display:flex;gap:.5rem;margin-bottom:1.5rem;}
+.layer-pip{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,0.08);}
+.layer-pip.done{background:var(--gold);}
+.layer-pip.active{background:rgba(201,168,76,0.4);}
+
+/* EMAIL GATE */
+.gate-screen{}
+.gate-score-mini{text-align:center;margin-bottom:2.5rem;padding:2rem;background:var(--navy2);border:1px solid rgba(201,168,76,0.2);border-radius:12px;}
+.gate-score-label{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.gate-score-num{font-family:var(--display);font-size:5rem;font-weight:800;color:var(--gold);line-height:1;}
+.gate-score-denom{font-family:var(--display);font-size:2rem;color:var(--white3);}
+.gate-score-blur{filter:blur(6px);user-select:none;pointer-events:none;position:relative;}
+.gate-score-blur::after{content:'Complete below to see your breakdown';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);filter:none;font-family:var(--mono);font-size:10px;color:var(--gold);white-space:nowrap;}
+.gate-title{font-family:var(--display);font-size:clamp(2rem,5vw,3rem);font-weight:800;text-transform:uppercase;line-height:1;margin-bottom:1rem;color:var(--white);}
+.gate-sub{font-size:1rem;color:var(--white2);line-height:1.7;margin-bottom:2rem;}
+.gate-form{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:8px;padding:1.75rem;}
+.gate-form-label{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);margin-bottom:.5rem;display:block;}
+.gate-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:.75rem 1rem;font-family:var(--sans);font-size:14px;color:var(--white);outline:none;transition:border-color .2s;margin-bottom:1rem;}
+.gate-input:focus{border-color:var(--gold);}
+.gate-input::placeholder{color:var(--white3);}
+.gate-btn{width:100%;background:var(--gold);color:var(--navy);font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:6px;padding:.9rem;cursor:pointer;transition:background .2s;}
+.gate-btn:hover{background:var(--gold-light);}
+.gate-note{font-family:var(--mono);font-size:10px;color:var(--white3);text-align:center;margin-top:.75rem;}
+.gate-skip{display:block;text-align:center;font-family:var(--mono);font-size:10px;color:var(--white3);margin-top:.5rem;cursor:pointer;text-decoration:underline;}
+.gate-skip:hover{color:var(--gold);}
 
 /* SCORE SCREEN */
 .score-hero{text-align:center;margin-bottom:3rem;}
@@ -83,13 +106,21 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-fi
 .score-big{font-family:var(--display);font-size:clamp(5rem,15vw,9rem);font-weight:800;line-height:1;color:var(--gold);}
 .score-denom{font-family:var(--display);font-size:clamp(2rem,6vw,3.5rem);font-weight:400;color:var(--white3);}
 .score-grade{font-family:var(--display);font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-top:.5rem;}
-.score-grade.excellent{color:var(--green);}
-.score-grade.good{color:var(--gold);}
-.score-grade.fair{color:#f0a040;}
-.score-grade.poor{color:var(--red);}
+.grade-excellent{color:var(--green);}
+.grade-good{color:var(--gold);}
+.grade-fair{color:#f0a040;}
+.grade-poor{color:var(--red);}
 .score-message{font-size:1rem;color:var(--white2);max-width:500px;margin:.75rem auto 0;line-height:1.7;}
 
-.score-breakdown{margin:2rem 0;}
+.layer-scores{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:2rem 0;}
+.layer-score-card{background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:1.25rem;}
+.layer-score-name{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white3);margin-bottom:.5rem;}
+.layer-score-val{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--gold);}
+.layer-score-denom{font-family:var(--display);font-size:1rem;color:var(--white3);}
+.layer-score-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:.5rem;}
+.layer-score-fill{height:4px;border-radius:2px;}
+
+.breakdown-section{margin:2rem 0;}
 .breakdown-title{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white3);margin-bottom:1rem;}
 .breakdown-list{display:flex;flex-direction:column;gap:.5rem;}
 .breakdown-item{display:flex;align-items:center;gap:.75rem;font-size:.9rem;padding:.5rem 0;border-bottom:1px solid var(--border);}
@@ -97,7 +128,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-fi
 .breakdown-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 .dot-correct{background:var(--green);}
 .dot-wrong{background:var(--red);}
+.dot-timeout{background:var(--white3);}
 .breakdown-q{color:var(--white2);flex:1;}
+.breakdown-layer{font-family:var(--mono);font-size:9px;color:var(--white3);margin-left:.5rem;}
 .breakdown-status{font-family:var(--mono);font-size:10px;color:var(--white3);}
 
 .cta-stack{display:flex;flex-direction:column;gap:.75rem;margin-top:2.5rem;}
@@ -106,31 +139,14 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.96);backdrop-fi
 .cta-secondary{display:block;background:transparent;color:var(--gold);font-family:var(--display);font-size:1.2rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:1rem 2rem;cursor:pointer;transition:all .2s;text-align:center;text-decoration:none;}
 .cta-secondary:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);}
 
-/* LEADERBOARD SUBMIT */
-.submit-section{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:8px;padding:1.5rem;margin-top:2rem;}
-.submit-title{font-family:var(--display);font-size:1.3rem;font-weight:700;text-transform:uppercase;margin-bottom:.5rem;}
-.submit-sub{font-size:.9rem;color:var(--white2);margin-bottom:1.25rem;}
-.submit-fields{display:flex;flex-direction:column;gap:.75rem;}
-.submit-input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:.75rem 1rem;font-family:var(--sans);font-size:14px;color:var(--white);outline:none;transition:border-color .2s;}
-.submit-input:focus{border-color:var(--gold);}
-.submit-input::placeholder{color:var(--white3);}
-.submit-btn{background:var(--navy3);color:var(--gold);font-family:var(--display);font-size:1.1rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:.75rem;cursor:pointer;transition:all .2s;}
-.submit-btn:hover{background:rgba(201,168,76,0.1);border-color:var(--gold);}
-.submit-success{font-family:var(--mono);font-size:12px;color:var(--green);text-align:center;margin-top:.75rem;display:none;}
-
-/* ANIMATIONS */
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.screen.active{animation:fadeIn .3s ease;}
-
 footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;margin-top:3rem;}
 .footer-brand{font-family:var(--display);font-size:1rem;font-weight:800;color:var(--white);}
 .footer-brand span{color:var(--gold);}
 .footer-tagline{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:0.08em;margin-top:4px;}
 
 @media(max-width:580px){
-  .intro-stats{grid-template-columns:1fr 1fr 1fr;}
-  .intro-stat{padding:.75rem .5rem;}
-  .intro-stat-num{font-size:1.5rem;}
+  .intro-stats{grid-template-columns:repeat(2,1fr);}
+  .layer-scores{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -146,53 +162,75 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
   </div>
 </nav>
 
-<!-- INTRO SCREEN -->
+<!-- INTRO -->
 <div class="screen active" id="screen-intro">
-  <div class="intro-badge">⚡ Signal Challenge · 10 Questions · 20 Seconds Each</div>
+  <div class="intro-badge">⚡ Signal Challenge · 20 Questions · 20 Seconds Each</div>
   <h1 class="intro-title">
-    Think you<br>know<br><span class="gold">YouTube?</span>
+    Think you<br>know<br><span class="accent">YouTube?</span>
   </h1>
-  <p class="intro-sub">Most creators optimize what they can see — upload schedule, keywords, hashtags. The algorithm measures something different. This quiz tests whether you know what that is. 10 questions. 20 Seconds Each. No hype. Real signals only.</p>
-
+  <p class="intro-sub">Most creators optimize what they can see — upload schedule, keywords, hashtags. The algorithm measures something different. 20 questions across 4 signal layers. No hype. Real signals only.</p>
   <div class="intro-stats">
     <div class="intro-stat">
-      <div class="intro-stat-num">10</div>
+      <div class="intro-stat-num">20</div>
       <div class="intro-stat-label">Questions</div>
     </div>
     <div class="intro-stat">
-      <div class="intro-stat-num">15s</div>
+      <div class="intro-stat-num">20s</div>
       <div class="intro-stat-label">Per Question</div>
     </div>
     <div class="intro-stat">
-      <div class="intro-stat-num">/100</div>
-      <div class="intro-stat-label">Signal Score</div>
+      <div class="intro-stat-num">4</div>
+      <div class="intro-stat-label">Signal Layers</div>
+    </div>
+    <div class="intro-stat">
+      <div class="intro-stat-num">/20</div>
+      <div class="intro-stat-label">Your Score</div>
     </div>
   </div>
-
   <button class="start-btn" onclick="startQuiz()">Start the Signal Challenge →</button>
   <p class="intro-note">After the quiz, run your real channel diagnostic free at app.pressuretested.co</p>
 </div>
 
-<!-- QUIZ SCREEN -->
+<!-- QUIZ -->
 <div class="screen" id="screen-quiz">
   <div class="quiz-header">
     <div class="quiz-progress-wrap">
-      <div class="quiz-progress-label" id="progress-label">Question 1 of 10</div>
+      <div class="quiz-progress-label" id="progress-label">Question 1 of 20</div>
       <div class="quiz-progress-bar">
-        <div class="quiz-progress-fill" id="progress-fill" style="width:10%;"></div>
+        <div class="quiz-progress-fill" id="progress-fill" style="width:5%;"></div>
       </div>
     </div>
-    <div class="quiz-timer" id="timer">15</div>
+    <div class="quiz-timer" id="timer">20</div>
   </div>
-
-  <div class="question-num" id="question-num">01 / 10</div>
+  <div class="layer-progress" id="layer-progress"></div>
+  <div class="question-layer" id="question-layer"></div>
+  <div class="question-num" id="question-num"></div>
   <div class="question-text" id="question-text"></div>
-
   <div class="answers" id="answers"></div>
-
   <div class="explanation" id="explanation"></div>
+  <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next →</button>
+</div>
 
-  <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question →</button>
+<!-- EMAIL GATE -->
+<div class="screen" id="screen-gate">
+  <div class="gate-score-mini">
+    <div class="gate-score-label">Your Signal Challenge Score</div>
+    <div>
+      <span class="gate-score-num" id="gate-score-num">0</span>
+      <span class="gate-score-denom">/20</span>
+    </div>
+  </div>
+  <h2 class="gate-title">See Your Full<br>Breakdown</h2>
+  <p class="gate-sub">You scored <span id="gate-score-text"></span>. Enter your name and email to see your score by signal layer, the full question breakdown, and submit to the leaderboard.</p>
+  <div class="gate-form">
+    <label class="gate-form-label">Your name or channel handle</label>
+    <input class="gate-input" id="gate-name" type="text" placeholder="David Swann" maxlength="50">
+    <label class="gate-form-label">Email address</label>
+    <input class="gate-input" id="gate-email" type="email" placeholder="you@example.com">
+    <button class="gate-btn" onclick="submitGate()">See My Full Score →</button>
+    <p class="gate-note">No spam. One email with your score card. Unsubscribe anytime.</p>
+    <span class="gate-skip" onclick="skipGate()">Skip — just show me the score</span>
+  </div>
 </div>
 
 <!-- SCORE SCREEN -->
@@ -201,30 +239,21 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
     <div class="score-label">Your Signal Challenge Score</div>
     <div>
       <span class="score-big" id="score-big">0</span>
-      <span class="score-denom">/10</span>
+      <span class="score-denom">/20</span>
     </div>
     <div class="score-grade" id="score-grade"></div>
     <p class="score-message" id="score-message"></p>
   </div>
 
-  <div class="score-breakdown">
+  <div class="layer-scores" id="layer-scores"></div>
+
+  <div class="breakdown-section">
     <div class="breakdown-title">Question Breakdown</div>
     <div class="breakdown-list" id="breakdown-list"></div>
   </div>
 
-  <div class="submit-section">
-    <div class="submit-title">Enter the Leaderboard</div>
-    <p class="submit-sub">Submit your score to the Signal Challenge leaderboard. Your name, score, and the date are all that's stored.</p>
-    <div class="submit-fields">
-      <input class="submit-input" id="submit-name" type="text" placeholder="Your name or channel handle" maxlength="50">
-      <input class="submit-input" id="submit-email" type="email" placeholder="Email (optional — only for leaderboard updates)">
-      <button class="submit-btn" onclick="submitScore()">Submit to Leaderboard →</button>
-    </div>
-    <div class="submit-success" id="submit-success">✓ Score submitted. Check the leaderboard to see where you rank.</div>
-  </div>
-
   <div class="cta-stack">
-    <a href="https://app.pressuretested.co" class="cta-primary">Now Run Your Real Channel Diagnostic →</a>
+    <a href="https://app.pressuretested.co" class="cta-primary">Run Your Real Channel Diagnostic →</a>
     <a href="/leaderboard/" class="cta-secondary">View the Leaderboard →</a>
     <button class="cta-secondary" onclick="restartQuiz()">Try Again</button>
   </div>
@@ -236,66 +265,152 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
 </footer>
 
 <script>
+const LAYERS = ['CTR Signal','Impression Depth','Views Per Impression','Upload Velocity'];
+
 const QUESTIONS = [
+  // CTR Signal — 5 questions
   {
+    layer: 0,
     q: "YouTube shows your video to 1,000 people and 18 click to watch. What is your CTR?",
-    answers: ["0.18%", "1.8%", "18%", "180%"],
+    answers: ["0.18%","1.8%","18%","180%"],
     correct: 1,
-    explanation: "<strong>1.8%</strong> — CTR = (Views ÷ Impressions) × 100. 18 ÷ 1,000 = 0.018 × 100 = 1.8%. This is below the 4% threshold where the algorithm starts investing in distribution. At 1.8%, YouTube is likely to reduce how often it tests this video."
+    explanation: "<strong>1.8%</strong> — CTR = (clicks ÷ impressions) × 100. 18 ÷ 1,000 = 0.018 × 100 = 1.8%. This is below the 4% threshold where the algorithm starts investing in distribution."
   },
   {
+    layer: 0,
     q: "What CTR range does YouTube consider 'performing' for a channel under 50K subscribers?",
-    answers: ["1–2%", "2–3%", "4–8%", "10–15%"],
+    answers: ["1–2%","2–3%","4–8%","10–15%"],
     correct: 2,
-    explanation: "<strong>4–8%</strong> is the performing range for small channels. Below 4% and the algorithm reads it as the packaging not earning the click. Above 8% is excellent. 2–3% is survivable but signals a packaging problem that needs attention."
+    explanation: "<strong>4–8%</strong> is the performing range. Below 4% and the algorithm reads it as the packaging not earning the click. Above 8% is excellent for a small channel."
   },
   {
-    q: "Your CTR is 5% but viewers leave after 15 seconds on a 10-minute video. What does this tell you?",
-    answers: ["The title is too long", "Packaging over-promised — content didn't deliver", "Upload velocity is too low", "The thumbnail needs more text"],
+    layer: 0,
+    q: "Your CTR is 5% but viewers leave after 15 seconds on a 10-minute video. What does this signal?",
+    answers: ["The title is too long","Packaging over-promised — content didn't deliver","Upload velocity is too low","The thumbnail needs more text"],
     correct: 1,
-    explanation: "<strong>Packaging over-promised.</strong> Good CTR means the thumbnail and title earned the click. A 15-second average view duration means the content didn't deliver on the implicit promise. YouTube reads this as the viewer being deceived — and penalizes distribution as a result."
+    explanation: "<strong>Packaging over-promised.</strong> Good CTR earned the click. But 15-second average view duration means the content didn't deliver on the implicit promise. YouTube penalizes this by reducing distribution."
   },
   {
-    q: "What does VPI (Views Per Impression) measure that CTR alone doesn't?",
-    answers: ["How many people subscribed after watching", "Whether the click converted to a real watched view — combines CTR and watch time", "How many comments a video received", "The total number of unique viewers"],
-    correct: 1,
-    explanation: "<strong>VPI combines CTR and watch time</strong> into one efficiency ratio. A channel can have a reasonable CTR but terrible VPI if viewers click and immediately leave. VPI is the full conversion — from impression to click to a view that counts. It's a more honest signal than CTR alone."
-  },
-  {
+    layer: 0,
     q: "A video has 2,000 impressions and 0.6% CTR. What is the highest-priority repair?",
-    answers: ["Add more keywords to the description", "Repackage — new thumbnail and title", "Delete the video and re-upload", "Increase upload frequency"],
+    answers: ["Add more keywords to the description","Repackage — new thumbnail and title","Delete the video and re-upload","Increase upload frequency"],
     correct: 1,
-    explanation: "<strong>Repackage first.</strong> 0.6% CTR on 2,000 impressions means YouTube is actively testing this video and the audience is rejecting the packaging. The content hasn't even had a chance to be judged. New thumbnail with a single focal point, high contrast, and a title that leads with the situation — not the topic."
+    explanation: "<strong>Repackage first.</strong> 0.6% CTR on 2,000 impressions means YouTube is actively testing this video and the audience is rejecting the packaging. The content hasn't had a fair chance to be judged."
   },
   {
+    layer: 0,
+    q: "Which thumbnail approach consistently earns higher CTR for channels under 10K subscribers?",
+    answers: ["Brand logo prominent, clean design","Single focal point with emotional tension or curiosity gap","Text-heavy — explain exactly what the video covers","Landscape or scene-setting image"],
+    correct: 1,
+    explanation: "<strong>Single focal point with emotional tension.</strong> The thumbnail's job is to create curiosity, not explain the video. One clear focal point — a face, a number, a reaction — outperforms explanatory designs in small channel testing."
+  },
+  // Impression Depth — 5 questions
+  {
+    layer: 1,
+    q: "What does 'impression depth' measure in the Signal Score?",
+    answers: ["The length of your videos in minutes","Volume and consistency of impressions YouTube is serving your channel","How many people subscribe after watching","The number of comments per video"],
+    correct: 1,
+    explanation: "<strong>Volume and consistency of impressions.</strong> Low impression depth means YouTube hasn't committed to distributing your content widely — usually because CTR hasn't earned that investment yet."
+  },
+  {
+    layer: 1,
+    q: "A new channel publishes 20 videos with consistent 5% CTR but still has very few impressions. What's most likely happening?",
+    answers: ["The niche is too competitive","The algorithm is still in the classification and trust-building phase","The titles are too short","Watch time is too long"],
+    correct: 1,
+    explanation: "<strong>Classification and trust-building.</strong> YouTube's algorithm is conservative with new channels. It serves content to small test batches first. Good CTR will accelerate this, but 20–30 videos is typically needed before broad distribution begins."
+  },
+  {
+    layer: 1,
+    q: "Your channel has 50,000 total impressions in 90 days across 20 videos. That's approximately how many impressions per video?",
+    answers: ["250","2,500","25,000","500"],
+    correct: 1,
+    explanation: "<strong>2,500 per video.</strong> 50,000 ÷ 20 = 2,500. For a channel under 1K subscribers, 2,500 impressions per video is a healthy signal that YouTube is actively testing your content."
+  },
+  {
+    layer: 1,
+    q: "What does it mean when YouTube serves high impressions to an old video that previously had low performance?",
+    answers: ["A bug in the algorithm","YouTube is re-testing the video — often triggered by new engagement, seasonal relevance, or a related trending topic","The channel is being penalized","Someone purchased impressions"],
+    correct: 1,
+    explanation: "<strong>YouTube is re-testing.</strong> Old videos don't die — they can be re-surfaced when new signals emerge. A spike in impressions on an old video is an opportunity to repackage it if the CTR was previously low."
+  },
+  {
+    layer: 1,
+    q: "You get 10,000 impressions in week one, then 200 impressions in week two with no new videos published. What happened?",
+    answers: ["Your account was flagged","The algorithm tested the content, got weak CTR signals, and reduced distribution","Your subscribers didn't watch","YouTube's impression algorithm resets weekly"],
+    correct: 1,
+    explanation: "<strong>Weak CTR triggered reduced distribution.</strong> The algorithm ran a test, saw that not enough people clicked, and pulled back. This is the CTR-distribution feedback loop in action — and it's the fastest way to lose momentum."
+  },
+  // VPI — 5 questions
+  {
+    layer: 2,
+    q: "What does VPI (Views Per Impression) measure that CTR alone doesn't?",
+    answers: ["How many people subscribed after watching","Whether the click converted to a meaningful view — combines CTR and watch time efficiency","How many comments a video received","Total unique viewer count"],
+    correct: 1,
+    explanation: "<strong>VPI combines CTR and watch time</strong> into one efficiency ratio. You can have reasonable CTR but terrible VPI if viewers click and immediately leave. VPI measures the full conversion — from impression to a view that actually counts."
+  },
+  {
+    layer: 2,
+    q: "Your channel has 5,000 impressions, 200 clicks, and 180 viewers who watched more than 50% of the video. Which metric best captures overall efficiency?",
+    answers: ["CTR at 4%","VPI — because it captures the quality of views, not just clicks","Subscriber count","Total watch time in minutes"],
+    correct: 1,
+    explanation: "<strong>VPI captures quality of views.</strong> CTR tells you 4% clicked. But VPI tells you 180 of those 200 clickers actually watched — that's a strong signal of content-packaging alignment that CTR alone misses."
+  },
+  {
+    layer: 2,
+    q: "A video shows VPI significantly higher than its CTR would predict. What's the most likely explanation?",
+    answers: ["The title was recently updated","External traffic — direct links, embeds, or social shares outside YouTube","YouTube made an algorithm error","The video went viral in a private group"],
+    correct: 1,
+    explanation: "<strong>External traffic.</strong> When VPI is anomalously high relative to CTR, it typically means the video is receiving direct traffic from outside YouTube — links, embeds, or shares. Browse feed performance may be weaker than the aggregate number suggests."
+  },
+  {
+    layer: 2,
+    q: "Which scenario has better VPI: Channel A gets 1,000 views from 10,000 impressions with 3-minute average view duration on a 5-minute video, or Channel B gets 500 views from 10,000 impressions with 4-minute average view duration on a 5-minute video?",
+    answers: ["Channel A — more views","Channel B — higher watch percentage and VPI quality","They're equal","Impossible to determine without subscriber count"],
+    correct: 1,
+    explanation: "<strong>Channel B has better VPI quality.</strong> 500 views ÷ 10,000 impressions = 5% VPI, but those views averaged 80% of the video length. Channel A has 10% VPI but only 60% watch time. YouTube weights quality of view, not just click volume."
+  },
+  {
+    layer: 2,
+    q: "What's the primary reason a channel can have good CTR but still score low on VPI?",
+    answers: ["Too many tags in the description","Watch time collapse — viewers click but leave early because content didn't deliver on the thumbnail's promise","Channel name is too generic","Videos are too long"],
+    correct: 1,
+    explanation: "<strong>Watch time collapse.</strong> The thumbnail earned the click — that's CTR working. But if viewers leave after 15–30 seconds, the VPI tanks. It means the hook didn't validate the click. The first 30–45 seconds of every video are the most important seconds you produce."
+  },
+  // Upload Velocity — 5 questions
+  {
+    layer: 3,
     q: "You publish 6 videos in one week then go silent for 5 weeks. What signal does this send?",
-    answers: ["Strong initial spike — the algorithm rewards volume", "Upload velocity gap — momentum resets and classification slows", "YouTube doesn't care about publishing schedule", "It only affects subscriber notifications"],
+    answers: ["Strong initial spike — the algorithm rewards volume","Upload velocity gap resets momentum and slows the algorithm's classification of your channel","YouTube doesn't care about publishing schedule","It only affects subscriber notifications"],
     correct: 1,
-    explanation: "<strong>Upload velocity gap resets momentum.</strong> The algorithm learns your channel from consistent data. A 5-week gap is like unplugging a machine mid-process. The classification signal weakens, the algorithm reduces how often it tests your videos, and you essentially restart the learning curve when you resume."
+    explanation: "<strong>Velocity gap resets momentum.</strong> The algorithm learns your channel from consistent data. A 5-week gap is like unplugging a machine mid-process. Classification weakens, distribution reduces, and you essentially restart the learning curve when you resume."
   },
   {
-    q: "What does a Signal Score of 55/100 typically mean for a channel?",
-    answers: ["The channel is failing and should be deleted", "Algorithm is aware of the channel but not yet invested in distributing it", "The channel is performing at maximum capacity", "CTR is the only metric being measured"],
+    layer: 3,
+    q: "Which publishing schedule earns the maximum Upload Velocity score in the Signal Score?",
+    answers: ["One video per week","Two or more videos per week on a consistent schedule","Four videos per day for one week","One video per month with high production quality"],
     correct: 1,
-    explanation: "<strong>Aware but not invested.</strong> 55/100 puts a channel in the 'aware' phase — the algorithm knows it exists, is occasionally testing it, but hasn't committed to broad distribution. This is a normal position for a channel under 6 months old. The path forward is moving the primary constraint — usually CTR or VPI."
+    explanation: "<strong>Two or more videos per week</strong> consistently earns full Upload Velocity points. This is the threshold where YouTube's algorithm has enough regular signal to actively classify and distribute the channel. Quality still matters — but consistency is what unlocks distribution."
   },
   {
-    q: "Your channel has one video doing 60% of total watch time. What does this flag?",
-    answers: ["Strong content quality — double down on this format", "Watch time concentration — possible topic scatter and classification problem", "Upload velocity is too high", "The channel has reached its maximum audience"],
+    layer: 3,
+    q: "A creator publishes two videos per week for 8 weeks then stops for 3 months, then resumes. What typically happens to impression volume after they resume?",
+    answers: ["It immediately returns to previous levels","It drops significantly and requires rebuilding — the algorithm's trust reset during the gap","It doubles due to audience anticipation","Nothing changes — YouTube holds the previous data"],
     correct: 1,
-    explanation: "<strong>Watch time concentration flags topic scatter.</strong> When one video does 60% of total watch time, the algorithm is being trained to classify the channel around that one video's topic — not your overall content. If the rest of your videos are different topics, the algorithm can't consistently categorize your channel, which limits distribution across the board."
+    explanation: "<strong>Impression volume drops and requires rebuilding.</strong> The algorithm doesn't maintain trust during extended gaps. When publishing resumes, it starts from a lower baseline, often requiring 4–6 weeks of consistent publishing before returning to pre-gap distribution levels."
   },
   {
-    q: "Which is more important to fix first on a channel with both low CTR and low watch time?",
-    answers: ["Watch time — content quality is the foundation", "CTR first — packaging is upstream of everything else", "Fix both simultaneously for maximum impact", "Neither — subscriber count is the priority"],
+    layer: 3,
+    q: "Which is better for Upload Velocity: publishing 1 video per week consistently for 12 weeks, or publishing 3 videos per week for 4 weeks then stopping?",
+    answers: ["3 per week for 4 weeks — more total content","1 per week for 12 weeks — consistency is the primary signal","They're equivalent — same total videos","Neither matters, only CTR counts"],
     correct: 1,
-    explanation: "<strong>CTR first, always.</strong> Nobody watches what they don't click. If your CTR is below threshold, your watch time data is based on a tiny unrepresentative sample — the few people who happened to find the video through search or direct links. Fix the packaging, get real click volume, then evaluate watch time with actual data."
+    explanation: "<strong>1 per week for 12 weeks wins.</strong> Consistency over time is worth more than burst volume. The algorithm builds a model of your publishing behavior — consistent weekly signals let it predict and plan distribution. Burst-then-stop breaks the model."
   },
   {
-    q: "The Pressure Tested Signal Score has four layers. Which layer carries the most weight?",
-    answers: ["Upload Velocity (0–20 points)", "Impression Depth (0–25 points)", "CTR Signal (0–30 points)", "Views Per Impression (0–25 points)"],
-    correct: 2,
-    explanation: "<strong>CTR Signal at 0–30 points</strong> is the highest-weighted layer — 30% of the total score. This reflects YouTube's own weighting: CTR is the primary signal the algorithm uses to decide whether to invest in distribution. Fix CTR and you often move multiple other metrics simultaneously."
+    layer: 3,
+    q: "What does a Signal Score of 55/100 typically mean for a channel's distribution stage?",
+    answers: ["The channel is failing and should be deleted","Algorithm is aware of the channel but not yet invested in broad distribution — the 'aware' phase","The channel is performing at maximum capacity","CTR is the only metric being measured"],
+    correct: 1,
+    explanation: "<strong>Aware but not yet invested.</strong> 55/100 puts a channel in the 'aware' phase — the algorithm knows it exists and occasionally tests it, but hasn't committed to broad distribution. This is normal for a channel under 6 months old. The path forward is fixing the primary constraint — usually CTR."
   }
 ];
 
@@ -305,6 +420,19 @@ let userAnswers = [];
 let timerInterval = null;
 let timeLeft = 20;
 let answered = false;
+let layerScores = [0,0,0,0];
+let layerTotals = [0,0,0,0];
+let submittedEmail = false;
+
+function buildLayerProgress(current) {
+  const el = document.getElementById('layer-progress');
+  el.innerHTML = '';
+  QUESTIONS.forEach((q, i) => {
+    const pip = document.createElement('div');
+    pip.className = 'layer-pip' + (i < current ? ' done' : i === current ? ' active' : '');
+    el.appendChild(pip);
+  });
+}
 
 function startQuiz() {
   document.getElementById('screen-intro').classList.remove('active');
@@ -312,6 +440,8 @@ function startQuiz() {
   currentQuestion = 0;
   score = 0;
   userAnswers = [];
+  layerScores = [0,0,0,0];
+  layerTotals = [0,0,0,0];
   loadQuestion();
 }
 
@@ -319,15 +449,16 @@ function loadQuestion() {
   answered = false;
   timeLeft = 20;
   const q = QUESTIONS[currentQuestion];
-  
+
   document.getElementById('progress-label').textContent = `Question ${currentQuestion + 1} of ${QUESTIONS.length}`;
   document.getElementById('progress-fill').style.width = `${((currentQuestion + 1) / QUESTIONS.length) * 100}%`;
-  document.getElementById('question-num').textContent = `${String(currentQuestion + 1).padStart(2, '0')} / ${QUESTIONS.length}`;
+  document.getElementById('question-num').textContent = `${String(currentQuestion + 1).padStart(2,'0')} / ${QUESTIONS.length}`;
+  document.getElementById('question-layer').textContent = LAYERS[q.layer];
   document.getElementById('question-text').textContent = q.q;
-  
+
   const answersEl = document.getElementById('answers');
   answersEl.innerHTML = '';
-  const letters = ['A', 'B', 'C', 'D'];
+  const letters = ['A','B','C','D'];
   q.answers.forEach((answer, i) => {
     const btn = document.createElement('button');
     btn.className = 'answer-btn';
@@ -335,24 +466,23 @@ function loadQuestion() {
     btn.onclick = () => selectAnswer(i);
     answersEl.appendChild(btn);
   });
-  
+
   document.getElementById('explanation').classList.remove('show');
   document.getElementById('explanation').textContent = '';
   document.getElementById('next-btn').classList.remove('show');
-  
+
   const timerEl = document.getElementById('timer');
   timerEl.textContent = timeLeft;
   timerEl.classList.remove('warning');
-  
+
+  buildLayerProgress(currentQuestion);
+
   clearInterval(timerInterval);
   timerInterval = setInterval(() => {
     timeLeft--;
     timerEl.textContent = timeLeft;
     if (timeLeft <= 5) timerEl.classList.add('warning');
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      timeExpired();
-    }
+    if (timeLeft <= 0) { clearInterval(timerInterval); timeExpired(); }
   }, 1000);
 }
 
@@ -360,125 +490,85 @@ function selectAnswer(index) {
   if (answered) return;
   answered = true;
   clearInterval(timerInterval);
-  
+
   const q = QUESTIONS[currentQuestion];
   const buttons = document.querySelectorAll('.answer-btn');
-  
+
   buttons.forEach((btn, i) => {
     btn.disabled = true;
     if (i === q.correct) btn.classList.add('correct');
     else if (i === index && index !== q.correct) btn.classList.add('wrong');
   });
-  
+
   const isCorrect = index === q.correct;
-  if (isCorrect) score++;
-  userAnswers.push({ questionIndex: currentQuestion, selected: index, correct: isCorrect });
-  
+  if (isCorrect) { score++; layerScores[q.layer]++; }
+  layerTotals[q.layer]++;
+  userAnswers.push({ questionIndex: currentQuestion, selected: index, correct: isCorrect, layer: q.layer });
+
   const expEl = document.getElementById('explanation');
   expEl.innerHTML = q.explanation;
   expEl.classList.add('show');
-  
-  document.getElementById('next-btn').classList.add('show');
-  document.getElementById('next-btn').textContent = currentQuestion < QUESTIONS.length - 1 ? 'Next Question →' : 'See My Score →';
+
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.classList.add('show');
+  nextBtn.textContent = currentQuestion < QUESTIONS.length - 1 ? 'Next Question →' : 'See My Score →';
 }
 
 function timeExpired() {
   if (answered) return;
   answered = true;
-  
   const q = QUESTIONS[currentQuestion];
   const buttons = document.querySelectorAll('.answer-btn');
-  buttons.forEach((btn, i) => {
-    btn.disabled = true;
-    if (i === q.correct) btn.classList.add('correct');
-  });
-  
-  userAnswers.push({ questionIndex: currentQuestion, selected: -1, correct: false });
-  
+  buttons.forEach((btn, i) => { btn.disabled = true; if (i === q.correct) btn.classList.add('correct'); });
+  layerTotals[q.layer]++;
+  userAnswers.push({ questionIndex: currentQuestion, selected: -1, correct: false, layer: q.layer });
+
   const expEl = document.getElementById('explanation');
   expEl.innerHTML = '<strong>Time\'s up.</strong> ' + q.explanation;
   expEl.classList.add('show');
-  
-  document.getElementById('next-btn').classList.add('show');
-  document.getElementById('next-btn').textContent = currentQuestion < QUESTIONS.length - 1 ? 'Next Question →' : 'See My Score →';
+
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.classList.add('show');
+  nextBtn.textContent = currentQuestion < QUESTIONS.length - 1 ? 'Next Question →' : 'See My Score →';
 }
 
 function nextQuestion() {
   currentQuestion++;
   if (currentQuestion >= QUESTIONS.length) {
-    showScore();
+    showGate();
   } else {
-    document.getElementById('screen-quiz').classList.remove('active');
-    document.getElementById('screen-quiz').classList.add('active');
     loadQuestion();
   }
 }
 
-function showScore() {
+function showGate() {
   clearInterval(timerInterval);
   document.getElementById('screen-quiz').classList.remove('active');
-  document.getElementById('screen-score').classList.add('active');
-  
-  document.getElementById('score-big').textContent = score;
-  
-  const gradeEl = document.getElementById('score-grade');
-  const msgEl = document.getElementById('score-message');
-  
-  if (score >= 9) {
-    gradeEl.textContent = 'Signal Expert';
-    gradeEl.className = 'score-grade excellent';
-    msgEl.textContent = 'You understand how the algorithm actually works. Now run your real channel diagnostic — the knowledge needs to meet the data.';
-  } else if (score >= 7) {
-    gradeEl.textContent = 'Signal Aware';
-    gradeEl.className = 'score-grade good';
-    msgEl.textContent = 'You understand the framework. The gap is in application — which specific signal is constraining your channel. The diagnostic tells you exactly which one.';
-  } else if (score >= 5) {
-    gradeEl.textContent = 'Packaging Phase';
-    gradeEl.className = 'score-grade fair';
-    msgEl.textContent = 'You know YouTube exists as a platform. You\'re still optimizing the wrong things. The diagnostic will show you where your 45 missing points are hiding.';
-  } else {
-    gradeEl.textContent = 'Guessing Phase';
-    gradeEl.className = 'score-grade poor';
-    msgEl.textContent = 'Most creators are exactly here — optimizing for things the algorithm doesn\'t measure. The diagnostic is where this gets real. Run it before you publish another video.';
-  }
-  
-  const breakdownEl = document.getElementById('breakdown-list');
-  breakdownEl.innerHTML = '';
-  userAnswers.forEach((ua, i) => {
-    const item = document.createElement('div');
-    item.className = 'breakdown-item';
-    const shortQ = QUESTIONS[ua.questionIndex].q.length > 60 
-      ? QUESTIONS[ua.questionIndex].q.substring(0, 57) + '...' 
-      : QUESTIONS[ua.questionIndex].q;
-    item.innerHTML = `
-      <div class="breakdown-dot ${ua.correct ? 'dot-correct' : 'dot-wrong'}"></div>
-      <div class="breakdown-q">${shortQ}</div>
-      <div class="breakdown-status">${ua.correct ? '✓ Correct' : ua.selected === -1 ? 'Time up' : '✗ Wrong'}</div>
-    `;
-    breakdownEl.appendChild(item);
-  });
+  document.getElementById('screen-gate').classList.add('active');
+  document.getElementById('gate-score-num').textContent = score;
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('gate-score-text').textContent = `${score} out of ${QUESTIONS.length} (${pct}%)`;
 }
 
-function submitScore() {
-  const name = document.getElementById('submit-name').value.trim();
-  if (!name) {
-    document.getElementById('submit-name').focus();
-    document.getElementById('submit-name').style.borderColor = 'var(--red)';
-    return;
-  }
-  
-  const email = document.getElementById('submit-email').value.trim();
-  const grade = document.getElementById('score-grade').textContent;
-  
-  const data = {
-    name: name,
-    email: email,
-    score: score,
-    total: QUESTIONS.length,
-    grade: grade,
-    date: new Date().toISOString()
-  };
-  
+function submitGate() {
+  const name = document.getElementById('gate-name').value.trim();
+  const email = document.getElementById('gate-email').value.trim();
+
+  if (!name) { document.getElementById('gate-name').style.borderColor = 'var(--red)'; document.getElementById('gate-name').focus(); return; }
+  if (!email || !email.includes('@')) { document.getElementById('gate-email').style.borderColor = 'var(--red)'; document.getElementById('gate-email').focus(); return; }
+
+  submittedEmail = true;
+  submitToSupabase(name, email);
+  submitToKit(name, email);
+  showScore();
+}
+
+function skipGate() {
+  showScore();
+}
+
+function submitToSupabase(name, email) {
+  const grade = getGrade(score).label;
   fetch('https://htagojtlqatnagjsydnv.supabase.co/rest/v1/quiz_leaderboard', {
     method: 'POST',
     headers: {
@@ -487,14 +577,68 @@ function submitScore() {
       'Authorization': 'Bearer sb_publishable_dWO-jisLPddhxfIwcKeS8g_JLFi2tSb',
       'Prefer': 'return=minimal'
     },
-    body: JSON.stringify(data)
-  }).then(r => {
-    document.getElementById('submit-success').style.display = 'block';
-    document.querySelector('.submit-btn').disabled = true;
-    document.querySelector('.submit-btn').textContent = 'Score Submitted ✓';
-  }).catch(() => {
-    document.getElementById('submit-success').style.display = 'block';
-    document.getElementById('submit-success').textContent = '✓ Score recorded. Check the leaderboard.';
+    body: JSON.stringify({ name, email, score, total: QUESTIONS.length, grade, date: new Date().toISOString() })
+  }).catch(() => {});
+}
+
+function submitToKit(name, email) {
+  fetch('https://api.kit.com/v2/forms/9137267/subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ api_key: 'kit_api_placeholder', email, first_name: name, fields: { quiz_score: score, quiz_total: QUESTIONS.length } })
+  }).catch(() => {});
+}
+
+function getGrade(s) {
+  const pct = s / QUESTIONS.length;
+  if (pct >= 0.9) return { label: 'Signal Expert', cls: 'grade-excellent', msg: 'You understand how the algorithm actually works. Now run your real channel diagnostic — knowledge needs to meet real data.' };
+  if (pct >= 0.75) return { label: 'Signal Aware', cls: 'grade-good', msg: 'You understand the framework. The gap is in application — which specific signal is constraining your actual channel. The diagnostic tells you exactly which one.' };
+  if (pct >= 0.55) return { label: 'Packaging Phase', cls: 'grade-fair', msg: 'You know YouTube exists as a platform. You\'re still optimizing the wrong things. The diagnostic will show you where your missing points are hiding.' };
+  return { label: 'Guessing Phase', cls: 'grade-poor', msg: 'Most creators are exactly here — optimizing for things the algorithm doesn\'t measure. Run the diagnostic before you publish another video.' };
+}
+
+function showScore() {
+  document.getElementById('screen-gate').classList.remove('active');
+  document.getElementById('screen-score').classList.add('active');
+
+  document.getElementById('score-big').textContent = score;
+
+  const grade = getGrade(score);
+  const gradeEl = document.getElementById('score-grade');
+  gradeEl.textContent = grade.label;
+  gradeEl.className = `score-grade ${grade.cls}`;
+  document.getElementById('score-message').textContent = grade.msg;
+
+  // Layer scores
+  const layerEl = document.getElementById('layer-scores');
+  layerEl.innerHTML = '';
+  const colors = ['var(--red)','var(--gold)','var(--green)','#4a9edd'];
+  LAYERS.forEach((name, i) => {
+    const total = layerTotals[i] || 5;
+    const correct = layerScores[i];
+    const pct = Math.round((correct / total) * 100);
+    layerEl.innerHTML += `
+      <div class="layer-score-card">
+        <div class="layer-score-name">${name}</div>
+        <div><span class="layer-score-val">${correct}</span><span class="layer-score-denom">/${total}</span></div>
+        <div class="layer-score-bar"><div class="layer-score-fill" style="width:${pct}%;background:${colors[i]};height:4px;border-radius:2px;"></div></div>
+      </div>`;
+  });
+
+  // Question breakdown
+  const breakdownEl = document.getElementById('breakdown-list');
+  breakdownEl.innerHTML = '';
+  userAnswers.forEach((ua, i) => {
+    const q = QUESTIONS[ua.questionIndex];
+    const shortQ = q.q.length > 55 ? q.q.substring(0,52) + '...' : q.q;
+    const dotClass = ua.correct ? 'dot-correct' : ua.selected === -1 ? 'dot-timeout' : 'dot-wrong';
+    const status = ua.correct ? '✓ Correct' : ua.selected === -1 ? 'Time up' : '✗ Wrong';
+    breakdownEl.innerHTML += `
+      <div class="breakdown-item">
+        <div class="breakdown-dot ${dotClass}"></div>
+        <div class="breakdown-q">${shortQ}<span class="breakdown-layer">${LAYERS[ua.layer]}</span></div>
+        <div class="breakdown-status">${status}</div>
+      </div>`;
   });
 }
 
