@@ -228,7 +228,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
     <label class="gate-form-label">Email address</label>
     <input class="gate-input" id="gate-email" type="email" placeholder="you@example.com">
     <button class="gate-btn" onclick="submitGate()">See My Full Score →</button>
-    <p class="gate-note">No spam. One email with your score card. Unsubscribe anytime.</p>
+    <p class="gate-note">We don't send email. Your email is stored only with your leaderboard entry.</p>
     <span class="gate-skip" onclick="skipGate()">Skip — just show me the score</span>
   </div>
 </div>
@@ -559,7 +559,6 @@ function submitGate() {
 
   submittedEmail = true;
   submitToSupabase(name, email);
-  submitToKit(name, email);
   showScore();
 }
 
@@ -578,14 +577,6 @@ function submitToSupabase(name, email) {
       'Prefer': 'return=minimal'
     },
     body: JSON.stringify({ name, email, score, total: QUESTIONS.length, grade, date: new Date().toISOString() })
-  }).catch(() => {});
-}
-
-function submitToKit(name, email) {
-  fetch('https://api.kit.com/v2/forms/9137267/subscribe', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ api_key: 'kit_api_placeholder', email, first_name: name, fields: { quiz_score: score, quiz_total: QUESTIONS.length } })
   }).catch(() => {});
 }
 
